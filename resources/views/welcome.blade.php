@@ -10,21 +10,21 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item active" style="background-image: url('/depan/img/1.jpg')">
           <div class="carousel-caption d-none d-md-block">
             <h3>First Slide</h3>
             <p>This is a description for the first slide.</p>
           </div>
         </div>
         <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item" style="background-image: url('/depan/img/2.jpg')">
           <div class="carousel-caption d-none d-md-block">
             <h3>Second Slide</h3>
             <p>This is a description for the second slide.</p>
           </div>
         </div>
         <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item" style="background-image: url('/depan/img/3.jpg')">
           <div class="carousel-caption d-none d-md-block">
             <h3>Third Slide</h3>
             <p>This is a description for the third slide.</p>
@@ -41,49 +41,36 @@
       </a>
     </div>
   </header>
-
+  
   <!-- Page Content -->
   <div class="container">
-
-    <h1 class="my-4">Macam macam Pelayanan</h1>
-
-    <!-- Marketing Icons Section -->
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Uji 1</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
+  <br>
+  <div class="row">
+      <div class="col-md-8 mb-5">
+        <h2>What We Do</h2>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+        <a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>
       </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">uji 2</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">uji 3</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
+      <div class="col-md-4 mb-5">
+        <h2>Contact Us</h2>
+        <hr>
+        <address>
+          <strong>Start Bootstrap</strong>
+          <br>3481 Melrose Place
+          <br>Beverly Hills, CA 90210
+          <br>
+        </address>
+        <address>
+          <abbr title="Phone">P:</abbr>
+          (123) 456-7890
+          <br>
+          <abbr title="Email">E:</abbr>
+          <a href="mailto:#">name@example.com</a>
+        </address>
       </div>
     </div>
-    <!-- /.row -->
 
     <!-- Portfolio Section -->
     <h2>Portfolio Heading</h2>
