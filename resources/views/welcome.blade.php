@@ -45,36 +45,46 @@
   <!-- Page Content -->
   <div class="container">
   <br>
+  <br>
   <div class="row">
       <div class="col-md-8 mb-5">
-        <h2>What We Do</h2>
+        <h2>Tentang Kami</h2>
         <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+        <p>Unit Kerja ini berada di bawah: Balai Besar Penelitian dan Pengembangan Sumberdaya Lahan Pertanian dengan tugas pokok Melaksanakan penelitian lahan rawa untuk pertanian.</p>
+        <p>Fungsi</p>
+        <ul>
+        <li>Penelitian eksplorasi, karakterisasi dan konservasi ekosistem lahan rawa untuk pertanian</li>
+        <li>Penelitian teknologi pengelolaan sumberdaya lahan rawa</li>
+        <li>Penelitian komponen teknologi sistem dan usaha agribisnis pertanian lahan rawa</li>
+        <li>Pelayanan teknik kegiatan penelitian pertanian lahan rawa</li>
+        <li>Penyiapan kerjasama, informasi, dokumentasi, serta penyebarluasan dan pendayagunaan hasil penelitian pertanian lahan rawa</li>
+        <li>Pelaksanaan urusan tata usah dan rumah tangga Balai</li>
+        </ul>
         <a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>
       </div>
       <div class="col-md-4 mb-5">
-        <h2>Contact Us</h2>
+        <h2>Alamat & Kontak</h2>
         <hr>
         <address>
-          <strong>Start Bootstrap</strong>
-          <br>3481 Melrose Place
-          <br>Beverly Hills, CA 90210
+          <strong>Jl. Kebun Karet, Lok Tabat Kotak Pos 31 </strong>
+          <br> loktabat utara, banjarbaru utara
+          <br>Banjarbaru 70712
           <br>
         </address>
         <address>
           <abbr title="Phone">P:</abbr>
-          (123) 456-7890
+         (0511) 4772534, 
+         (0511) 4773034
           <br>
           <abbr title="Email">E:</abbr>
-          <a href="mailto:#">name@example.com</a>
+          <a href="mailto:#">balittra@litbang.pertanian.go.id </a>
         </address>
       </div>
     </div>
-
+  <hr>
     <!-- Portfolio Section -->
-    <h2>Portfolio Heading</h2>
-
+    <h2 class="text-center">Pelayanan</h2>
+  <br>
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">

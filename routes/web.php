@@ -16,8 +16,15 @@ Route::get('/', function () {
 });
 
 // middleware admin
+
 Route::get('/admin/index','adminController@index')
         ->name('adminIndex');
 
 Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
+
+        
+// akhir middleware admin
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
