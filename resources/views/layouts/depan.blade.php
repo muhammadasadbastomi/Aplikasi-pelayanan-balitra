@@ -45,7 +45,7 @@
             <a class="nav-link" href="contact.html">Kontak</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Register / Login</a>
+            <a class="nav-link" href="{{route('login')}}">Register / Login</a>
           </li>
         </ul>
       </div>
