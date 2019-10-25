@@ -51,7 +51,6 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Master Data</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{Route('pemohonIndex')}}">Data Pemohon</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="{{Route('jenisPelayananIndex')}}">jenis Pelayanan</a></li>
                             <li><i class="fa fa-bars"></i><a href="{{Route('karyawanIndex')}}">Karyawan</a></li>
                         </ul>
@@ -59,8 +58,8 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Pelayanan</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Pemohon</a></li>
-                            <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Transaksi</a></li>
+                            <li><i class="menu-icon fa fa-map-o"></i><a href="{{Route('pemohonIndex')}}">Pemohon</a></li>
+                            <li><i class="menu-icon fa fa-street-view"></i><a href="">Transaksi</a></li>
                             <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Hasil Uji</a></li>
                         </ul>
                     </li>

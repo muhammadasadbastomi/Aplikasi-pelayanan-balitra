@@ -11,4 +11,9 @@ class customerController extends Controller
 
         return view('customer.index');
     }
+
+    public function pengujianIndex(){
+
+        return view('customer.pengujian.index');
+    }
 }
