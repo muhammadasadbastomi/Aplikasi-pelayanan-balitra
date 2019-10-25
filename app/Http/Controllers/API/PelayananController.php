@@ -48,4 +48,23 @@ class PelayananController extends APIController
         Redis::del("pelayanan:all");
         return $this->returnController("ok", $create);
     }
+
+    public function update($uuid, Request $req){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $pelayanan = Pelayanan::find($id);
+        if (!$pelayanan) {
+            return $this->returnController("error", "failed find data pelayanan");
+        }
+
+        $update = $pelayanan->update($req->all());
+        if (!$update) {
+            return $this->returnController("error", "failed find data pelayanan");
+        }
+
+        return $this->returnController("ok", $update);
+    }
 }
