@@ -36,6 +36,12 @@ Route::get('/karyawan/info','adminController@karyawanInfo')
         ->name('karyawanInfo');
         
 // akhir middleware admin
+
+//middleware customer
+
+Route::get('/customer/index','customerController@index')
+        ->name('customerIndex');
+//
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

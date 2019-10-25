@@ -68,8 +68,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
