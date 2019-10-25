@@ -14,6 +14,10 @@
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
+                Route::get('{uuid}', 'PelayananController@find')->name('find');
+                Route::post('', 'PelayananController@create')->name('create');
+                Route::put('{uuid}', 'PelayananController@udpate')->name('udpate');
+                Route::delete('{uuid}', 'PelayananController@delete')->name('delete');
         });
 });
 
