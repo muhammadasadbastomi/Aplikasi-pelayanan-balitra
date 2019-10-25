@@ -65,6 +65,9 @@ class PelayananController extends APIController
             return $this->returnController("error", "failed find data pelayanan");
         }
 
+        Redis::del("pelayanan:all");
+        Redis::set("pelayanan:$id", $update);
+
         return $this->returnController("ok", $update);
     }
 
@@ -86,6 +89,9 @@ class PelayananController extends APIController
         if (!$delete) {
             return $this->returnController("error", "failed delete data pelayanan");
         }
+
+        Redis::del("pelayanan:all");
+        Redis::del("pelayanan:$id");
 
         return $this->returnController("ok", "success delete data pelayanan");
     }
