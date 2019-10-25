@@ -23,6 +23,15 @@ Route::get('/admin/index','adminController@index')
 Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
 
+ Route::get('/jenisPelayanan/index','adminController@jenisPelayananIndex')
+        ->name('jenisPelayananIndex');
+
+Route::get('/karyawan/index','adminController@karyawanIndex')
+        ->name('karyawanIndex');
+Route::get('/karyawan/edit','adminController@karyawanEdit')
+        ->name('karyawanEdit');
+Route::get('/karyawan/info','adminController@karyawanInfo')
+        ->name('karyawanInfo');
         
 // akhir middleware admin
 Auth::routes();
