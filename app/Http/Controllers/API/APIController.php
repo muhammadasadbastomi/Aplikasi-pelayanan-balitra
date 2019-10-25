@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class APIController extends Controller
 {
     protected function returnController($status, $data){
-        return collect(["status" => $status, "data" => $data])->toJson();
+        if (!is_array($data) && json_decode($data) != null) {
+            $data = json_decode($data);
+        }
+
+        return response()->json([
+            'status' => $status,
+            'data' => $data,
+        ]);
     }
 }
