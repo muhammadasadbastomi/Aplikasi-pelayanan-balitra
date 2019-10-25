@@ -23,8 +23,10 @@ Route::get('/admin/index','adminController@index')
 Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
 
- Route::get('/jenisPelayanan/index','adminController@jenisPelayananIndex')
+Route::get('/jenisPelayanan/index','adminController@jenisPelayananIndex')
         ->name('jenisPelayananIndex');
+Route::get('/jenisPelayanan/edit','adminController@jenisPelayananEdit')
+        ->name('jenisPelayananEdit');
 
 Route::get('/karyawan/index','adminController@karyawanIndex')
         ->name('karyawanIndex');
