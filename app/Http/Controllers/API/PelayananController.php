@@ -67,4 +67,26 @@ class PelayananController extends APIController
 
         return $this->returnController("ok", $update);
     }
+
+    public function delete($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $pelayanan = Pelayanan::find($id);
+        if (!$pelayanan) {
+            return $this->returnController("error", "failed find data pelayanan");
+        }
+
+        // Need to check realational
+        // If there relation to other data, return error with message, this data has relation to other table(s)
+
+        $delete = $pelayanan->delete();
+        if (!$delete) {
+            return $this->returnController("error", "failed delete data pelayanan");
+        }
+
+        return $this->returnController("ok", "success delete data pelayanan");
+    }
 }
