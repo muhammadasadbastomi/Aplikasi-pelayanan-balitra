@@ -19,6 +19,10 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::put('{uuid}', 'PelayananController@udpate')->name('udpate');
                 Route::delete('{uuid}', 'PelayananController@delete')->name('delete');
         });
+
+        Route::prefix('karyawan')->name('karyawan.')->group(function(){
+            Route::get('', 'KaryawanController@get')->name('get');
+    });
 });
 
 Route::get('/', function () {
@@ -44,7 +48,7 @@ Route::get('/karyawan/edit','adminController@karyawanEdit')
         ->name('karyawanEdit');
 Route::get('/karyawan/info','adminController@karyawanInfo')
         ->name('karyawanInfo');
-        
+
 // akhir middleware admin
 
 //middleware customer
