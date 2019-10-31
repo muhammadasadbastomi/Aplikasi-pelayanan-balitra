@@ -26,6 +26,7 @@
 </head>
 
 <body>
+<div id="app">
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
 
@@ -148,6 +149,8 @@
 
     <!-- Right Panel -->
 
+   
+    </div>
     <script src="{{asset('admin/vendors/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('admin/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>

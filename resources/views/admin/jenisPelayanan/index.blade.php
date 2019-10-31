@@ -75,30 +75,5 @@
                 </div>
 @endsection
 @section('script')
-<script>
-    	getPelayanan()
-	
-	function getPelayanan(){
-		axios({
-			url: '{{route("API.pelayanan.get")}}'
-		}).then((response) => {
-			if (response.data.status == "error") {
-				console.log(response.data.value)
-				return
-            }console.log(response.data);/*
-            $('tbody > *').remove()
-			$.each(response.data.value, function (index, value) {
-				$('tbody').append(
-					'<tr>' +
-						'<td class="text-left">' + value.name + '</td>' +
-						'<td class="text-center">' + value.price + '</td>' +
-						'<td class="aksi">' +
-						'<a href="#" class="btn btn-labeled btn-danger btn-xs"><i class="fa fa-trash"></i> hapus</a>' +
-						'</td>' +
-					'</tr>'
-				)
-			})*/
-        })
-	}
-</script>
+
 @endsection
