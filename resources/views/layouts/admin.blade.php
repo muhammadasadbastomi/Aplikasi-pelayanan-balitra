@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset('css/datatable/datatables.bootstrap4.min.css')}}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <script src="{{asset('/js/app.js')}}"></script>
@@ -148,13 +148,13 @@
 
     <!-- Right Panel -->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="{{asset('js/jquery-3.3.1.js')}}"></script>
     <script src="{{asset('admin/assets/js/main.js')}}"></script>
     <script src="{{asset('admin/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/js/app.js')}}"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('/js/datatable/jquery.datatables.min.js')}}"></script>
+    <script src="{{asset('/js/datatable/datatables.bootstrap4.min.js')}}"></script>
     @yield('script')
 
 </body>

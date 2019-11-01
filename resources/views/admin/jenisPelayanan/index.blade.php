@@ -110,10 +110,5 @@ $(document).ready(function() {
         ]
     });
 } );
-/*{data: "id" , render : function ( data, type, row, meta ) {
-                return type === 'display'  ?
-                '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
-                data;
-            }},*/
 </script>
 @endsection
