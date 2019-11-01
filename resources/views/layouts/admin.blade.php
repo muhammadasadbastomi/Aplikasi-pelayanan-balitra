@@ -18,15 +18,14 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/jqvmap/dist/jqvmap.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
 
-
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('/js/app.js')}}"></script>
 </head>
 
 <body>
-<div id="app">
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
 
@@ -149,19 +148,14 @@
 
     <!-- Right Panel -->
 
-   
-    </div>
-    <script src="{{asset('admin/vendors/jquery/dist/jquery.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="{{asset('admin/assets/js/main.js')}}"></script>
     <script src="{{asset('admin/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/main.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+    <script src="{{asset('/js/app.js')}}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     @yield('script')
+
 </body>
 </html>

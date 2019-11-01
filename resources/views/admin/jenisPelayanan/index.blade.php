@@ -33,18 +33,24 @@
                                 <a href="" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
-                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Pelayanan</th>
-                                            <th>Harga</th>
-                                            <th class="text-center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                            <table id="datatable" class="table table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Pelayanan</th>
+                                        <th>Harga</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nama Pelayanan</th>
+                                    <th>Harga</th>
+                                    <th>action</th>
+                                </tr>
+                            </tfoot>
+                            </table>
                             </div>
                         </div>
                     </div>
@@ -76,29 +82,38 @@
 @endsection
 @section('script')
 <script>
-    	getPelayanan()
-	
-	function getPelayanan(){
-		axios({
-			url: '{{route("API.pelayanan.get")}}'
-		}).then((response) => {
-			if (response.data.status == "error") {
-				console.log(response.data.value)
-				return
-            }console.log(response.data);/*
-            $('tbody > *').remove()
-			$.each(response.data.value, function (index, value) {
-				$('tbody').append(
-					'<tr>' +
-						'<td class="text-left">' + value.name + '</td>' +
-						'<td class="text-center">' + value.price + '</td>' +
-						'<td class="aksi">' +
-						'<a href="#" class="btn btn-labeled btn-danger btn-xs"><i class="fa fa-trash"></i> hapus</a>' +
-						'</td>' +
-					'</tr>'
-				)
-			})*/
-        })
-	}
+$(document).ready(function() {
+    $('#datatable').DataTable( {
+        responsive: true,
+            processing: true,
+            serverSide: false,
+            searching: true,
+            ajax: {
+            "type": "GET",
+            "url": "{{route('API.pelayanan.get')}}",
+            "dataSrc": "data",
+            "contentType": "application/json; charset=utf-8",
+            "dataType": "json",
+            "processData": true
+        },
+        "fnDrawCallback": function () {
+            console.log(this.fnSettings().fnRecordsTotal());
+        },
+        columns: [
+            {"data": "name"},
+            {"data": "price"},
+            {data: "id" , render : function ( data, type, row, meta ) {
+                return type === 'display'  ?
+                '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
+                data;
+            }}
+        ]
+    });
+} );
+/*{data: "id" , render : function ( data, type, row, meta ) {
+                return type === 'display'  ?
+                '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
+                data;
+            }},*/
 </script>
 @endsection
