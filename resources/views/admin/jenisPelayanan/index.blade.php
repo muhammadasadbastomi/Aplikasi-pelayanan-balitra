@@ -20,7 +20,6 @@
                 </div>
             </div>
         </div>
-
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
@@ -104,7 +103,7 @@ $(document).ready(function() {
             {"data": "price"},
             {data: "id" , render : function ( data, type, row, meta ) {
                 return type === 'display'  ?
-                '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
+                '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="{{route('API.pelayanan.delete', 'data' )}}" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
                 data;
             }}
         ]
