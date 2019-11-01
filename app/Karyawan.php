@@ -20,7 +20,7 @@ class Karyawan extends Model
     public function getUuidAttribute()
     {
         // return Hash::make($this->id);
-        return HCrypt::decrypt($this->id);
+        return HCrypt::encrypt($this->id);
     }
 
     public function user(){

@@ -36,7 +36,7 @@ class User extends Authenticatable
 
     public function getUuidAttribute()
     {
-        return HCrypt::decrypt($this->id);
+        return HCrypt::encrypt($this->id);
         // return Hash::make($this->id);
     }
 
