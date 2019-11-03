@@ -84,10 +84,10 @@
 $(document).ready(function() {
     $('#datatable').DataTable( {
         responsive: true,
-            processing: true,
-            serverSide: false,
-            searching: true,
-            ajax: {
+        processing: true,
+        serverSide: false,
+        searching: true,
+        ajax: {
             "type": "GET",
             "url": "{{route('API.pelayanan.get')}}",
             "dataSrc": "data",
@@ -95,16 +95,13 @@ $(document).ready(function() {
             "dataType": "json",
             "processData": true
         },
-        "fnDrawCallback": function () {
-            console.log(this.fnSettings().fnRecordsTotal());
-        },
         columns: [
             {"data": "name"},
             {"data": "price"},
             {data: "id" , render : function ( data, type, row, meta ) {
                 return type === 'display'  ?
-                '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="{{route('API.pelayanan.delete', 'data' )}}" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
-                data;
+                    '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="{{route('API.pelayanan.delete', 'data' )}}" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
+            data;
             }}
         ]
     });

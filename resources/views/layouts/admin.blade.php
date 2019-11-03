@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/jqvmap/dist/jqvmap.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/datatable/datatables.bootstrap4.min.css')}}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <script src="{{asset('/js/app.js')}}"></script>
 </head>
