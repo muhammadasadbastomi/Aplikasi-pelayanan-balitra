@@ -32,5 +32,5 @@ const app = new Vue({
 });
 
 elixir(function(mix) {
-    mix.less('app.less', 'public/admin/assets/css/style.css');
+    mix.less('app.less', 'public/js/app.js');
 });
