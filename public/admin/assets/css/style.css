@@ -66,12 +66,6 @@
   height: 24px;
   background-color: transparent;
   cursor: pointer; }
-  .switch.switch-default .switch-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
   .switch.switch-default .switch-label {
     position: relative;
     display: block;
@@ -88,8 +82,7 @@
     opacity: 0;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
   .switch.switch-default .switch-input:checked ~ .switch-label:after {
-    opacity: 1;
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
+    opacity: 1; }
   .switch.switch-default .switch-handle {
     position: absolute;
     top: 2px;

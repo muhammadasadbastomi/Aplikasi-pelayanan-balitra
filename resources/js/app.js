@@ -30,3 +30,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+elixir(function(mix) {
+    mix.less('app.less', 'public/admin/assets/css/style.css');
+});
