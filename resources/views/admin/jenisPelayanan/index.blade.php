@@ -20,7 +20,6 @@
                 </div>
             </div>
         </div>
-
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
@@ -33,38 +32,24 @@
                                 <a href="" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
-                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Pelayanan</th>
-                                            <th>Harga</th>
-                                            <th class="text-center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Uji Padi</td>
-                                            <td>Rp.250.000</td>
-                                            <td>Uji ini adalah uji ...</td>
-                                            <td class="text-center"> 
-                                                <a href="{{Route('jenisPelayananEdit')}}" class="btn btn-sm btn-outline-info">Edit</a>
-                                                <a href="" class="btn btn-sm btn-outline-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Uji Kentang</td>
-                                            <td>Rp.400.000</td>
-                                            <td>Uji ini adalah uji ...</td>
-                                            <td class="text-center"> 
-                                                <a href="{{Route('jenisPelayananEdit')}}" class="btn btn-sm btn-outline-info">Edit</a>
-                                                <a href="" class="btn btn-sm btn-outline-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <table id="datatable" class="table table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Pelayanan</th>
+                                        <th>Harga</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nama Pelayanan</th>
+                                    <th>Harga</th>
+                                    <th>action</th>
+                                </tr>
+                            </tfoot>
+                            </table>
                             </div>
                         </div>
                     </div>
@@ -93,4 +78,33 @@
                         </div>
                     </div>
                 </div>
+@endsection
+@section('script')
+<script>
+$(document).ready(function() {
+    $('#datatable').DataTable( {
+        responsive: true,
+        processing: true,
+        serverSide: false,
+        searching: true,
+        ajax: {
+            "type": "GET",
+            "url": "{{route('API.pelayanan.get')}}",
+            "dataSrc": "data",
+            "contentType": "application/json; charset=utf-8",
+            "dataType": "json",
+            "processData": true
+        },
+        columns: [
+            {"data": "name"},
+            {"data": "price"},
+            {data: "id" , render : function ( data, type, row, meta ) {
+                return type === 'display'  ?
+                    '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="{{route('API.pelayanan.delete', 'data' )}}" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
+            data;
+            }}
+        ]
+    });
+} );
+</script>
 @endsection
