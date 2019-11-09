@@ -65,4 +65,36 @@ class KaryawanController extends APIController
 
         return $this->returnController("ok", $merge);
     }
+
+    public function update($uuid, Request $req){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $karyawan = karyawan::find($id);
+        $user_id = $karyawan->user_id;
+        $user = user::findOrFail($user_id);
+        if (!$user) {
+            return $this->returnController("error", "failed find data karyawan");
+        }
+
+        $u_user = $user->update($req->all());
+        $u_karyawan = $karyawan->update($req->all());
+
+        if (!$u_user && $u_karyawan) {
+            return $this->returnController("error", "failed find data karyawan");
+        }
+
+        $merge = (['user' => $u_user, 'karyawan' => $u_karyawan]);
+
+        Redis::del("user:all");
+        Redis::set("user:$user_id", $u_user);
+        Redis::del("karyawan:all");
+        Redis::set("karyawan:$id", $u_karyawan);
+
+        return $this->returnController("ok", $merge);
+    }
+
+
 }
