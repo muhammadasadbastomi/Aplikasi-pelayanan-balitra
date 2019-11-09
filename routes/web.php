@@ -16,7 +16,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
                 Route::get('{uuid}', 'PelayananController@find')->name('find');
                 Route::post('', 'PelayananController@create')->name('create');
-                Route::put('{uuid}', 'PelayananController@udpate')->name('udpate');
+                Route::put('{uuid}', 'PelayananController@update')->name('update');
                 Route::delete('{uuid}', 'PelayananController@delete')->name('delete');
         });
 
@@ -24,6 +24,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::get('', 'KaryawanController@get')->name('get');
             Route::get('{uuid}', 'KaryawanController@find')->name('find');
             Route::post('', 'KaryawanController@create')->name('create');
+            Route::put('{uuid}', 'KaryawanController@update')->name('update');
     });
 });
 
