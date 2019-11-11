@@ -96,5 +96,30 @@ class KaryawanController extends APIController
         return $this->returnController("ok", $merge);
     }
 
+    public function delete($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $karyawan = karyawan::find($id);
+        $user = user::find($karyawan->user_id);
+        if (!$user) {
+            return $this->returnController("error", "failed find data karyawan");
+        }
+
+        // Need to check realational
+        // If there relation to other data, return error with message, this data has relation to other table(s)
+
+        $delete = $user->delete();
+        if (!$delete) {
+            return $this->returnController("error", "failed delete data karyawan");
+        }
+
+        Redis::del("user:all");
+        Redis::del("user:$karyawan->user_id");
+
+        return $this->returnController("ok", "success delete data karyawan");
+    }
+
 
 }
