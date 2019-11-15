@@ -67,8 +67,8 @@
                             </div>
                             <div class="modal-body">
                             <form  method="post" action="">
-                                <div class="form-group"><label for="company" class=" form-control-label">Nama Pelayanan</label><input type="text" id="company" name="name" placeholder="Uji ..." class="form-control"></div>
-                                <div class="form-group"><label for="vat" class=" form-control-label">Harga Uji(Rp.)</label><input type="text" id="vat" name="price" placeholder="" class="form-control"></div>
+                                <div class="form-group"><label for="company" class=" form-control-label">Nama Pelayanan</label><input type="text"  name="name" placeholder="Uji ..." class="form-control"></div>
+                                <div class="form-group"><label for="vat" class=" form-control-label">Harga Uji(Rp.)</label><input type="text" name="price" placeholder="" class="form-control"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn " data-dismiss="modal"> <i class="ti-close"></i> Batal</button>
                                 <button type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
@@ -111,11 +111,18 @@ $(document).ready(function() {
         $.ajax({
                 url: "{{Route('API.pelayanan.create')}}",
                 type: "post",
-                data: form.serialize(),
+                data: $(this).serialize(),
                 success: function (response) {
                     form.trigger('reset');
                     $('#mediumModal').modal('hide');
                     $('#datatable').DataTable().ajax.reload();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 },
                 error:function(response){
                     console.log(response);

@@ -140,6 +140,7 @@
     <script src="{{asset('/js/app.js')}}"></script>
     <script src="{{asset('/js/datatable/jquery.datatables.min.js')}}"></script>
     <script src="{{asset('/js/datatable/datatables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/js/sweetalert/sweetalert.all.min.js')}}"></script>
     @yield('script')
 
 </body>
