@@ -8,7 +8,6 @@ use App\Karyawan;
 use App\User;
 use HCrypt;
 use Redis;
-// use Hash;
 
 class KaryawanController extends APIController
 {
@@ -20,9 +19,7 @@ class KaryawanController extends APIController
                 return $this->returnController("error", "failed get karyawan data");
             }
             Redis::set("karyawan:all", $karyawan);
-
         }
-        // dd($karyawan);
         return $this->returnController("ok", $karyawan);
     }
 
@@ -31,7 +28,6 @@ class KaryawanController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
-
         $karyawan = Redis::get("karyawan:$id");
         if (!$karyawan) {
             $karyawan = karyawan::find($id);
@@ -40,29 +36,18 @@ class KaryawanController extends APIController
             }
             Redis::set("karyawan:$id", $karyawan);
         }
-
         return $this->returnController("ok", $karyawan);
     }
 
     public function create(Request $req){
-
         $user = User::create($req->all());
-        // dd($user->id);
         $karyawan = $user->karyawan()->create($req->all());
-        // $id = HCrypt::decrypt($user->id);
-        // $id =
-         // dd($);
-
-
         if (!$user && $karyawan) {
             return $this->returnController("error", "failed create data karyawan");
         }
 
-
         $merge = (['user' => $user, 'karyawan' => $karyawan]);
         Redis::del("karyawan:all");
-        // Redis::set("pelayanan:$id", $update);
-
         return $this->returnController("ok", $merge);
     }
 
@@ -81,11 +66,9 @@ class KaryawanController extends APIController
 
         $u_user = $user->update($req->all());
         $u_karyawan = $karyawan->update($req->all());
-
         if (!$u_user && $u_karyawan) {
             return $this->returnController("error", "failed find data karyawan");
         }
-
         $merge = (['user' => $u_user, 'karyawan' => $u_karyawan]);
 
         Redis::del("user:all");
@@ -101,6 +84,7 @@ class KaryawanController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
+
         $karyawan = karyawan::find($id);
         $user = user::find($karyawan->user_id);
         if (!$user) {
