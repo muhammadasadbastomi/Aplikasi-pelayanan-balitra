@@ -26,6 +26,9 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::post('', 'KaryawanController@create')->name('create');
             Route::put('{uuid}', 'KaryawanController@update')->name('update');
             Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
+
+        Route::prefix('pelanggan')->name('pelanggan.')->group(function(){
+            Route::get('', 'PelangganController@get')->name('get');
     });
 });
 
