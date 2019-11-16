@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use HCrypt;
-// use Hash;
 
 class Karyawan extends Model
 {
@@ -19,7 +18,6 @@ class Karyawan extends Model
 
     public function getUuidAttribute()
     {
-        // return Hash::make($this->id);
         return HCrypt::encrypt($this->id);
     }
 
