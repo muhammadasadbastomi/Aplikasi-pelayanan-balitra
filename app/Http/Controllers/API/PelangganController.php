@@ -33,4 +33,16 @@ class PelangganController extends Controller
         }
         return $this->returnController("ok", $pelanggan);
     }
+
+    public function create(Request $req){
+        $user = User::create($req->all());
+        $pelanggan = $user->pelanggan()->create($req->all());
+        if (!$user && $pelanggan) {
+            return $this->returnController("error", "failed create data pelanggan");
+        }
+
+        $merge = (['user' => $user, 'pelanggan' => $pelanggan]);
+        Redis::del("pelanggan:all");
+        return $this->returnController("ok", $merge);
+    }
 }
