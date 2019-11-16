@@ -21,4 +21,6 @@ class Pelanggan extends Model
         return HCrypt::encrypt($this->id);
     }
 
+    public function user(){
+      return $this->HasOne('App\User');
 }
