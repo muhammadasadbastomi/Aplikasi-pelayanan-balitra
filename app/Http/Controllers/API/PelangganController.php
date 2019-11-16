@@ -73,4 +73,30 @@ class PelangganController extends Controller
 
         return $this->returnController("ok", $merge);
     }
+
+    public function delete($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $pelanggan = pelanggan::find($id);
+        $user = user::find($pelanggan->user_id);
+        if (!$user) {
+            return $this->returnController("error", "failed find data pelanggan");
+        }
+
+        // Need to check realational
+        // If there relation to other data, return error with message, this data has relation to other table(s)
+
+        $delete = $user->delete();
+        if (!$delete) {
+            return $this->returnController("error", "failed delete data pelanggan");
+        }
+
+        Redis::del("user:all");
+        Redis::del("user:$pelanggan->user_id");
+
+        return $this->returnController("ok", "success delete data pelanggan");
+    }
 }
