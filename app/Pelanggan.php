@@ -11,5 +11,8 @@ class Pelanggan extends Model
     protected $fillable = [
         'kd_pelanggan', 'alamat',  'telepon'
     ];
+    protected $hidden = [
+        'id', 'user_id'
+    ];
 
 }
