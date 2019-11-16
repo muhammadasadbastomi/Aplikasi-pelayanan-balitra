@@ -31,7 +31,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::get('', 'PelangganController@get')->name('get');
             Route::get('{uuid}', 'PelangganController@find')->name('find');
             Route::post('', 'PelangganController@create')->name('create');
-    });
+            Route::put('{uuid}', 'PelangganController@update')->name('update');
 });
 
 Route::get('/', function () {
