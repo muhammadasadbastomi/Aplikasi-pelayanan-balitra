@@ -35,6 +35,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'PelangganController@update')->name('update');
             Route::delete('{uuid}', 'PelangganController@delete')->name('delete');
         });
+});
 
 Route::get('/', function () {
     return view('welcome');
