@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 use App\Karyawan;
 use App\User;
 use HCrypt;
-<<<<<<< HEAD
 // use Hash;
-=======
-use Redis;
->>>>>>> feature_pelanggan_crud
 
 class KaryawanController extends APIController
 {
