@@ -41,10 +41,10 @@ Route::get('/admin/index','adminController@index')
 Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
 
-Route::get('/jenisPelayanan/index','adminController@jenisPelayananIndex')
-        ->name('jenisPelayananIndex');
-Route::get('/jenisPelayanan/edit','adminController@jenisPelayananEdit')
-        ->name('jenisPelayananEdit');
+Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
+        ->name('pelayananIndex');
+Route::get('/pelayanan/edit','adminController@jenisPelayananEdit')
+        ->name('pelayananEdit');
 
 Route::get('/karyawan/index','adminController@karyawanIndex')
         ->name('karyawanIndex');

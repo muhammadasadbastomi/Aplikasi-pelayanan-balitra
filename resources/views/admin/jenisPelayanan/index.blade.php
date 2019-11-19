@@ -66,13 +66,12 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                            <form action="">
-                                <div class="form-group"><label for="company" class=" form-control-label">Nama Pelayanan</label><input type="text" id="company" placeholder="Uji ..." class="form-control"></div>
-                                <div class="form-group"><label for="vat" class=" form-control-label">Harga Uji(Rp.)</label><input type="text" id="vat" placeholder="" class="form-control"></div>
-                                <div class="form-group"><label for="street" class=" form-control-label">Keterangan</label><textarea name="" id="" class="form-control"></textarea></div>                                      
+                            <form  method="post" action="">
+                                <div class="form-group"><label for="company" class=" form-control-label">Nama Pelayanan</label><input type="text"  name="name" placeholder="Uji ..." class="form-control"></div>
+                                <div class="form-group"><label for="vat" class=" form-control-label">Harga Uji(Rp.)</label><input type="text" name="price" placeholder="" class="form-control"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn " data-dismiss="modal"> <i class="ti-close"></i> Batal</button>
-                                <button type="button" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
+                                <button type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
                             </form>
                             </div>
                         </div>
@@ -105,6 +104,33 @@ $(document).ready(function() {
             }}
         ]
     });
+
+    $("form").submit(function (e) {
+        e.preventDefault()
+        var form = $('#modal-body form');
+        $.ajax({
+                url: "{{Route('API.pelayanan.create')}}",
+                type: "post",
+                data: $(this).serialize(),
+                success: function (response) {
+                    form.trigger('reset');
+                    $('#mediumModal').modal('hide');
+                    $('#datatable').DataTable().ajax.reload();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error:function(response){
+                    console.log(response);
+                }
+            })
 } );
+} );
+
+
 </script>
 @endsection
