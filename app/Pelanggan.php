@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 use HCrypt;
 
-class Karyawan extends Model
+class Pelanggan extends Model
 {
     protected $fillable = [
-        'NIP', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'telepon'
+        'kd_pelanggan', 'alamat',  'telepon'
     ];
     protected $hidden = [
         'id', 'user_id'
@@ -23,5 +23,4 @@ class Karyawan extends Model
 
     public function user(){
       return $this->HasOne('App\User');
-    }
 }
