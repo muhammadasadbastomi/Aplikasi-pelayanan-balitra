@@ -1,0 +1,40 @@
+version: '3.1'
+services:
+
+  web:
+    build:
+      container_name : balitra_web
+      context: ./
+      dockerfile: .docker/web.dockerfile
+    volumes:
+      - ./:/var/www
+    ports:
+      - "80:80"
+    links:
+      - app
+
+  app:
+    build:
+      container_name : balitra_app
+      context: ./
+      dockerfile: .docker/app.dockerfile
+    volumes:
+      - ./:/var/www
+
+  #MySQL Service
+  db:
+    container_name : balitra_mariadb
+    image: mariadb
+    restart: always
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 48344951
+      MYSQL_DATABASE: spj_uptd
+
+  cache:
+    container_name : balitra_redis
+    image: redis
+    ports:
+      - "6379:6379"
