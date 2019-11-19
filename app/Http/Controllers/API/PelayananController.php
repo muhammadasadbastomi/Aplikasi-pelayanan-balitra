@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Pelayanan;
 use HCrypt;
-use Redis;
 
 class PelayananController extends APIController
 {
     public function get(){
-        $pelayanan = Redis::get("pelayanan:all");
+        $pelayanan = json_decode(redis::get("pelayanan::all"));
+        // $pelayanan = Redis::get("pelayanan:all");
         if (!$pelayanan) {
             $pelayanan = Pelayanan::all();
             if (!$pelayanan) {
