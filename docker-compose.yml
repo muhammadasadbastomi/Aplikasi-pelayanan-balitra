@@ -3,7 +3,6 @@ services:
 
   web:
     build:
-      container_name : balitra_web
       context: ./
       dockerfile: .docker/web.dockerfile
     volumes:
@@ -15,7 +14,6 @@ services:
 
   app:
     build:
-      container_name : balitra_app
       context: ./
       dockerfile: .docker/app.dockerfile
     volumes:
@@ -31,7 +29,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 48344951
-      MYSQL_DATABASE: spj_uptd
+      MYSQL_DATABASE: balitra
 
   cache:
     container_name : balitra_redis
