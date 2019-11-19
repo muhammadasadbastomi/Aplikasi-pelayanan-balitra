@@ -13,7 +13,8 @@ use Redis;
 class KaryawanController extends APIController
 {
     public function get(){
-        $karyawan = Redis::get("karyawan:all");
+        $karyawan = json_decode(redis::get("karyawan::all"));
+        // $karyawan = Redis::get("karyawan:all");
         if (!$karyawan) {
             $karyawan = karyawan::all();
             if (!$karyawan) {

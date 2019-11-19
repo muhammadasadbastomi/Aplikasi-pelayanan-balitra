@@ -11,7 +11,8 @@ use Redis;
 class PelayananController extends APIController
 {
     public function get(){
-        $pelayanan = Redis::get("pelayanan:all");
+        $pelayanan = json_decode(redis::get("pelayanan::all"));
+        // $pelayanan = Redis::get("pelayanan:all");
         if (!$pelayanan) {
             $pelayanan = Pelayanan::all();
             if (!$pelayanan) {
