@@ -1,5 +1,6 @@
 <?php
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
+
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
                 Route::get('{uuid}', 'PelayananController@find')->name('find');
