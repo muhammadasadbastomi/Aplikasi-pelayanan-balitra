@@ -15,7 +15,7 @@ class CreatePelayanansTable extends Migration
     {
         Schema::create('pelayanans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid')->length(100)->nullable();
+            $table->text('uuid')->length(100)->nullable();
             $table->string('name')->length(100);
             $table->double('price');
             $table->timestamps();
