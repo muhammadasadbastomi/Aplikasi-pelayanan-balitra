@@ -1,23 +1,11 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
                 Route::get('{uuid}', 'PelayananController@find')->name('find');
                 Route::post('', 'PelayananController@create')->name('create');
                 Route::put('{uuid}', 'PelayananController@update')->name('update');
-                Route::delete('{uuid}', 'PelayananController@delete')->name('delete');
+                Route::delete('{id}', 'PelayananController@delete')->name('delete');
         });
 
         Route::prefix('karyawan')->name('karyawan.')->group(function(){

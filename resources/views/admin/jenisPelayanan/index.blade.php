@@ -77,9 +77,69 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="dataModal" class="modal fade">  
+                <div class="modal-dialog">  
+                <div class="modal-content">  
+                <div class="modal-header">  
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                     <h4 class="modal-title">Employee Details</h4>  
+                </div>  
+                <div class="modal-body" id="employee_detail">  
+                </div>  
+                <div class="modal-footer">  
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                </div>  
+           </div>  
+      </div>  
+ </div> 
 @endsection
 @section('script')
 <script>
+
+function hapus(id, name){
+    var csrf_token=$('meta[name="csrf_token"]').attr('content');
+    Swal.fire({
+                title: 'apa anda yakin?',
+                text: " Menghapus Kecamatan data " + name,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'hapus data',
+                cancelButtonText: 'batal',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url : "{{ url('/api/pelayanan')}}" + '/' + id,
+                        type : "POST",
+                        data : {'_method' : 'DELETE', '_token' :csrf_token},
+                        success: function (response) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Berhasil Dihapus',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('#datatable').DataTable().ajax.reload(null, false);
+                },
+                    })
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    Swal.fire(
+                        'Dibatalkan',
+                        'data batal dihapus',
+                        'error'
+                    )
+                }
+            })
+}
+function edit(id){
+    $('#editmodal').modal('show');
+}
 $(document).ready(function() {
     $('#datatable').DataTable( {
         responsive: true,
@@ -97,9 +157,11 @@ $(document).ready(function() {
         columns: [
             {"data": "name"},
             {"data": "price"},
-            {data: "id" , render : function ( data, type, row, meta ) {
+            {data: null , render : function ( data, type, row, meta ) {
+                var id = row.id;
+                var name = row.name;
                 return type === 'display'  ?
-                    '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="{{route('API.pelayanan.delete', 'data' )}}" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
+                '<button onClick="edit(\''+id+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></a> <button onClick="hapus(\'' + id + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
             data;
             }}
         ]

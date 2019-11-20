@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\API;
-
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -72,8 +70,7 @@ class PelayananController extends APIController
         return $this->returnController("ok", $update);
     }
 
-    public function delete($uuid){
-        $id = HCrypt::decrypt($uuid);
+    public function delete($id){
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
