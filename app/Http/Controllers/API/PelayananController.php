@@ -46,8 +46,10 @@ class PelayananController extends APIController
         if (!$create) {
             return $this->returnController("error", "failed create data pelayanan");
         }
+        $uuid = HCrypt::encrypt($create->id);
+        $merge = (['uuid' => $uuid, 'create' => $create]);
         Redis::del("pelayanan:all");
-        return $this->returnController("ok", $create);
+        return $this->returnController("ok", $merge);
     }
 
     public function update($uuid, Request $req){

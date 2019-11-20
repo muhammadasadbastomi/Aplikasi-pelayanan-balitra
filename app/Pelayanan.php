@@ -8,12 +8,13 @@ use HCrypt;
 
 class Pelayanan extends Model
 {
-    protected $fillable = ['name', 'price'];
+    protected $fillable = ['uuid','name', 'price'];
     protected $hidden = ['id'];
-    protected $appends = array('uuid');
 
-    public function getUuidAttribute()
+    public function setUuidAttribute()
     {
-        return HCrypt::encrypt($this->id);
+        $uuid = HCrypt::encrypt($this->id);
+        dd($uuid);
+        $this->attributes['uuid'] = HCrypt::encrypt($value);
     }
 }
