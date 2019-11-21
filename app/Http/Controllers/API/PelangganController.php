@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Redis;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Pelanggan;
+use HCrypt;
 
-class PelangganController extends Controller
+class PelangganController extends APIController
 {
     public function get(){
         $pelanggan = Redis::get("pelanggan:all");
@@ -46,7 +50,7 @@ class PelangganController extends Controller
         $setuuid = Pelanggan::findOrFail($id);
         $setuuid->uuid = $uuid;
         $setuuid->update();
-        
+
         if (!$create) {
             return $this->returnController("error", "failed create data pelanggan");
         }
