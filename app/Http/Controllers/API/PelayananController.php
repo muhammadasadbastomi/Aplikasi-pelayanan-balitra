@@ -43,18 +43,21 @@ class PelayananController extends APIController
 
     public function create(Request $req){
         $create = new Pelayanan;
-        $uuid = HCrypt::encrypt($req->id);
-        // dd($uuid);
-        $create->uuid     = $uuid;
         
         $create->name     = $req->name;
         $create->price    = $req->price;
         $create->save();
+
+        $id= $create->id;
+        $uuid = HCrypt::encrypt($id);
+        $setuuid = Pelayanan::findOrFail($id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+       
         if (!$create) {
             return $this->returnController("error", "failed create data pelayanan");
         }
-        // $uuid = HCrypt::encrypt($create->id);
-        // $merge = (['uuid' => $uuid, 'create' => $create]);
+        
         Redis::del("pelayanan:all");
         return $this->returnController("ok", $create);
     }
