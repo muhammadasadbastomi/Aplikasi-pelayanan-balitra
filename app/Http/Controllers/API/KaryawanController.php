@@ -8,13 +8,11 @@ use Illuminate\Http\Request;
 use App\Karyawan;
 use App\User;
 use HCrypt;
-// use Hash;
 
 class KaryawanController extends APIController
 {
     public function get(){
         $karyawan = json_decode(redis::get("karyawan::all"));
-        // $karyawan = Redis::get("karyawan:all");
         if (!$karyawan) {
             $karyawan = karyawan::all();
             if (!$karyawan) {
