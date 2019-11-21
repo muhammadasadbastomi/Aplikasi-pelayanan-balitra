@@ -80,57 +80,97 @@
 @endsection
 @section('script')
 <script>
-$(document).ready(function() {
-    $('#datatable').DataTable( {
-        responsive: true,
-        processing: true,
-        serverSide: false,
-        searching: true,
-        ajax: {
-            "type": "GET",
-            "url": "{{route('API.pelayanan.get')}}",
-            "dataSrc": "data",
-            "contentType": "application/json; charset=utf-8",
-            "dataType": "json",
-            "processData": true
-        },
-        columns: [
-            {"data": "name"},
-            {"data": "price"},
-            {data: "id" , render : function ( data, type, row, meta ) {
-                return type === 'display'  ?
-                    '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="{{route('API.pelayanan.delete', 'data' )}}" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
-            data;
-            }}
-        ]
-    });
-
-    $("form").submit(function (e) {
-        e.preventDefault()
-        var form = $('#modal-body form');
-        $.ajax({
-                url: "{{Route('API.pelayanan.create')}}",
-                type: "post",
-                data: $(this).serialize(),
-                success: function (response) {
-                    form.trigger('reset');
-                    $('#mediumModal').modal('hide');
-                    $('#datatable').DataTable().ajax.reload();
-                    Swal.fire({
+    function hapus(uuid, name){
+        var csrf_token=$('meta[name="csrf_token"]').attr('content');
+        Swal.fire({
+                    title: 'apa anda yakin?',
+                    text: " Menghapus Kecamatan data " + name,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'hapus data',
+                    cancelButtonText: 'batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url : "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                            type : "POST",
+                            data : {'_method' : 'DELETE', '_token' :csrf_token},
+                            success: function (response) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#datatable').DataTable().ajax.reload(null, false);
+                    },
+                        })
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === swal.DismissReason.cancel
+                    ) {
+                        Swal.fire(
+                            'Dibatalkan',
+                            'data batal dihapus',
+                            'error'
+                        )
+                    }
+                })
+    }
+    
+    $(document).ready(function() {
+        $('#datatable').DataTable( {
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            searching: true,
+            ajax: {
+                "type": "GET",
+                "url": "{{route('API.pelayanan.get')}}",
+                "dataSrc": "data",
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "processData": true
+            },
+            columns: [
+                {"data": "name"},
+                {"data": "price"},
+                {data: null, render : function ( data, type, row, meta ) {
+                    var uuid = data.uuid;
+                    return type === 'display'  ?
+                        '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <button onclick="hapus(\'' +uuid+'\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                data;
+                }}
+            ]
+        });
+        $("form").submit(function (e) {
+            e.preventDefault()
+            var form = $('#modal-body form');
+            $.ajax({
+                    url: "{{Route('API.pelayanan.create')}}",
+                    type: "post",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        form.trigger('reset');
+                        $('#mediumModal').modal('hide');
+                        $('#datatable').DataTable().ajax.reload();
+                        Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Data Berhasil Tersimpan',
+                        title: 'Your work has been saved',
                         showConfirmButton: false,
                         timer: 1500
-                    })
-                },
-                error:function(response){
-                    console.log(response);
-                }
-            })
-} );
-} );
-
-
-</script>
+                        })
+                    },
+                    error:function(response){
+                        console.log(response);
+                    }
+                })
+    } );
+    } );
+    
+    </script>
 @endsection
