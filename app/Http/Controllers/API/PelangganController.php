@@ -35,15 +35,24 @@ class PelangganController extends Controller
     }
 
     public function create(Request $req){
-        $user = User::create($req->all());
-        $pelanggan = $user->pelanggan()->create($req->all());
-        if (!$user && $pelanggan) {
+        $create = new Pelanggan;
+        
+        $create->name     = $req->name;
+        $create->price    = $req->price;
+        $create->save();
+
+        $id= $create->id;
+        $uuid = HCrypt::encrypt($id);
+        $setuuid = Pelanggan::findOrFail($id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        
+        if (!$create) {
             return $this->returnController("error", "failed create data pelanggan");
         }
 
-        $merge = (['user' => $user, 'pelanggan' => $pelanggan]);
         Redis::del("pelanggan:all");
-        return $this->returnController("ok", $merge);
+        return $this->returnController("ok", $create);
     }
 
     public function update($uuid, Request $req){
