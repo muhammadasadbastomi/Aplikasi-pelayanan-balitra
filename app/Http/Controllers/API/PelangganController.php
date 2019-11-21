@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Pelanggan;
@@ -39,10 +40,13 @@ class PelangganController extends APIController
     }
 
     public function create(Request $req){
+        $user_id= Auth::user()->id;
         $create = new Pelanggan;
         
-        $create->name     = $req->name;
-        $create->price    = $req->price;
+        $create->kd_pelanggan     = $req->kd_pelanggan;
+        $create->alamat    = $req->alamat;
+        $create->telepon    = $req->telepon;
+        $create->user_id    = $user_id;
         $create->save();
 
         $id= $create->id;
