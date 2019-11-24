@@ -9,7 +9,6 @@ use HCrypt;
 class Pelayanan extends Model
 {
     protected $fillable = ['uuid','name', 'price'];
-    protected $hidden = ['id'];
 
     
 }

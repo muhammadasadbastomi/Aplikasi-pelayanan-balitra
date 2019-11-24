@@ -21,8 +21,7 @@ class PelayananController extends APIController
         return $this->returnController("ok", $pelayanan);
     }
 
-    public function find($uuid){
-        $id = HCrypt::decrypt($uuid);
+    public function find($id){
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
@@ -57,22 +56,24 @@ class PelayananController extends APIController
         return $this->returnController("ok", $create);
     }
 
-    public function update($uuid, Request $req){
-        $id = HCrypt::decrypt($uuid);
+    public function update($id, Request $req){
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
 
-        $pelayanan = Pelayanan::find($id);
+        /*$pelayanan = Pelayanan::find($id);
         if (!$pelayanan) {
             return $this->returnController("error", "failed find data pelayanan");
-        }
+        }*/
 
-        $update = $pelayanan->update($req->all());
+        //$update = $pelayanan->update($req->all());
+        $update = Pelayanan::findOrFail($id);
         if (!$update) {
             return $this->returnController("error", "failed find data pelayanan");
         }
-
+        $update->name = $req->name;
+        $update->price = $req->price;
+        $update->update();
         Redis::del("pelayanan:all");
         Redis::set("pelayanan:$id", $update);
 

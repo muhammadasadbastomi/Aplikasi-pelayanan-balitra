@@ -3,9 +3,9 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
-                Route::get('{uuid}', 'PelayananController@find')->name('find');
+                Route::get('{id}', 'PelayananController@find')->name('find');
                 Route::post('', 'PelayananController@create')->name('create');
-                Route::put('{uuid}', 'PelayananController@update')->name('update');
+                Route::put('{id}', 'PelayananController@update')->name('update');
                 Route::delete('{id}', 'PelayananController@delete')->name('delete');
         });
 
@@ -16,7 +16,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'KaryawanController@update')->name('update');
             Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
         });
-
+/*
         Route::prefix('pelanggan')->name('pelanggan.')->group(function(){
             Route::get('', 'PelangganController@get')->name('get');
             Route::get('{uuid}', 'PelangganController@find')->name('find');
@@ -24,8 +24,9 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'PelangganController@update')->name('update');
             Route::delete('{uuid}', 'PelangganController@delete')->name('delete');
         });
+     */
+   
 });
-
 Route::get('/', function () {
     return view('welcome');
 });
