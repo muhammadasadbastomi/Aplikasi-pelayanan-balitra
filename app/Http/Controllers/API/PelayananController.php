@@ -77,9 +77,7 @@ class PelayananController extends APIController
         if (!$update) {
             return $this->returnController("error", "failed find data pelayanan");
         }
-        $update->name = $req->name;
-        $update->price = $req->price;
-        $update->update();
+        
         Redis::del("pelayanan:all");
         Redis::set("pelayanan:$id", $update);
 
