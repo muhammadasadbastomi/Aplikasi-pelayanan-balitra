@@ -23,7 +23,6 @@
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
@@ -87,7 +86,7 @@
 @section('script')
 <script>
 
-function hapus(id, name){
+function hapus(uuid, name){
     var csrf_token=$('meta[name="csrf_token"]').attr('content');
     Swal.fire({
                 title: 'apa anda yakin?',
@@ -101,7 +100,7 @@ function hapus(id, name){
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url : "{{ url('/api/pelayanan')}}" + '/' + id,
+                        url : "{{ url('/api/pelayanan')}}" + '/' + uuid,
                         type : "POST",
                         data : {'_method' : 'DELETE', '_token' :csrf_token},
                         success: function (response) {
@@ -134,14 +133,14 @@ $('#tambah').click(function(){
     $('#btn-form').text('Simpan Data');
     $('#mediumModal').modal('show');
 })
-function edit(id){
+function edit(uuid){
     $.ajax({
             type: "GET",
-            url: "{{ url('/api/pelayanan')}}" + '/' + id,
+            url: "{{ url('/api/pelayanan')}}" + '/' + uuid,
             beforeSend: false,
             success : function(returnData) {
                 $('.modal-title').text('Edit Data');
-                $('#id').val(returnData.data.id);
+                $('#id').val(returnData.data.uuid);
                 $('#name').val(returnData.data.name);
                 $('#price').val(returnData.data.price);  
                 $('#btn-form').text('Ubah Data');
@@ -167,10 +166,10 @@ $(document).ready(function() {
             {"data": "name"},
             {"data": "price"},
             {data: null , render : function ( data, type, row, meta ) {
-                var id = row.id;
+                var uuid = row.uuid;
                 var name = row.name;
                 return type === 'display'  ?
-                '<button onClick="edit(\''+id+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + id + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
             data;
             }}
         ]
@@ -214,7 +213,7 @@ $(document).ready(function() {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Data Berhasil Tersimpan',
+                        title: 'Your work has been saved',
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -224,27 +223,7 @@ $(document).ready(function() {
                 }
             })
         }
-        /*$.ajax({
-                url: "{{Route('API.pelayanan.create')}}",
-                type: "post",
-                data: $(this).serialize(),
-                success: function (response) {
-                    form.trigger('reset');
-                    $('#mediumModal').modal('hide');
-                    $('#datatable').DataTable().ajax.reload();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Data Berhasil Tersimpan',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                },
-                error:function(response){
-                    console.log(response);
-                }
-            })
-*/} );
+       } );
 } );
 
 

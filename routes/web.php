@@ -3,10 +3,10 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
-                Route::get('{id}', 'PelayananController@find')->name('find');
+                Route::get('{uuid}', 'PelayananController@find')->name('find');
                 Route::post('', 'PelayananController@create')->name('create');
-                Route::put('{id}', 'PelayananController@update')->name('update');
-                Route::delete('{id}', 'PelayananController@delete')->name('delete');
+                Route::put('{uuid}', 'PelayananController@update')->name('update');
+                Route::delete('{uuid}', 'PelayananController@delete')->name('delete');
         });
 
         Route::prefix('karyawan')->name('karyawan.')->group(function(){

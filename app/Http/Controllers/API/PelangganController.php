@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Pelanggan;
+use HCrypt;
 
-class PelangganController extends Controller
+class PelangganController extends APIController
 {
     public function get(){
         $pelanggan = Redis::get("pelanggan:all");
@@ -35,15 +40,27 @@ class PelangganController extends Controller
     }
 
     public function create(Request $req){
-        $user = User::create($req->all());
-        $pelanggan = $user->pelanggan()->create($req->all());
-        if (!$user && $pelanggan) {
+        $user_id= Auth::user()->id;
+        $create = new Pelanggan;
+        
+        $create->kd_pelanggan     = $req->kd_pelanggan;
+        $create->alamat    = $req->alamat;
+        $create->telepon    = $req->telepon;
+        $create->user_id    = $user_id;
+        $create->save();
+
+        $id= $create->id;
+        $uuid = HCrypt::encrypt($id);
+        $setuuid = Pelanggan::findOrFail($id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+
+        if (!$create) {
             return $this->returnController("error", "failed create data pelanggan");
         }
 
-        $merge = (['user' => $user, 'pelanggan' => $pelanggan]);
         Redis::del("pelanggan:all");
-        return $this->returnController("ok", $merge);
+        return $this->returnController("ok", $create);
     }
 
     public function update($uuid, Request $req){
