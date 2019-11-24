@@ -57,19 +57,41 @@ class KaryawanController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
 
-        $karyawan = karyawan::find($id);
-        $user_id = $karyawan->user_id;
-        $user = user::findOrFail($user_id);
-        if (!$user) {
-            return $this->returnController("error", "failed find data karyawan");
-        }
+        $pelanggan = pelanggan::findOrFail($id);
+        $user_id = $pelanggan->user_id;
+        $user = User::findOrFail($user_id);
+        if (!$user){
+                return $this->returnController("error", "failed find data pelanggan");
+            }
+        if($req->foto != null){
+                $FotoExt  = $req->foto->getClientOriginalExtension();
+                $FotoName = $req->user_id.' - '.$req->name;
+                $foto   = $FotoName.'.'.$FotoExt;
+                $req->foto->move('images/user', $foto);
+                $user->foto       = $foto;
+                }else {
+                    $user->foto  = $user->foto;
+                }
+            $user->name            = $req->name;
+            $user->email    = $req->email;
+            if($req->password != null){
+            $password       = Hash::make($req->password);
+            $user->password = $password;
+            }else{
 
-        $u_user = $user->update($req->all());
-        $u_karyawan = $karyawan->update($req->all());
-        if (!$u_user && $u_karyawan) {
+            }
+
+           $user->update();
+           $pelanggan->NIP     = $req->NIP;
+           $pelanggan->tempat_lahir    = $req->tempat_lahir;
+           $pelanggan->tanggal_lahir    = $req->tanggal_lahir;
+           $pelanggan->alamat    = $req->alamat;
+           $pelanggan->telepon    = $req->telepon;
+           $pelanggan->update();
+        if (!$user && $karyawan) {
             return $this->returnController("error", "failed find data karyawan");
         }
-        $merge = (['user' => $u_user, 'karyawan' => $u_karyawan]);
+        $merge = (['user' => $user, 'karyawan' => $karyawan]);
 
         Redis::del("user:all");
         Redis::set("user:$user_id", $u_user);
