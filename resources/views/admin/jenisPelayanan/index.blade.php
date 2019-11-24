@@ -134,6 +134,7 @@ $('#tambah').click(function(){
     $('#mediumModal').modal('show');
 })
 function edit(uuid){
+    e.preventDefault()
     $.ajax({
             type: "GET",
             url: "{{ url('/api/pelayanan')}}" + '/' + uuid,
