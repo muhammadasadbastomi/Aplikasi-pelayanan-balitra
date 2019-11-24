@@ -66,13 +66,14 @@ class PelayananController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
 
-        /*$pelayanan = Pelayanan::find($id);
-        if (!$pelayanan) {
-            return $this->returnController("error", "failed find data pelayanan");
-        }*/
-
-        //$update = $pelayanan->update($req->all());
         $update = Pelayanan::findOrFail($id);
+        if (!$update){
+                return $this->returnController("error", "failed find data pelayanan");
+            }
+        $update->name = $req->name;
+        $update->price = $req->price;
+        $update->update();
+
         if (!$update) {
             return $this->returnController("error", "failed find data pelayanan");
         }
