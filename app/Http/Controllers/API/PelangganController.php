@@ -97,6 +97,7 @@ class PelangganController extends APIController
            $pelanggan->kd_pelanggan     = $req->kd_pelanggan;
            $pelanggan->alamat    = $req->alamat;
            $pelanggan->telepon    = $req->telepon;
+           $pelanggan->update();
 
         if (!$user && $pelanggan) {
             return $this->returnController("error", "failed find data pelanggan");
