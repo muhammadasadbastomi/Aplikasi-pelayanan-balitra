@@ -11,6 +11,10 @@ class customerController extends Controller
 
         return view('customer.index');
     }
+    public function profilEdit(){
+
+        return view('customer.profil.tambah');
+    }
 
     public function pengujianIndex(){
 

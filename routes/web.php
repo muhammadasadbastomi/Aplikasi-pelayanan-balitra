@@ -57,6 +57,8 @@ Route::get('/karyawan/info','adminController@karyawanInfo')
 
 Route::get('/customer/index','customerController@index')
         ->name('customerIndex');
+Route::get('/customer/profil/edit','customerController@profilEdit')
+        ->name('profilEdit');
 Route::get('/customer/pengujian','customerController@pengujianIndex')
         ->name('pengujianIndex');
 //

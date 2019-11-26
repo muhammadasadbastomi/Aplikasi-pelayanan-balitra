@@ -1,11 +1,11 @@
 
-@extends('layouts.customer')
+@extends('layouts.admin')
 @section('content')
 <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1> Jenis Pengujian</h1>
+                        <h1>Data Pengujian</h1>
                     </div>
                 </div>
             </div>
@@ -20,74 +20,108 @@
                 </div>
             </div>
         </div>
-
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <a href="" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
-                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Pelayanan</th>
-                                            <th>Harga</th>
-                                            <th class="text-center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Uji Padi</td>
-                                            <td>Rp.250.000</td>
-                                            <td>Uji ini adalah uji ...</td>
-                                            <td class="text-center"> 
-                                                <a href="{{Route('jenisPelayananEdit')}}" class="btn btn-sm btn-outline-info">Buat permohonan</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Uji Kentang</td>
-                                            <td>Rp.400.000</td>
-                                            <td>Uji ini adalah uji ...</td>
-                                            <td class="text-center"> 
-                                                <a href="{{Route('jenisPelayananEdit')}}" class="btn btn-sm btn-outline-info">Buat permohonan</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <table id="datatable" class="table table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Pelayanan</th>
+                                        <th>Harga</th>
+                                        <th>pilih</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nama Pelayanan</th>
+                                    <th>Harga</th>
+                                    <th>action</th>
+                                </tr>
+                            </tfoot>
+                            </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-        <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="mediumModalLabel">Tambah Data</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                            <form action="">
-                                <div class="form-group"><label for="company" class=" form-control-label">Nama Pelayanan</label><input type="text" id="company" placeholder="Uji ..." class="form-control"></div>
-                                <div class="form-group"><label for="vat" class=" form-control-label">Harga Uji(Rp.)</label><input type="text" id="vat" placeholder="" class="form-control"></div>
-                                <div class="form-group"><label for="street" class=" form-control-label">Keterangan</label><textarea name="" id="" class="form-control"></textarea></div>                                      
-                            <div class="modal-footer">
-                                <button type="button" class="btn " data-dismiss="modal"> <i class="ti-close"></i> Batal</button>
-                                <button type="button" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
-                            </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+       
+@endsection
+@section('script')
+<script>
+
+function hapus(uuid, name){
+    var csrf_token=$('meta[name="csrf_token"]').attr('content');
+    Swal.fire({
+                title: 'apa anda yakin?',
+                text: " Menghapus Kecamatan data " + name,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'hapus data',
+                cancelButtonText: 'batal',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url : "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                        type : "POST",
+                        data : {'_method' : 'DELETE', '_token' :csrf_token},
+                        success: function (response) {
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    $('#datatable').DataTable().ajax.reload(null, false);
+                },
+            })
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                Swal.fire(
+                'Dibatalkan',
+                'data batal dihapus',
+                'error'
+                )
+            }
+        })
+    }
+  
+$(document).ready(function() {
+    $('#datatable').DataTable( {
+        responsive: true,
+        processing: true,
+        serverSide: false,
+        searching: true,
+        ajax: {
+            "type": "GET",
+            "url": "{{route('API.pelayanan.get')}}",
+            "dataSrc": "data",
+            "contentType": "application/json; charset=utf-8",
+            "dataType": "json",
+            "processData": true
+        },
+        columns: [
+            {"data": "name"},
+            {"data": "price"},
+            {data: null , render : function ( data, type, row, meta ) {
+                var uuid = row.uuid;
+                var name = row.name;
+                return type === 'display'  ?
+                '<button onClick="" class="btn btn-sm btn-outline-primary" > <i class="ti-pencil-alt"></i></button>':
+            data;
+            }}
+        ]
+    });
+    } );
+</script>
 @endsection
