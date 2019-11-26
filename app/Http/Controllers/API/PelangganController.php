@@ -12,7 +12,7 @@ use HCrypt;
 class PelangganController extends APIController
 {
     public function get(){
-        $pelanggan = Redis::get("pelanggan:all");
+        $pelanggan = json_decode(redis::get("pelanggan::all"));
         if (!$pelanggan) {
             $pelanggan = pelanggan::all();
             if (!$pelanggan) {
@@ -69,24 +69,45 @@ class PelangganController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
 
-        $pelanggan = pelanggan::find($id);
+        $pelanggan = pelanggan::findOrFail($id);
         $user_id = $pelanggan->user_id;
-        $user = user::findOrFail($user_id);
-        if (!$user) {
-            return $this->returnController("error", "failed find data pelanggan");
-        }
+        $user = User::findOrFail($user_id);
+        if (!$user){
+                return $this->returnController("error", "failed find data pelanggan");
+            }
+        if($req->foto != null){
+                $FotoExt  = $req->foto->getClientOriginalExtension();
+                $FotoName = $req->user_id.' - '.$req->name;
+                $foto   = $FotoName.'.'.$FotoExt;
+                $req->foto->move('images/user', $foto);
+                $user->foto       = $foto;
+                }else {
+                    $user->foto  = $user->foto;
+                }
+            $user->name            = $req->name;
+            $user->email    = $req->email;
+            if($req->password != null){
+            $password       = Hash::make($req->password);
+            $user->password = $password;
+            }else{
 
-        $u_user = $user->update($req->all());
-        $u_pelanggan = $pelanggan->update($req->all());
-        if (!$u_user && $u_pelanggan) {
+            }
+
+           $user->update();
+           $pelanggan->kd_pelanggan     = $req->kd_pelanggan;
+           $pelanggan->alamat    = $req->alamat;
+           $pelanggan->telepon    = $req->telepon;
+           $pelanggan->update();
+
+        if (!$user && $pelanggan) {
             return $this->returnController("error", "failed find data pelanggan");
         }
-        $merge = (['user' => $u_user, 'pelanggan' => $u_pelanggan]);
+        $merge = (['user' => $user, 'pelanggan' => $pelanggan]);
 
         Redis::del("user:all");
-        Redis::set("user:$user_id", $u_user);
+        Redis::set("user:$user_id", $user);
         Redis::del("pelanggan:all");
-        Redis::set("pelanggan:$id", $u_pelanggan);
+        Redis::set("pelanggan:$id", $pelanggan);
 
         return $this->returnController("ok", $merge);
     }
