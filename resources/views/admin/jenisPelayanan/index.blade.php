@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
                                 <button href="" class="btn btn-outline-primary pull-right" id="tambah" >+ tambah data</button>
-                                <a href="" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <a href="{{Route('pelayananCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="table table-hover" style="width:100%">
@@ -104,38 +104,34 @@ function hapus(uuid, name){
                         type : "POST",
                         data : {'_method' : 'DELETE', '_token' :csrf_token},
                         success: function (response) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Data Berhasil Dihapus',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     $('#datatable').DataTable().ajax.reload(null, false);
                 },
-                    })
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    Swal.fire(
-                        'Dibatalkan',
-                        'data batal dihapus',
-                        'error'
-                    )
-                }
             })
-}
-$('#tambah').click(function(){
-    $('.modal-title').text('Tambah Data');
-    $('#name').val('');
-    $('#price').val('');  
-    $('#btn-form').text('Simpan Data');
-    $('#mediumModal').modal('show');
-})
-function edit(uuid){
-    e.preventDefault()
-    $.ajax({
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                Swal.fire(
+                'Dibatalkan',
+                'data batal dihapus',
+                'error'
+                )
+            }
+        })
+    }
+    $('#tambah').click(function(){
+        $('.modal-title').text('Tambah Data');
+        $('#name').val('');
+        $('#price').val('');  
+        $('#btn-form').text('Simpan Data');
+        $('#mediumModal').modal('show');
+    })
+    function edit(uuid){
+        $.ajax({
             type: "GET",
             url: "{{ url('/api/pelayanan')}}" + '/' + uuid,
             beforeSend: false,
@@ -148,7 +144,7 @@ function edit(uuid){
                 $('#mediumModal').modal('show');
             }
         })
-}
+    }
 $(document).ready(function() {
     $('#datatable').DataTable( {
         responsive: true,
@@ -224,9 +220,7 @@ $(document).ready(function() {
                 }
             })
         }
-       } );
-} );
-
-
+    } );
+    } );
 </script>
 @endsection
