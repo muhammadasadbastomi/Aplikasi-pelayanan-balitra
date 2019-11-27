@@ -26,9 +26,9 @@ class adminController extends Controller
         return view('admin.jenisPelayanan.index');
     }
 
-    public function jenisPelayananEdit(){
+    public function analisisIndex(){
        
-        return view('admin.jenisPelayanan.edit');
+        return view('admin.analisis.index');
     }
 
     public function karyawanIndex(){

@@ -44,6 +44,9 @@ Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
 Route::get('/pelayanan/cetak','adminController@pelayananCetak')
         ->name('pelayananCetak');
 
+Route::get('/analisis/index','adminController@analisisIndex')
+        ->name('analisisIndex');
+
 Route::get('/karyawan/index','adminController@karyawanIndex')
         ->name('karyawanIndex');
 Route::get('/karyawan/edit','adminController@karyawanEdit')
