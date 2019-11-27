@@ -1,0 +1,55 @@
+
+@extends('layouts.customer')
+@section('content')
+<br>
+<br>
+
+<div class="col-md-4">
+<div class="feed-box text-center">
+<section class="card">
+<div class="card-body">
+<div class="corner-ribon blue-ribon">
+<i class="fa fa-user"></i>
+</div>
+<a href="#">
+<img class="align-self-center rounded-circle mr-3" style="width:150px; height:150px;" alt="" src="{{asset('admin/images/admin.jpg')}}">
+</a>
+<h2>Nama customer</h2>
+<p>perusahsaan xxx</p>
+</div>
+</section>
+</div>
+</div>
+
+<div class="col-md-8">
+<aside class="profile-nav alt">
+<section class="card">
+<div class="card-header user-header alt bg-dark">
+<div class="media">
+<div class="media-body">
+<h3 class="text-light display-6">Pemberitahuan</h3>
+</div>
+</div>
+</div>
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="{{Route('notifDetail')}}"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-success pull-right">belum dibaca</span></a><br>
+<small>14:00 PM</small>
+</li>
+<li class="list-group-item">
+<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-success pull-right">belum dibaca</span></a><br>
+<small>14:00 PM</small>
+</li>
+<li class="list-group-item">
+<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-primary pull-right">sudah dibaca</span></a><br>
+<small>14:00 PM</small>
+</li>
+<li class="list-group-item">
+<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-primary pull-right">sudah dibaca</span></a><br>
+<small>14:00 PM</small>
+</li>
+</ul>
+</section>
+</aside>
+</div>
+@endsection

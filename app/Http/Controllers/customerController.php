@@ -20,4 +20,14 @@ class customerController extends Controller
 
         return view('customer.pengujian.index');
     }
+
+    public function notifIndex(){
+
+        return view('customer.notif.index');
+    }
+
+    public function notifdetail(){
+
+        return view('customer.notif.detail');
+    }
 }

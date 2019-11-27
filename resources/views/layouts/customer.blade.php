@@ -45,7 +45,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="{{Route('adminIndex')}}"> <i class="menu-icon ti-home"></i>Beranda </a>
+                        <a href="{{Route('customerIndex')}}"> <i class="menu-icon ti-home"></i>Beranda </a>
                     </li>
                     <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -79,27 +79,14 @@
             <div class="header-menu">
 
                 <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <a id="" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                     <div class="header-left">
                         <div class="dropdown for-message">
-                            <button class="btn btn-secondary dropdown-toggle" type="button"
-                                id="message"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="{{Route('notifIndex')}}" class="btn btn-secondary dropdown-toggle">
                                 <i class="ti-bell"></i>
                                 <span class="count bg-primary">2</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <p class="red">You have 4 Mails</p>
-                                <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/1.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Jonathan Smith</span>
-                                    <span class="time float-right">5 menit yang lalu</span>
-                                        <p>Permintaan Pengujian</p>
-                                </span>
                             </a>
-                              
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

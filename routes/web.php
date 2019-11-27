@@ -61,6 +61,10 @@ Route::get('/customer/profil/edit','customerController@profilEdit')
         ->name('profilEdit');
 Route::get('/customer/pengujian','customerController@pengujianIndex')
         ->name('pengujianIndex');
+Route::get('/notif/index','customerController@notifIndex')
+        ->name('notifIndex');
+Route::get('/notif/detail','customerController@notifDetail')
+        ->name('notifDetail');
 //
 Auth::routes();
 
