@@ -24,10 +24,10 @@
 <div class="col-md-8">
 <aside class="profile-nav alt">
 <section class="card">
-<div class="card-header user-header alt bg-dark">
+<div class="card-header user-header alt bg-light">
 <div class="media">
 <div class="media-body">
-<h3 class="text-light display-6">Pemberitahuan</h3>
+<h3 class="text-dark display-6">Pemberitahuan</h3>
 </div>
 </div>
 </div>
@@ -41,11 +41,11 @@
 <small>14:00 PM</small>
 </li>
 <li class="list-group-item">
-<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-primary pull-right">sudah dibaca</span></a><br>
+<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-secondary pull-right">sudah dibaca</span></a><br>
 <small>14:00 PM</small>
 </li>
 <li class="list-group-item">
-<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-primary pull-right">sudah dibaca</span></a><br>
+<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-secondary pull-right">sudah dibaca</span></a><br>
 <small>14:00 PM</small>
 </li>
 </ul>
