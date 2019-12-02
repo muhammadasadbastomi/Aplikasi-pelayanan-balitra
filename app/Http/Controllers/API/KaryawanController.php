@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Karyawan;
@@ -41,7 +42,23 @@ class KaryawanController extends APIController
 
     public function create(Request $req){
         $user = User::create($req->all());
+        // hash password
+        $password=Hash::make($user->password);
+        //set uuid
+        $user_id = $user->id;
+        $uuid = HCrypt::encrypt($user_id);
+        $setuuid = User::findOrFail($user_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->password = $password;
+        $setuuid->update();
+
         $karyawan = $user->karyawan()->create($req->all());
+        //set uuid
+        $karyawan_id = $karyawan->id;
+        $uuid = HCrypt::encrypt($karyawan_id);
+        $setuuid = Karyawan::findOrFail($karyawan_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
         if (!$user && $karyawan) {
             return $this->returnController("error", "failed create data karyawan");
         }

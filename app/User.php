@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use HCrypt;
-// use Hash;
 
 class User extends Authenticatable
 {
@@ -19,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'status',
+        'uuid', 'name', 'email', 'password', 'role', 'status',
     ];
 
     /**
@@ -31,15 +30,6 @@ class User extends Authenticatable
         'password', 'remember_token','id'
     ];
 
-    // protected $hidden   = array('id');
-    protected $appends = array('uuid');
-
-    public function getUuidAttribute()
-    {
-        return HCrypt::encrypt($this->id);
-        // return Hash::make($this->id);
-    }
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -48,14 +38,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function setRoleAttribute($value)
-    {
-
-            $this->attributes['role'] = 2;
-
-
-    }
 
     public function karyawan(){
         return $this->HasOne('App\Karyawan');
