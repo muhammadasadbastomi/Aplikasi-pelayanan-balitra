@@ -27,8 +27,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <a href="" class="btn btn-outline-primary pull-right"  data-toggle="modal" data-target="#mediumModal" >+ tambah data</a>
-                                <a href="" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <button href="" class="btn btn-outline-primary pull-right" id="tambah" >+ tambah data</button>
+                                <a href="{{Route('pelayananCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="table table-hover" style="width:100%">
@@ -55,8 +55,8 @@
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-        <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal fade" id="mediumModal"  role="dialog" >
+                    <div class="modal-dialog modal-lg" >
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="mediumModalLabel">Tambah Data</h5>
@@ -66,19 +66,85 @@
                             </div>
                             <div class="modal-body">
                             <form  method="post" action="">
-                                <div class="form-group"><label for="company" class=" form-control-label">Nama Pelayanan</label><input type="text"  name="name" placeholder="Uji ..." class="form-control"></div>
-                                <div class="form-group"><label for="vat" class=" form-control-label">Harga Uji(Rp.)</label><input type="text" name="price" placeholder="" class="form-control"></div>
+                                <div class="form-group"><input type="hidden" id="id" name="id"  class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">Nama Pelayanan</label><input type="text" id="name" name="name" placeholder="Uji ..." class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">Harga Uji(Rp.)</label><input type="text" id="price" name="price" placeholder="" class="form-control"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn " data-dismiss="modal"> <i class="ti-close"></i> Batal</button>
-                                <button type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
+                                <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
                             </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
+      </div>  
+
+     
+ </div> 
 @endsection
 @section('script')
 <script>
+
+function hapus(uuid, name){
+    var csrf_token=$('meta[name="csrf_token"]').attr('content');
+    Swal.fire({
+                title: 'apa anda yakin?',
+                text: " Menghapus Kecamatan data " + name,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'hapus data',
+                cancelButtonText: 'batal',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url : "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                        type : "POST",
+                        data : {'_method' : 'DELETE', '_token' :csrf_token},
+                        success: function (response) {
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    $('#datatable').DataTable().ajax.reload(null, false);
+                },
+            })
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                Swal.fire(
+                'Dibatalkan',
+                'data batal dihapus',
+                'error'
+                )
+            }
+        })
+    }
+    $('#tambah').click(function(){
+        $('.modal-title').text('Tambah Data');
+        $('#name').val('');
+        $('#price').val('');  
+        $('#btn-form').text('Simpan Data');
+        $('#mediumModal').modal('show');
+    })
+    function edit(uuid){
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/api/pelayanan')}}" + '/' + uuid,
+            beforeSend: false,
+            success : function(returnData) {
+                $('.modal-title').text('Edit Data');
+                $('#id').val(returnData.data.uuid);
+                $('#name').val(returnData.data.name);
+                $('#price').val(returnData.data.price);  
+                $('#btn-form').text('Ubah Data');
+                $('#mediumModal').modal('show');
+            }
+        })
+    }
 $(document).ready(function() {
     $('#datatable').DataTable( {
         responsive: true,
@@ -96,9 +162,11 @@ $(document).ready(function() {
         columns: [
             {"data": "name"},
             {"data": "price"},
-            {data: "id" , render : function ( data, type, row, meta ) {
+            {data: null , render : function ( data, type, row, meta ) {
+                var uuid = row.uuid;
+                var name = row.name;
                 return type === 'display'  ?
-                    '<a href="" class="btn btn-sm btn-outline-primary" ><i class="ti-pencil"></i></a> <a href="{{route('API.pelayanan.delete', 'data' )}}" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></a>':
+                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
             data;
             }}
         ]
@@ -107,9 +175,12 @@ $(document).ready(function() {
     $("form").submit(function (e) {
         e.preventDefault()
         var form = $('#modal-body form');
-        $.ajax({
-                url: "{{Route('API.pelayanan.create')}}",
-                type: "post",
+        if($('.modal-title').text() == 'Edit Data'){
+            var url = '{{route("API.pelayanan.update", '')}}'
+            var id = $('#id').val();
+            $.ajax({
+                url: url+'/'+id,
+                type: "put",
                 data: $(this).serialize(),
                 success: function (response) {
                     form.trigger('reset');
@@ -127,9 +198,29 @@ $(document).ready(function() {
                     console.log(response);
                 }
             })
-} );
-} );
-
-
+        }else{
+            $.ajax({
+                url: "{{Route('API.pelayanan.create')}}",
+                type: "post",
+                data: $(this).serialize(),
+                success: function (response) {
+                    form.trigger('reset');
+                    $('#mediumModal').modal('hide');
+                    $('#datatable').DataTable().ajax.reload();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error:function(response){
+                    console.log(response);
+                }
+            })
+        }
+    } );
+    } );
 </script>
 @endsection

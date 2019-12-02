@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\API;
-
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,7 +22,7 @@ class PelayananController extends APIController
     }
 
     public function find($uuid){
-        $id = HCrypt::decrypt($uuid);
+        $id = Hcrypt::decrypt($uuid);
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
@@ -43,38 +41,43 @@ class PelayananController extends APIController
 
     public function create(Request $req){
         $create = new Pelayanan;
-        $uuid = HCrypt::encrypt($req->id);
-        // dd($uuid);
-        $create->uuid     = $uuid;
         
         $create->name     = $req->name;
         $create->price    = $req->price;
         $create->save();
+
+        $id= $create->id;
+        $uuid = HCrypt::encrypt($id);
+        $setuuid = Pelayanan::findOrFail($id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+       
         if (!$create) {
             return $this->returnController("error", "failed create data pelayanan");
         }
-        // $uuid = HCrypt::encrypt($create->id);
-        // $merge = (['uuid' => $uuid, 'create' => $create]);
+        
         Redis::del("pelayanan:all");
         return $this->returnController("ok", $create);
     }
 
     public function update($uuid, Request $req){
-        $id = HCrypt::decrypt($uuid);
+        $id = Hcrypt::decrypt($uuid);
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
 
-        $pelayanan = Pelayanan::find($id);
-        if (!$pelayanan) {
-            return $this->returnController("error", "failed find data pelayanan");
-        }
+        $update = Pelayanan::findOrFail($id);
+        if (!$update){
+                return $this->returnController("error", "failed find data pelayanan");
+            }
+        $update->name = $req->name;
+        $update->price = $req->price;
+        $update->update();
 
-        $update = $pelayanan->update($req->all());
         if (!$update) {
             return $this->returnController("error", "failed find data pelayanan");
         }
-
+        
         Redis::del("pelayanan:all");
         Redis::set("pelayanan:$id", $update);
 
@@ -82,7 +85,7 @@ class PelayananController extends APIController
     }
 
     public function delete($uuid){
-        $id = HCrypt::decrypt($uuid);
+        $id = Hcrypt::decrypt($uuid);
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }

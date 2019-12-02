@@ -1,17 +1,6 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
+
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
                 Route::get('{uuid}', 'PelayananController@find')->name('find');
@@ -27,7 +16,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'KaryawanController@update')->name('update');
             Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
         });
-
+/*
         Route::prefix('pelanggan')->name('pelanggan.')->group(function(){
             Route::get('', 'PelangganController@get')->name('get');
             Route::get('{uuid}', 'PelangganController@find')->name('find');
@@ -35,8 +24,9 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'PelangganController@update')->name('update');
             Route::delete('{uuid}', 'PelangganController@delete')->name('delete');
         });
+     */
+   
 });
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -51,8 +41,11 @@ Route::get('/pemohon/index','adminController@pemohonIndex')
 
 Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
         ->name('pelayananIndex');
-Route::get('/pelayanan/edit','adminController@jenisPelayananEdit')
-        ->name('pelayananEdit');
+Route::get('/pelayanan/cetak','adminController@pelayananCetak')
+        ->name('pelayananCetak');
+
+Route::get('/analisis/index','adminController@analisisIndex')
+        ->name('analisisIndex');
 
 Route::get('/karyawan/index','adminController@karyawanIndex')
         ->name('karyawanIndex');
@@ -67,8 +60,14 @@ Route::get('/karyawan/info','adminController@karyawanInfo')
 
 Route::get('/customer/index','customerController@index')
         ->name('customerIndex');
+Route::get('/customer/profil/edit','customerController@profilEdit')
+        ->name('profilEdit');
 Route::get('/customer/pengujian','customerController@pengujianIndex')
         ->name('pengujianIndex');
+Route::get('/notif/index','customerController@notifIndex')
+        ->name('notifIndex');
+Route::get('/notif/detail','customerController@notifDetail')
+        ->name('notifDetail');
 //
 Auth::routes();
 

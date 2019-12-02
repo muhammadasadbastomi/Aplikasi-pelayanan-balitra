@@ -16,6 +16,7 @@ class CreateKaryawansTable extends Migration
         Schema::create('karyawans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('user_id');
+            $table->text('uuid')->nullable();
             $table->string('NIP')->length('25');
             $table->string('tempat_lahir')->length(255);
             $table->date('tanggal_lahir');
