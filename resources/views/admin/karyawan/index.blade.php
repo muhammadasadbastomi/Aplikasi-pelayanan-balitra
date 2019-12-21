@@ -133,6 +133,7 @@
                 })
             }
 
+            
             //event btn tambah
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
