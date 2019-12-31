@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'status',
+         'name', 'email', 'password', 'role', 'status',
     ];
 
     /**
@@ -28,17 +28,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','id'
+        'password', 'remember_token','id',
     ];
-
-    // protected $hidden   = array('id');
-    protected $appends = array('uuid');
-
-    public function getUuidAttribute()
-    {
-        return HCrypt::encrypt($this->id);
-        // return Hash::make($this->id);
-    }
 
     /**
      * The attributes that should be cast to native types.
@@ -51,10 +42,7 @@ class User extends Authenticatable
 
     public function setRoleAttribute($value)
     {
-
-            $this->attributes['role'] = 2;
-
-
+        $this->attributes['role'] = 2;
     }
 
     public function karyawan(){

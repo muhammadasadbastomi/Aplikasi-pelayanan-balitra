@@ -14,12 +14,6 @@ class Karyawan extends Model
     protected $hidden = [
         'id', 'user_id'
     ];
-    protected $appends = array('uuid');
-
-    public function getUuidAttribute()
-    {
-        return HCrypt::encrypt($this->id);
-    }
 
     public function user(){
       return $this->HasOne('App\User');

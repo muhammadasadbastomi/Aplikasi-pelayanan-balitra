@@ -41,7 +41,21 @@ class KaryawanController extends APIController
 
     public function create(Request $req){
         $user = User::create($req->all());
+
+        $user_id= $user->id;
+        $uuid = HCrypt::encrypt($user_id);
+        $setuuid = User::findOrFail($user_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+
         $karyawan = $user->karyawan()->create($req->all());
+
+        $karyawan_id= $karyawan->id;
+        $uuid = HCrypt::encrypt($karyawan_id);
+        $setuuid = Karyawan::findOrFail($karyawan_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+
         if (!$user && $karyawan) {
             return $this->returnController("error", "failed create data karyawan");
         }
@@ -126,6 +140,4 @@ class KaryawanController extends APIController
 
         return $this->returnController("ok", "success delete data karyawan");
     }
-
-
 }
