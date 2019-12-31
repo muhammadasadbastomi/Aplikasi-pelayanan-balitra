@@ -41,8 +41,11 @@ Route::get('/pemohon/index','adminController@pemohonIndex')
 
 Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
         ->name('pelayananIndex');
-Route::get('/pelayanan/edit','adminController@jenisPelayananEdit')
-        ->name('pelayananEdit');
+Route::get('/pelayanan/cetak','adminController@pelayananCetak')
+        ->name('pelayananCetak');
+
+Route::get('/analisis/index','adminController@analisisIndex')
+        ->name('analisisIndex');
 
 Route::get('/karyawan/index','adminController@karyawanIndex')
         ->name('karyawanIndex');
@@ -57,8 +60,14 @@ Route::get('/karyawan/info','adminController@karyawanInfo')
 
 Route::get('/customer/index','customerController@index')
         ->name('customerIndex');
+Route::get('/customer/profil/edit','customerController@profilEdit')
+        ->name('profilEdit');
 Route::get('/customer/pengujian','customerController@pengujianIndex')
         ->name('pengujianIndex');
+Route::get('/notif/index','customerController@notifIndex')
+        ->name('notifIndex');
+Route::get('/notif/detail','customerController@notifDetail')
+        ->name('notifDetail');
 //
 Auth::routes();
 
