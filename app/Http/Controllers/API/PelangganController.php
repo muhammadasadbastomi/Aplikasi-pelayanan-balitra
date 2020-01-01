@@ -50,6 +50,17 @@ class PelangganController extends APIController
         $setuuid = User::findOrFail($user_id);
         $setuuid->uuid = $uuid;
         $setuuid->password = $password;
+        if($req->foto != null)
+        {
+            $img = $req->file('foto');
+            $FotoExt  = $img->getClientOriginalExtension();
+            $FotoName = $user_id.' - '.$req->username;
+            $foto   = $FotoName.'.'.$FotoExt;
+            $img->move('img/user', $foto);
+            $setuuid->foto       = $foto;
+        }else{
+            $setuuid->foto       = $setuuid->foto;
+        }
         $setuuid->update();
 
         $pelanggan = $user->pelanggan()->create($req->all());
@@ -132,7 +143,10 @@ class PelangganController extends APIController
 
         // Need to check realational
         // If there relation to other data, return error with message, this data has relation to other table(s)
-
+        $image_path = "img/pelanggan/".$pelanggan->foto;  // Value is not URL but directory file path
+        if(File::exists($image_path)) {
+        File::delete($image_path);
+        }
         $delete = $user->delete();
         if (!$delete) {
             return $this->returnController("error", "failed delete data pelanggan");
