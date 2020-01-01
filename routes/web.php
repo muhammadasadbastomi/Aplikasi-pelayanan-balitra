@@ -1,6 +1,13 @@
 <?php
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 
+        Route::prefix('jenis')->name('jenis.')->group(function(){
+                Route::get('', 'JenisController@get')->name('get');
+                Route::get('{uuid}', 'JenisController@find')->name('find');
+                Route::post('', 'JenisController@create')->name('create');
+                Route::put('{uuid}', 'JenisController@update')->name('update');
+                Route::delete('{uuid}', 'JenisController@delete')->name('delete');
+            });
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
                 Route::get('{uuid}', 'PelayananController@find')->name('find');
@@ -16,7 +23,6 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'KaryawanController@update')->name('update');
             Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
         });
-/*
         Route::prefix('pelanggan')->name('pelanggan.')->group(function(){
             Route::get('', 'PelangganController@get')->name('get');
             Route::get('{uuid}', 'PelangganController@find')->name('find');
@@ -24,7 +30,6 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'PelangganController@update')->name('update');
             Route::delete('{uuid}', 'PelangganController@delete')->name('delete');
         });
-     */
    
 });
 Route::get('/', function () {
