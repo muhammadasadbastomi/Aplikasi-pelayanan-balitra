@@ -16,6 +16,6 @@ class Pelanggan extends Model
     ];
 
     public function user(){
-      return $this->HasOne('App\User');
+      return $this->BelongsTo('App\User');
     }
 }

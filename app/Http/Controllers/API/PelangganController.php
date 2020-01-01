@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Pelanggan;
+use App\User;
 use HCrypt;
 
 class PelangganController extends APIController
@@ -40,27 +41,32 @@ class PelangganController extends APIController
     }
 
     public function create(Request $req){
-        $user_id= Auth::user()->id;
-        $create = new Pelanggan;
-        
-        $create->kd_pelanggan     = $req->kd_pelanggan;
-        $create->alamat    = $req->alamat;
-        $create->telepon    = $req->telepon;
-        $create->user_id    = $user_id;
-        $create->save();
-
-        $id= $create->id;
-        $uuid = HCrypt::encrypt($id);
-        $setuuid = Pelanggan::findOrFail($id);
+        $user = User::create($req->all());
+        // hash password
+        $password=Hash::make($user->password);
+        //set uuid
+        $user_id = $user->id;
+        $uuid = HCrypt::encrypt($user_id);
+        $setuuid = User::findOrFail($user_id);
         $setuuid->uuid = $uuid;
+        $setuuid->password = $password;
         $setuuid->update();
 
-        if (!$create) {
+        $pelanggan = $user->pelanggan()->create($req->all());
+        //set uuid
+        $pelanggan_id = $pelanggan->id;
+        $uuid = HCrypt::encrypt($pelanggan_id);
+        $setuuid = Pelanggan::findOrFail($pelanggan_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        if (!$user && $pelanggan) {
             return $this->returnController("error", "failed create data pelanggan");
         }
 
+        $merge = (['user' => $user, 'pelanggan' => $pelanggan]);
         Redis::del("pelanggan:all");
-        return $this->returnController("ok", $create);
+        return $this->returnController("ok", $merge);
+
     }
 
     public function update($uuid, Request $req){
@@ -87,10 +93,10 @@ class PelangganController extends APIController
             $user->name            = $req->name;
             $user->email    = $req->email;
             if($req->password != null){
-            $password       = Hash::make($req->password);
-            $user->password = $password;
+                $password       = Hash::make($req->password);
+                $user->password = $password;
             }else{
-
+                $user->password = $user->password;
             }
 
            $user->update();

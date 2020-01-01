@@ -91,10 +91,10 @@ class KaryawanController extends APIController
             $user->name            = $req->name;
             $user->email    = $req->email;
             if($req->password != null){
-            $password       = Hash::make($req->password);
-            $user->password = $password;
+                $password       = Hash::make($req->password);
+                $user->password = $password;
             }else{
-
+                $user->password = $user->password;
             }
 
            $user->update();
