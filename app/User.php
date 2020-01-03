@@ -27,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','id'
+        'password', 'remember_token','id',
     ];
 
     /**
@@ -41,5 +41,9 @@ class User extends Authenticatable
 
     public function karyawan(){
         return $this->HasOne('App\Karyawan');
+      }
+
+    public function pelanggan(){
+        return $this->HasOne('App\Pelanggan');
       }
 }
