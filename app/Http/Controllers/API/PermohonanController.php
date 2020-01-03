@@ -118,18 +118,6 @@ class PermohonanController extends APIController
             $permohonan_detail->pelayanan_id = $pelayanan;
             $permohonan_detail->save();
         }
-
-        // $permohonan_detail = New permohonan_detail;
-        
-        // // decrypt uuid from $req
-        // $permohonan_id = HCrypt::decrypt($req->id);
-        // $pelayanan_id = HCrypt::decrypt($req->pelayanan_id);
-
-        // $permohonan_detail->permohonan_id    =  $permohonan_id;
-        // $permohonan_detail->pelayanan_id      =  $pelayanan_id;
-        // $permohonan_detail->keterangan       =  $req->keterangan;
-
-        // $permohonan_detail->save();
         
         $permohonan_detail_id= $permohonan_detail->id;
         
