@@ -30,7 +30,7 @@
                     <li class="active">
                         <a href="{{Route('adminIndex')}}"> <i class="menu-icon ti-home"></i>Beranda </a>
                     </li>
-                    <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                    <h3 class="menu-title">UI elements</h3>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Master Data</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -50,21 +50,12 @@
                     <li><a href="{{Route('beritaIndex')}}"><i class="menu-icon fa fa-file"></i> Data Berita</a></li>
                     <li><a href="#"><i class="menu-icon fa fa-user"></i> Data Admin</a></li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </nav>
-    </aside><!-- /#left-panel -->
-
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
-
+    </aside>
     <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
         <header id="header" class="header">
-
             <div class="header-menu">
-
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                     <div class="header-left">
@@ -127,18 +118,11 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
-        </header><!-- /header -->
-        <!-- Header-->
-
+        </header>
         @yield('content')
-    </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
-
+    </div>
     <script src="{{asset('admin/assets/js/main.js')}}"></script>
     <script src="{{asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/js/app.js')}}"></script>
@@ -147,6 +131,5 @@
     <script src="{{asset('/js/sweetalert/sweetalert.all.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/vendors/froala/froala.min.js')}}"></script>
     @yield('script')
-
 </body>
 </html>
