@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/themify-icons/css/themify-icons.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
+    <link href="{{asset('admin/vendors/froala/froala.min.css')}}" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -46,6 +47,8 @@
                             <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Hasil Uji</a></li>
                         </ul>
                     </li>
+                    <li><a href="{{Route('beritaIndex')}}"><i class="menu-icon fa fa-file"></i> Data Berita</a></li>
+                    <li><a href="#"><i class="menu-icon fa fa-user"></i> Data Admin</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -142,6 +145,7 @@
     <script src="{{asset('/js/datatable/jquery.datatables.min.js')}}"></script>
     <script src="{{asset('/js/datatable/datatables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('/js/sweetalert/sweetalert.all.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/vendors/froala/froala.min.js')}}"></script>
     @yield('script')
 
 </body>
