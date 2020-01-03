@@ -12,4 +12,9 @@ class Permohonan extends Model
     public function jenispelayanan(){
         return $this->BelongsTo('App\JenisPelayanan');
       }  
+
+    public function detail_permohonan()
+    {
+    	return $this->belongsToMany('App\Detail_permohonan');
+    }
 }

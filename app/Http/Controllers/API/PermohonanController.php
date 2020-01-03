@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Permohonan_detail;
 use App\Permohonan;
 use HCrypt;
 
@@ -103,5 +104,84 @@ class PermohonanController extends APIController
         Redis::del("permohonan:$id");
 
         return $this->returnController("ok", "success delete data permohonan");
+    }
+
+    //permohonan detail
+
+    public function permohonan_create(Request $req){
+        $permohonan_id = HCrypt::decrypt($req->id);
+        $pelayanans = $req->input('pelayanan');
+        foreach ($pelayanans as $pelayanan)
+        {
+            $permohonan_detail = new Permohonan_detail;
+            $permohonan_detail->permohonan_id = $permohonan_id;
+            $permohonan_detail->pelayanan_id = $pelayanan;
+            $permohonan_detail->save();
+        }
+
+        // $permohonan_detail = New permohonan_detail;
+        
+        // // decrypt uuid from $req
+        // $permohonan_id = HCrypt::decrypt($req->id);
+        // $pelayanan_id = HCrypt::decrypt($req->pelayanan_id);
+
+        // $permohonan_detail->permohonan_id    =  $permohonan_id;
+        // $permohonan_detail->pelayanan_id      =  $pelayanan_id;
+        // $permohonan_detail->keterangan       =  $req->keterangan;
+
+        // $permohonan_detail->save();
+        
+        $permohonan_detail_id= $permohonan_detail->id;
+        
+        $uuid = HCrypt::encrypt($permohonan_detail_id);
+        $setuuid = permohonan_detail::findOrFail($permohonan_detail_id);
+        $setuuid->uuid = $uuid;
+            
+        $setuuid->update();
+
+        if (!$permohonan_detail) {
+            return $this->returnController("error", "failed create data permohonan detail");
+        }
+
+        Redis::del("permohonan_detail:all");
+        Redis::set("permohonan_detail:all",$permohonan_detail);
+        return $this->returnController("ok", $permohonan_detail);
+    }
+
+    public function permohonan_get($uuid){
+        $permohonan_id = HCrypt::decrypt($uuid);
+        $permohonan_detail = json_decode(redis::get("permohonan_detail::all"));
+        if (!$permohonan_detail) {
+            $permohonan_detail = permohonan_detail::with('permohonan')->where('permohonan_id', $permohonan_id)->get();
+            if (!$permohonan_detail) {
+                return $this->returnController("error", "failed get permohonan detail data");
+            }
+            Redis::set("permohonan_detail:all", $permohonan_detail);
+        }
+        return $this->returnController("ok", $permohonan_detail);
+    }
+
+    public function permohonan_delete($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $permohonan_detail = permohonan_detail::find($id);
+        if (!$permohonan_detail) {
+            return $this->returnController("error", "failed find data permohonan detail");
+        }
+
+        // Need to check realational
+        // If there relation to other data, return error with message, this data has relation to other table(s)
+        $delete = $permohonan_detail->delete();
+        if (!$delete) {
+            return $this->returnController("error", "failed delete data permohonan detail");
+        }
+
+        Redis::del("permohonan_detail:all");
+        Redis::del("permohonan_detail:$id");
+
+        return $this->returnController("ok", "success delete data permohonan detail");
     }
 }
