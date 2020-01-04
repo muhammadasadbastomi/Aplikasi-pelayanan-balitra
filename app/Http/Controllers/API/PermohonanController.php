@@ -54,7 +54,7 @@ class PermohonanController extends APIController
         {
             $permohonan_detail = new Permohonan_detail;
             $permohonan_detail->permohonan_id = $permohonan->id;
-            $permohonan_detail->pelayanan_id = $pelayanan;
+            $permohonan_detail->pelayanan_id = HCrypt::decrypt($pelayanan);
             $permohonan_detail->save();
         }
 
