@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Permohonan_detail;
 use App\Permohonan;
