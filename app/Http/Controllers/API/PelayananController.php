@@ -13,7 +13,7 @@ class PelayananController extends APIController
     public function get(){
         $pelayanan = json_decode(redis::get("pelayanan::all"));
         if (!$pelayanan) {
-            $pelayanan = pelayanan::with('jenispelayanan')->get();
+            $pelayanan = pelayanan::with('jenis_pelayanan')->get();
             if (!$pelayanan) {
                 return $this->returnController("error", "failed get pelayanan data");
             }
@@ -42,7 +42,7 @@ class PelayananController extends APIController
         // $seksi = Seksi::create($req->all());
         $pelayanan = new pelayanan;
         // decrypt foreign key id
-        $pelayanan->jenispelayanan_id = Hcrypt::decrypt($req->jenispelayanan_id);
+        $pelayanan->jenis_pelayanan_id = Hcrypt::decrypt($req->jenis_pelayanan_id);
         $pelayanan->name = $req->name;
         $pelayanan->price = $req->price;
 
