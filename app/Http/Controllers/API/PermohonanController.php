@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Permohonan_detail;
+use App\Detail_permohonan;
 use App\Permohonan;
 use HCrypt;
 
@@ -45,7 +45,7 @@ class PermohonanController extends APIController
         $permohonan = new permohonan;
         // decrypt foreign key id
         $permohonan->user_id = $user_id;
-        $permohonan->jenis_pelayanan_id = Hcrypt::decrypt($req->jenis_pelayanan_id);
+        $permohonan->jenispelayanan_id = Hcrypt::decrypt($req->jenispelayanan_id);
         $permohonan->keterangan = $req->keterangan;
 
         $permohonan->save();
@@ -53,7 +53,7 @@ class PermohonanController extends APIController
         $pelayanans = $req->input('pelayanan_id');
         foreach ($pelayanans as $pelayanan)
         {
-            $permohonan_detail = new Permohonan_detail;
+            $permohonan_detail = new Detail_permohonan;
             $permohonan_detail->permohonan_id = $permohonan->id;
             $permohonan_detail->pelayanan_id = HCrypt::decrypt($pelayanan);
             $permohonan_detail->save();
