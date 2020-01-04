@@ -44,10 +44,19 @@ class PermohonanController extends APIController
         $permohonan = new permohonan;
         // decrypt foreign key id
         $permohonan->user_id = $user_id;
-        $permohonan->jenispermohonan_id = Hcrypt::decrypt($req->jenispelayanan_id);
+        $permohonan->jenispelayanan_id = Hcrypt::decrypt($req->jenispelayanan_id);
         $permohonan->keterangan = $req->keterangan;
 
         $permohonan->save();
+
+        $pelayanans = $req->input('pelayanan_id');
+        foreach ($pelayanans as $pelayanan)
+        {
+            $permohonan_detail = new Permohonan_detail;
+            $permohonan_detail->permohonan_id = $permohonan->id;
+            $permohonan_detail->pelayanan_id = $pelayanan;
+            $permohonan_detail->save();
+        }
 
         //set uuid
         $permohonan_id = $permohonan->id;

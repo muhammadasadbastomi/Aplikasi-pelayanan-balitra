@@ -9,7 +9,7 @@ class Permohonan extends Model
     protected $fillable = ['uuid','kode_jenis', 'jenis'];
     protected $hidden = ['id','jenispelayanan_id','user_id'];
 
-    public function jenispelayanan(){
+    public function jenis_pelayanan(){
         return $this->BelongsTo('App\JenisPelayanan');
       }  
 
