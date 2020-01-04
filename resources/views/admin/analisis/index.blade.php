@@ -157,14 +157,14 @@
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                    url: "{{ url('/api/pelayanan/edit')}}" + '/' + uuid,
                     beforeSend: false,
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
                         $('#name').val(returnData.data.name);
                         $('#price').val(returnData.data.price);
-                        $('#jenis_pelayanan_id').val(returnData.data.jenis_pelayanan_id);  
+                        $('#jenis_pelayanan_id').val(returnData.data.jenis_pelayanan.uuid);  
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }

@@ -31,7 +31,7 @@
                             <div class="card-body">
                             <form action="">
                             <div class="form-group">
-                                <select class="form-control" name="jenis_pelayanan_id" id="jenis_pelayanan_id">
+                                <select class="form-control" name="jenispelayanan_id" id="jenispelayanan_id">
                                     <option value="">--pilih pelayanan--</option>
                                 </select>
                             </div>
@@ -39,6 +39,11 @@
                                     <select  style="width:100%;" class="js-example-basic-multiple" name="pelayanan_id[]" id="pelayanan_id" multiple="multiple">
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                <label for="">Keterangan</label>
+                                   <input type="text" class="form-control" name="keterangan" id="keterangan">
+                                </div>
+                            </div>
                             </div>
                             <div class="card-footer text-right">
                             <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
@@ -60,7 +65,7 @@
                     beforeSend: false,
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
-                        $('#jenis_pelayanan_id').append(
+                        $('#jenispelayanan_id').append(
                             '<option value="'+value.uuid+'">'+value.jenis+'</option>'
                         )
                     })
@@ -73,7 +78,7 @@
             $('.js-example-basic-multiple').select2();
         });
 
-    $('#jenis_pelayanan_id').on('change',function(){
+    $('#jenispelayanan_id').on('change',function(){
         var uuid = $(this).val();
         if(uuid){
             $.ajax({
@@ -95,6 +100,33 @@
             $("#kelurahan").empty();
         }
     });
+
+       //event form submit 
+       $("form").submit(function (e) {
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                        let url = '{{route("API.permohonan.create")}}'
+                        $.ajax({
+                            url: url,
+                            type: "post",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Tersimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                } );
     </script>
     
 @endsection
