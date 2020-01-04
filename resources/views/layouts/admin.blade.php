@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
     <link href="{{asset('admin/vendors/froala/froala.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -127,6 +128,9 @@
     <script src="{{asset('/js/datatable/datatables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('/js/sweetalert/sweetalert.all.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/vendors/froala/froala.min.js')}}"></script>
+    <script src="{{asset('admin/vendors/chosen/chosen.jquery.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
     @yield('script')
 </body>
 </html>

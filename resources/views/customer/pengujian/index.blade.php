@@ -29,24 +29,20 @@
                                 <strong class="card-title">Tabel Data</strong>
                             </div>
                             <div class="card-body">
-                            <table id="datatable" class="table table-hover" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Pelayanan</th>
-                                        <th>Harga</th>
-                                        <th>pilih</th>
-                                    </tr>
-                                </thead>
-                            <tbody>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Nama Pelayanan</th>
-                                    <th>Harga</th>
-                                    <th>action</th>
-                                </tr>
-                            </tfoot>
-                            </table>
+                            <form action="">
+                            <div class="form-group">
+                                <select class="form-control" name="jenis_pelayanan_id" id="jenis_pelayanan_id">
+                                    <option value="">--pilih pelayanan--</option>
+                                </select>
+                            </div>
+                                <div class="form-group">
+                                    <select  style="width:100%;" class="js-example-basic-multiple" name="pelayanan_id[]" id="pelayanan_id" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                            <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -56,72 +52,48 @@
        
 @endsection
 @section('script')
-<script>
-
-function hapus(uuid, name){
-    var csrf_token=$('meta[name="csrf_token"]').attr('content');
-    Swal.fire({
-                title: 'apa anda yakin?',
-                text: " Menghapus Kecamatan data " + name,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'hapus data',
-                cancelButtonText: 'batal',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        url : "{{ url('/api/pelayanan')}}" + '/' + uuid,
-                        type : "POST",
-                        data : {'_method' : 'DELETE', '_token' :csrf_token},
-                        success: function (response) {
-                            Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Data Berhasil Dihapus',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    $('#datatable').DataTable().ajax.reload(null, false);
-                },
+    <script>
+            getJenis = () => {
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/jenis')}}",
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $.each(returnData.data, function (index, value) {
+                        $('#jenis_pelayanan_id').append(
+                            '<option value="'+value.uuid+'">'+value.jenis+'</option>'
+                        )
+                    })
+                }
             })
-            } else if (result.dismiss === swal.DismissReason.cancel) {
-                Swal.fire(
-                'Dibatalkan',
-                'data batal dihapus',
-                'error'
-                )
+        }
+        getJenis();
+
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+
+    $('#jenis_pelayanan_id').on('change',function(){
+        var uuid = $(this).val();
+        if(uuid){
+            $.ajax({
+            type:"GET",
+            url:"{{ url('/api/pelayanan')}}" + '/' + uuid,
+            success:function(returnData){
+                if(returnData){
+                    $("#pelayanan_id").empty();
+                            $.each(returnData.data, function (index, value) {
+                        $("#pelayanan_id").append('<option value="'+value.uuid+'">'+value.name+'- Rp.'+value.price+' </option>');
+                    });
+                }else{
+                $("#kecamatan").empty();
+                }
             }
-        })
-    }
-  
-$(document).ready(function() {
-    $('#datatable').DataTable( {
-        responsive: true,
-        processing: true,
-        serverSide: false,
-        searching: true,
-        ajax: {
-            "type": "GET",
-            "url": "{{route('API.pelayanan.get')}}",
-            "dataSrc": "data",
-            "contentType": "application/json; charset=utf-8",
-            "dataType": "json",
-            "processData": true
-        },
-        columns: [
-            {"data": "name"},
-            {"data": "price"},
-            {data: null , render : function ( data, type, row, meta ) {
-                var uuid = row.uuid;
-                var name = row.name;
-                return type === 'display'  ?
-                '<button onClick="" class="btn btn-sm btn-outline-primary" > <i class="ti-pencil-alt"></i></button>':
-            data;
-            }}
-        ]
+            });
+        }else{
+            $("#kecamatan").empty();
+            $("#kelurahan").empty();
+        }
     });
-    } );
-</script>
+    </script>
 @endsection
