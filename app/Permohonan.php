@@ -4,16 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use HCrypt;
-
-class Pelayanan extends Model
+class Permohonan extends Model
 {
-    protected $fillable = ['uuid','name', 'price'];
-    protected $hidden = ['id','jenis_pelayanan_id'];
+    protected $fillable = ['uuid','kode_jenis', 'jenis'];
+    protected $hidden = ['id','jenispelayanan_id','user_id'];
 
-    public function jenis_pelayanan(){
+    public function jenispelayanan(){
         return $this->BelongsTo('App\JenisPelayanan');
-      }    
+      }  
 
     public function detail_permohonan()
     {

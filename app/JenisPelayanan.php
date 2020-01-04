@@ -12,4 +12,8 @@ class JenisPelayanan extends Model
     public function pelayanan(){
         return $this->HasMany('App\Pelayanan');
       }
+    
+    public function permohonan(){
+       return $this->HasMany('App\Permohonan');
+     }  
 }
