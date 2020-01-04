@@ -46,6 +46,11 @@ class adminController extends Controller
         return view('admin.karyawan.info');
     }
 
+    public function beritaIndex(){
+       
+        return view('admin.berita.index');
+    }
+
       //cetak laporan data jenis pelayanan
   public function pelayananCetak(){
     $pelayanan=pelayanan::all();

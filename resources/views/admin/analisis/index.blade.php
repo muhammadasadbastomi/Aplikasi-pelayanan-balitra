@@ -34,10 +34,9 @@
                             <table id="datatable" class="table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Kode Analisis</th>
                                         <th>Analisis</th>
                                         <th>Harga</th>
-                                        <th>jenis uji</th>
+                                        <th>Jenis Pelayanan</th>
                                         <th>action</th>
                                     </tr>
                                 </thead>
@@ -45,10 +44,9 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Kode Analisis</th>
                                     <th>Analisis</th>
                                     <th>Harga</th>
-                                    <th>jenis uji</th>
+                                    <th>jenis pelayanan</th>
                                     <th>action</th>
                                 </tr>
                             </tfoot>
@@ -71,37 +69,187 @@
                             <div class="modal-body">
                             <form  method="post" action="">
                                 <div class="form-group"><input type="hidden" id="id" name="id"  class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Kode Analisis</label><input type="text" id="kd_analisis" name="name" placeholder="Kode Analisis" class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Analisis</label><input type="text" id="analisis" name="price" placeholder="Analisis" class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Harga</label><input type="text" id="harga" name="price" placeholder="Rp." class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">Analisis</label><input type="text" id="name" name="name" placeholder="name" class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">Harga</label><input type="text" id="price" name="price" placeholder="Rp." class="form-control"></div>
                                 <div class="form-group">
                                 <label  class=" form-control-label">Jenis Uji</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="">ini ngambil dari data uji pelayanan</option>
-                                    <option value="">ini ngambil dari data uji pelayanan</option>
+                                <select name="jenis_pelayanan_id" id="jenis_pelayanan_id" class="form-control">
+                                    <option value="">-- pilih Jenis Uji</option>
                                 </select></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn " data-dismiss="modal"> <i class="ti-close"></i> Batal</button>
                                 <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
                             </form>
-                            </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
       </div>  
-
-     
  </div> 
 @endsection
 @section('script')
-<script>
-    $('#tambah').click(function(){
-        $('.modal-title').text('Tambah Data');
-        $('#name').val('');
-        $('#price').val('');  
-        $('#btn-form').text('Simpan Data');
-        $('#mediumModal').modal('show');
-    })
-</script>
+    <script>        
+        getJenis = () => {
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/jenis')}}",
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $.each(returnData.data, function (index, value) {
+                        $('#jenis_pelayanan_id').append(
+                            '<option value="'+value.uuid+'">'+value.jenis+'</option>'
+                        )
+                    })
+                }
+            })
+        }
+        getJenis();
+        //fungsi hapus
+        hapus = (uuid, name)=>{
+            let csrf_token=$('meta[name="csrf_token"]').attr('content');
+            Swal.fire({
+                        title: 'apa anda yakin?',
+                        text: " Menghapus Kecamatan data " + name,
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'hapus data',
+                        cancelButtonText: 'batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url : "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                                type : "POST",
+                                data : {'_method' : 'DELETE', '_token' :csrf_token},
+                                success: function (response) {
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Dihapus',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            $('#datatable').DataTable().ajax.reload(null, false);
+                        },
+                    })
+                    } else if (result.dismiss === swal.DismissReason.cancel) {
+                        Swal.fire(
+                        'Dibatalkan',
+                        'data batal dihapus',
+                        'error'
+                        )
+                    }
+                })
+            }
+            
+            //event btn tambah klik
+            $('#tambah').click(function(){
+                $('.modal-title').text('Tambah Data');
+                $('#name').val('');
+                $('#price').val('');
+                $('#jenis_pelayanan_id').val('');    
+                $('#btn-form').text('Simpan Data');
+                $('#mediumModal').modal('show');
+            })
+
+            //event btn edit klik
+            edit = uuid =>{
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $('.modal-title').text('Edit Data');
+                        $('#id').val(returnData.data.uuid);
+                        $('#name').val(returnData.data.name);
+                        $('#price').val(returnData.data.price);
+                        $('#jenis_pelayanan_id').val(returnData.data.jenis_pelayanan_id);  
+                        $('#btn-form').text('Ubah Data');
+                        $('#mediumModal').modal('show');
+                    }
+                })
+            }
+
+            // fungsi render datatable
+            $(document).ready(function() {
+                $('#datatable').DataTable( {
+                    responsive: true,
+                    processing: true,
+                    serverSide: false,
+                    searching: true,
+                    ajax: {
+                        "type": "GET",
+                        "url": "{{route('API.pelayanan.get')}}",
+                        "dataSrc": "data",
+                        "contentType": "application/json; charset=utf-8",
+                        "dataType": "json",
+                        "processData": true
+                    },
+                    columns: [
+                        {"data": "name"},
+                        {"data": "price"},
+                        {"data": "jenis_pelayanan.jenis"},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let uuid = row.uuid;
+                            let name = row.name;
+                            return type === 'display'  ?
+                            '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                        data;
+                        }}
+                    ]
+                });
+
+                //event form submit 
+                $("form").submit(function (e) {
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                    if($('.modal-title').text() == 'Edit Data'){
+                        let url = '{{route("API.pelayanan.update", '')}}'
+                        let id = $('#id').val();
+                        $.ajax({
+                            url: url+'/'+id,
+                            type: "put",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Tersimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }else{
+                        $.ajax({
+                            url: "{{Route('API.pelayanan.create')}}",
+                            type: "post",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Your work has been saved',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }
+                } );
+                } );
+    </script>
 @endsection

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/themify-icons/css/themify-icons.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
+    <link href="{{asset('admin/vendors/froala/froala.min.css')}}" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -29,7 +30,7 @@
                     <li class="active">
                         <a href="{{Route('adminIndex')}}"> <i class="menu-icon ti-home"></i>Beranda </a>
                     </li>
-                    <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                    <h3 class="menu-title">UI elements</h3>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Master Data</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -46,22 +47,15 @@
                             <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Hasil Uji</a></li>
                         </ul>
                     </li>
+                    <li><a href="{{Route('beritaIndex')}}"><i class="menu-icon fa fa-file"></i> Data Berita</a></li>
+                    <li><a href="#"><i class="menu-icon fa fa-user"></i> Data Admin</a></li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </nav>
-    </aside><!-- /#left-panel -->
-
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
-
+    </aside>
     <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
         <header id="header" class="header">
-
             <div class="header-menu">
-
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                     <div class="header-left">
@@ -81,19 +75,16 @@
                                     <span class="time float-right">5 menit yang lalu</span>
                                         <p>Permintaan Pengujian</p>
                                 </span>
-                            </a>
-                              
+                            </a>   
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="{{asset('admin/images/admin.jpg')}}" alt="User Avatar">
                         </a>
-
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
 
@@ -124,25 +115,18 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
-        </header><!-- /header -->
-        <!-- Header-->
-
+        </header>
         @yield('content')
-    </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
-
+    </div>
     <script src="{{asset('admin/assets/js/main.js')}}"></script>
     <script src="{{asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/js/app.js')}}"></script>
     <script src="{{asset('/js/datatable/jquery.datatables.min.js')}}"></script>
     <script src="{{asset('/js/datatable/datatables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('/js/sweetalert/sweetalert.all.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/vendors/froala/froala.min.js')}}"></script>
     @yield('script')
-
 </body>
 </html>

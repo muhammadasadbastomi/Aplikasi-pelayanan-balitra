@@ -34,20 +34,20 @@
                             <table id="datatable" class="table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Nama Pelayanan</th>
-                                        <th>Harga</th>
+                                        <th>kode Jenis</th>
+                                        <th>Jenis</th>
                                         <th>action</th>
                                     </tr>
                                 </thead>
-                            <tbody>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Nama Pelayanan</th>
-                                    <th>Harga</th>
-                                    <th>action</th>
-                                </tr>
-                            </tfoot>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>kode Jenis</th>
+                                        <th>Jenis</th>
+                                        <th>action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                             </div>
                         </div>
@@ -67,8 +67,8 @@
                             <div class="modal-body">
                             <form  method="post" action="">
                                 <div class="form-group"><input type="hidden" id="id" name="id"  class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Nama Pelayanan</label><input type="text" id="name" name="name" placeholder="Uji ..." class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Harga Uji(Rp.)</label><input type="text" id="price" name="price" placeholder="" class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">Kode Jenis</label><input type="text" id="kode_jenis" name="kode_jenis" placeholder="kode Jenis" class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">Jenis</label><input type="text" id="jenis" name="jenis" placeholder="" class="form-control"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn " data-dismiss="modal"> <i class="ti-close"></i> Batal</button>
                                 <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
@@ -97,7 +97,7 @@
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                                url : "{{ url('/api/jenis')}}" + '/' + uuid,
                                 type : "POST",
                                 data : {'_method' : 'DELETE', '_token' :csrf_token},
                                 success: function (response) {
@@ -124,8 +124,8 @@
             //event btn tambah klik
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
-                $('#name').val('');
-                $('#price').val('');  
+                $('#kode_jenis').val('');
+                $('#jenis').val('');  
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
@@ -134,13 +134,13 @@
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/pelayanan')}}" + '/' + uuid,
+                    url: "{{ url('/api/jenis')}}" + '/' + uuid,
                     beforeSend: false,
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
-                        $('#name').val(returnData.data.name);
-                        $('#price').val(returnData.data.price);  
+                        $('#kode_jenis').val(returnData.data.name);
+                        $('#jenis').val(returnData.data.price);  
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
@@ -156,18 +156,18 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.pelayanan.get')}}",
+                        "url": "{{route('API.jenis.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
                         "processData": true
                     },
                     columns: [
-                        {"data": "name"},
-                        {"data": "price"},
+                        {"data": "kode_jenis"},
+                        {"data": "jenis"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
-                            let name = row.name;
+                            let name = row.jenis;
                             return type === 'display'  ?
                             '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
                         data;
@@ -180,7 +180,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.pelayanan.update", '')}}'
+                        let url = '{{route("API.jenis.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -204,7 +204,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.pelayanan.create')}}",
+                            url: "{{Route('API.jenis.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {

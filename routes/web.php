@@ -66,10 +66,11 @@ Route::get('/analisis/index','adminController@analisisIndex')
 
 Route::get('/karyawan/index','adminController@karyawanIndex')
         ->name('karyawanIndex');
-Route::get('/karyawan/edit','adminController@karyawanEdit')
-        ->name('karyawanEdit');
 Route::get('/karyawan/info','adminController@karyawanInfo')
         ->name('karyawanInfo');
+//route berita
+ Route::get('/berita/index','adminController@beritaIndex')
+        ->name('beritaIndex');
 
 // akhir middleware admin
 

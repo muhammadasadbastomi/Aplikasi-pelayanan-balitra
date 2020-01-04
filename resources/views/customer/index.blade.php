@@ -36,7 +36,7 @@
 info...
 </div>
 <div class="card-body">
-Harap Lengapi data anda , dan tunggu 1x24 jam untuk konvirmasi akun oleh admin 
+Harap Lengapi data anda , dan tunggu 1x24 jam untuk konfirmasi akun oleh admin 
 </div>
 <div class="card-footer text-right">
 <a href="{{Route('profilEdit')}}" class="btn btn-primary">Lengkapi Data anda</a>

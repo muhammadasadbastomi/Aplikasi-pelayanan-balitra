@@ -11,7 +11,7 @@ class Pelayanan extends Model
     protected $fillable = ['uuid','name', 'price'];
     protected $hidden = ['id','jenis_pelayanan_id'];
 
-    public function jenispelayanan(){
+    public function jenis_pelayanan(){
         return $this->BelongsTo('App\JenisPelayanan');
       }    
 
