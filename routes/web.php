@@ -40,7 +40,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         });
         Route::prefix('permohonan_detail')->name('permohonan_detail.')->group(function(){
                 Route::get('{uuid}', 'PermohonanController@permohonan_get')->name('get');
-                Route::post('', 'PermohonanController@permohonan_create')->name('create');
+                Route::post('', 'PermohonanController@permohonan_create')->name('creritaeate');
                 Route::delete('{uuid}', 'PermohonanController@permohonan_delete')->name('delete');
          });
         Route::prefix('berita')->name('berita.')->group(function(){
