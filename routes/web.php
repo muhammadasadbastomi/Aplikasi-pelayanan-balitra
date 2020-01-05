@@ -52,9 +52,9 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 });
    
 });
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/','adminController@depan')
+        ->name('depan');
 
 // middleware admin
 
@@ -77,8 +77,12 @@ Route::get('/karyawan/index','adminController@karyawanIndex')
 Route::get('/karyawan/info','adminController@karyawanInfo')
         ->name('karyawanInfo');
 //route berita
- Route::get('/berita/index','adminController@beritaIndex')
+Route::get('/berita/index','adminController@beritaIndex')
         ->name('beritaIndex');
+Route::get('/berita/depan','adminController@beritaDepan')
+        ->name('beritaDepan');
+Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
+        ->name('beritaDetail');
 
 // akhir middleware admin
 

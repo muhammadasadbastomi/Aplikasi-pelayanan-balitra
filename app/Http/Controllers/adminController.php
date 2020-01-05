@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Pelayanan;
+use App\Berita;
 use Carbon\Carbon;
 use PDF;
+use HCrypt;
+
 
 use Illuminate\Http\Request;
 
@@ -13,6 +16,23 @@ class adminController extends Controller
     public function index(){
 
         return view('admin.index');
+    }
+
+    //fungsi beranda admin
+    public function depan(){
+        $berita = Berita::paginate(3);
+        return view('welcome',compact('berita'));
+    }
+
+    public function beritaDepan(){
+        $berita = Berita::all();
+        return view('berita',compact('berita'));
+      }
+      
+    public function beritaDetail($uuid){
+        $id = HCrypt::decrypt($uuid);
+        $berita = Berita::findOrFail($id);
+        return view('beritaDetail',compact('berita'));
     }
 
     //fungsi halaman data pemohon

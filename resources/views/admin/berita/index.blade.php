@@ -82,7 +82,7 @@
                 $('.modal-title').text('Tambah Data');
                 $('#judul').val('');
                 var editor = new FroalaEditor('#isi', {}, function () {
-                editor.html.insert('<p>isi berita.</p>');
+                editor.html.insert('');
                 })
                 $('#foto').val('');  
                 $('#btn-form').text('Simpan Data');
