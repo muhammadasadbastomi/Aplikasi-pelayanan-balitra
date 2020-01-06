@@ -1,5 +1,5 @@
 
-@extends('layouts.admin')
+@extends('layouts.customer')
 @section('content')
 <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -41,12 +41,12 @@
                                 </div>
                                 <div class="form-group">
                                 <label for="">Keterangan</label>
-                                   <input type="text" class="form-control" name="keterangan" id="keterangan">
+                                   <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                 </div>
                             </div>
                             </div>
                             <div class="card-footer text-right">
-                            <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Simpan</button>
+                            <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Buat Permohonan</button>
                                 </form>
                             </div>
                         </div>

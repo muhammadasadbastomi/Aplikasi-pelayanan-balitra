@@ -71,6 +71,11 @@ class adminController extends Controller
         return view('admin.berita.index');
     }
 
+    public function permohonanIndex(){
+       
+        return view('admin.permohonan.index');
+    }
+
       //cetak laporan data jenis pelayanan
   public function pelayananCetak(){
     $pelayanan=pelayanan::all();

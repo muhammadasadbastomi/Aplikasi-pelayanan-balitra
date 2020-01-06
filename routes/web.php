@@ -83,6 +83,9 @@ Route::get('/berita/depan','adminController@beritaDepan')
         ->name('beritaDepan');
 Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
         ->name('beritaDetail');
+//route permohonan
+Route::get('/permohonan/index','adminController@permohonanIndex')
+        ->name('permohonanIndex');
 
 // akhir middleware admin
 
@@ -98,6 +101,8 @@ Route::get('/notif/index','customerController@notifIndex')
         ->name('notifIndex');
 Route::get('/notif/detail','customerController@notifDetail')
         ->name('notifDetail');
+Route::get('/permohonan/customer/index','customerController@permohonanCustomerIndex')
+        ->name('permohonanCustomerIndex');
 //
 Auth::routes();
 
