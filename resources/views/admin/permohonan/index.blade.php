@@ -27,7 +27,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <a href="{{Route('pelayananCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="table table-hover" style="width:100%">
@@ -36,6 +36,7 @@
                                         <th>permohonan </th>
                                         <th>tanggal</th>
                                         <th>Pemohon</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -46,6 +47,7 @@
                                         <th>permohonan </th>
                                         <th>tanggal</th>
                                         <th>Pemohon</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -120,10 +122,17 @@
                         {"data": "created_at"},
                         {"data": "user.name"},
                         {data: null , render : function ( data, type, row, meta ) {
+                            let status = row.status;
+
+                            return status === 0  ?
+                            '<a class="btn btn-warning">pending</a>':
+                            '<a class="btn btn-success text-white">selesai</a>';
+                        }},
+                        {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
                             let name = row.permohonan;
                             return type === 'display'  ?
-                            '<a href="#" class="btn btn-sm  btn-outline-warning" ><i class="ti-eye"></i> </a> <button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                            '<a href="#" class="btn btn-sm  btn-primary" ><i class="ti-eye"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
                         data;
                         }}
                     ]

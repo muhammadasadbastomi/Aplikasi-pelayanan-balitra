@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Pelayanan;
 use App\Berita;
+use App\Permohonan;
 use Carbon\Carbon;
 use PDF;
 use HCrypt;
@@ -76,12 +77,21 @@ class adminController extends Controller
         return view('admin.permohonan.index');
     }
 
-      //cetak laporan data jenis pelayanan
-  public function pelayananCetak(){
-    $pelayanan=pelayanan::all();
-    $tgl= Carbon::now()->format('d-m-Y');
-    $pdf =PDF::loadView('laporan.pelayananKeseluruhan', ['pelayanan'=>$pelayanan,'tgl'=>$tgl]);
-    $pdf->setPaper('a4', 'potrait');
-    return $pdf->stream('Laporan data Jenis Pelayanan.pdf');
-  }
+    //cetak laporan data jenis pelayanan
+    public function pelayananCetak(){
+        $pelayanan=pelayanan::all();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.pelayananKeseluruhan', ['pelayanan'=>$pelayanan,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Jenis Pelayanan.pdf');
+    }
+
+    //cetak laporan data jenis pelayanan
+    public function permohonanCetak(){
+        $permohonan=permohonan::all();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.permohonanKeseluruhan', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Jenis permohonan.pdf');
+    }
 }

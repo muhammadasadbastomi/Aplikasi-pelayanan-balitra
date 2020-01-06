@@ -86,6 +86,8 @@ Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
 //route permohonan
 Route::get('/permohonan/index','adminController@permohonanIndex')
         ->name('permohonanIndex');
+Route::get('/permohonan/cetak','adminController@permohonanCetak')
+        ->name('permohonanCetak');
 
 // akhir middleware admin
 
