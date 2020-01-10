@@ -87,6 +87,8 @@ class PengujianController extends APIController
             return view('admin.permohonan.index');
         }
 
+        return redirect()->route('permohonan');
+
     }
 
     public function update($uuid, Request $req){
