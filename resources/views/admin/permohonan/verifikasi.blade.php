@@ -34,6 +34,7 @@
                                     <div class="form-group">
                                         <label for="">Status Permohonan</label>
                                         <select class="form-control" name="status" id="status">
+                                            <option value="0">Pending</option>
                                             <option value="1"> Diterima</option>
                                             <option value="2">Ditolak</option>
                                         </select>

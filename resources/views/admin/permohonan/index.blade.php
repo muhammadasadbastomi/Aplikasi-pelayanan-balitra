@@ -125,7 +125,7 @@
 
                             return status === 0  ?
                             '<a class="btn btn-warning">pending</a>':
-                            '<a class="btn btn-success text-white">selesai</a>';
+                            '<a class="btn btn-danger text-white">Ditolak</a>';
                         }},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
