@@ -14,16 +14,16 @@ use HCrypt;
 class PengujianController extends APIController
 {
     public function get(){
-        $pengujian = json_decode(redis::get("permohonan::all"));
-        if (!$pengujian) {
-            $pengujian = permohonan::with('jenispelayanan','user')->where('status',1)->get();
-            // $pengujian = permohonan::with('user')->where('status',1)->get()->load('jenis_pelayanan');
-            if (!$pengujian) {
-                return $this->returnController("error", "failed get pengujian data");
+        $permohonan = json_decode(redis::get("permohonan::all"));
+        if (!$permohonan) {
+            $permohonan = permohonan::with('jenispelayanan','user')->where('status',1)->get();
+            // $permohonan = permohonan::with('user')->where('status',1)->get()->load('jenis_pelayanan');
+            if (!$permohonan) {
+                return $this->returnController("error", "failed get permohonan data");
             }
-            Redis::set("permohonan:all", $pengujian);
+            Redis::set("permohonan:all", $permohonan);
         }
-        return $this->returnController("ok", $pengujian);
+        return $this->returnController("ok", $permohonan);
     }
 
     public function find($uuid){
