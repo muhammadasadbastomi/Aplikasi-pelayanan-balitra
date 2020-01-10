@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Jenis_pelayanan;
 use App\Permohonan;
 use App\Pengujian;
 use App\Inbox;
@@ -15,7 +16,7 @@ class PengujianController extends APIController
     public function get(){
         $pengujian = json_decode(redis::get("pengujian::all"));
         if (!$pengujian) {
-            $pengujian = pengujian::with('permohonan','user')->where('status',1)->get()->load('jenis_pelayanan');
+            $pengujian = permohonan::with('pengujian','user')->where('status',1)->get()->load('jenis_pelayanan');
             if (!$pengujian) {
                 return $this->returnController("error", "failed get pengujian data");
             }
