@@ -44,9 +44,9 @@ class PengujianController extends APIController
         $id = $req->permohonan_id;
         //update status
         $status = Permohonan::findOrFail($id);
-        $status->status = $request->status;
+        $status->status = $req->status;
         $status->update();
-        // dd($request);
+        // dd($req);
         $user_id = $status->user_id;
         // dd($user_id);
         $inbox = new inbox;
@@ -55,7 +55,7 @@ class PengujianController extends APIController
         $inbox->permohonan_id   = $id;
         $subjek = 'Verifikasi permohonan pengujian';
         $inbox->subjek          = $subjek;
-        $inbox->keterangan      = $request->keterangan;
+        $inbox->keterangan      = $req->keterangan;
         $inbox->save();
 
         //set uuid
@@ -65,7 +65,7 @@ class PengujianController extends APIController
         $setuid->uuid = $uid;
         $setuid->update();
 
-        if($request->status==1)
+        if($req->status==1)
         {
             $pengujian = new pengujian;
             $pengujian->user_id = $user_id;
