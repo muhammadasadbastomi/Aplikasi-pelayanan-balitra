@@ -84,7 +84,7 @@ class PengujianController extends APIController
             }
             Redis::del("pengujian:all");
             Redis::set("pengujian:all", $pengujian);
-            return $this->returnController("ok", $pengujian);
+            return view('admin.permohonan.index');
         }
 
     }

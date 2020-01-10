@@ -67,9 +67,6 @@
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                form.trigger('reset');
-                                $('#mediumModal').modal('hide');
-                                $('#datatable').DataTable().ajax.reload();
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
