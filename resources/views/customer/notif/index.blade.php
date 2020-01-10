@@ -32,22 +32,12 @@
 </div>
 </div>
 <ul class="list-group list-group-flush">
-<li class="list-group-item">
-<a href="{{Route('notifDetail')}}"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-success pull-right">belum dibaca</span></a><br>
-<small>14:00 PM</small>
-</li>
-<li class="list-group-item">
-<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-success pull-right">belum dibaca</span></a><br>
-<small>14:00 PM</small>
-</li>
-<li class="list-group-item">
-<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-secondary pull-right">sudah dibaca</span></a><br>
-<small>14:00 PM</small>
-</li>
-<li class="list-group-item">
-<a href="#"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-secondary pull-right">sudah dibaca</span></a><br>
-<small>14:00 PM</small>
-</li>
+    @foreach( $inbox as $i)
+    <li class="list-group-item">
+        <a href="{{Route('notifDetail',['id' => $i->id ] )}}"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-success pull-right">belum dibaca</span></a><br>
+        <small>{{$i->created_at}}</small>
+    </li>
+    @endforeach
 </ul>
 </section>
 </aside>

@@ -19,11 +19,11 @@
             </tr>
             <tr>
             <td>Waktu</td>
-            <td> :14:00 PM</td>
+            <td> : {{$inbox->created_at}}</td>
             </tr>
             <tr>
                 <td>Subject</td>
-                <td>: Konfirmasi Permohonan uji</td>
+                <td>: {{$inbox->subject}}</td>
             </tr>
         </table>
         </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <br>
-    <p style="text-align: justify;" > Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt tenetur cumque in. Quod temporibus fuga dolor libero eaque doloribus, corrupti deleniti sit aut nihil quo iure est doloremque repellat deserunt? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque voluptates obcaecati, doloremque repellat reiciendis reprehenderit recusandae modi fugiat ut, placeat quis fuga laboriosam? Animi iure adipisci esse laudantium ducimus cumque. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde eius ipsum, deserunt incidunt illum ex molestiae fuga expedita possimus sit repudiandae repellat doloribus totam voluptatem quibusdam sunt, quidem veniam porro! , Nomor Permohonan Anda Adalah <b class="text-danger"> 123125672</b></p>
+    <p style="text-align: justify;" > {{$inbox->keterangan}} <b class="text-danger"> {{$inbox->permohonan->id}}</b></p>
     <br>
     <p>Harap dapat mengantar Sampel Uji pada, </p>
     <table>

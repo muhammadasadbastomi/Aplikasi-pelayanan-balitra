@@ -56,4 +56,7 @@ class User extends Authenticatable
     public function berita(){
         return $this->HasMany('App\Berita');
       }
+    public function inbox(){
+        return $this->HasMany('App\Inbox');
+    }
 }

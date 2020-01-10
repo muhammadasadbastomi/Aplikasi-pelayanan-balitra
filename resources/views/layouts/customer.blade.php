@@ -83,8 +83,11 @@
                     <div class="header-left">
                         <div class="dropdown for-message">
                             <a href="{{Route('notifIndex')}}" class="btn btn-secondary dropdown-toggle">
+                            @if(Auth::user()->inbox->where('status',0)->count() != 0)
+                                <i class="ti-bell"></i><span class="badge badge-danger header-badge">{{ Auth::user()->inbox->where('status',0)->count() }} </span>
+                            @else
                                 <i class="ti-bell"></i>
-                                <span class="count bg-primary">2</span>
+                            @endif
                             </a>
                             </a>
                         </div>

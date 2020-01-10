@@ -111,7 +111,7 @@ Route::get('/customer/pengujian','customerController@pengujianIndex')
         ->name('pengujianIndex');
 Route::get('/notif/index','customerController@notifIndex')
         ->name('notifIndex');
-Route::get('/notif/detail','customerController@notifDetail')
+Route::get('/notif/detail/{id}','customerController@notifDetail')
         ->name('notifDetail');
 Route::get('/permohonan/customer/index','customerController@permohonanCustomerIndex')
         ->name('permohonanCustomerIndex');

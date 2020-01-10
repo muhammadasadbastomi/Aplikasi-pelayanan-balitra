@@ -87,7 +87,7 @@ class PengujianController extends APIController
             return view('admin.permohonan.index');
         }
 
-        return redirect()->route('permohonan');
+        return redirect()->route('permohonanIndex');
 
     }
 
