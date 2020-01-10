@@ -97,7 +97,10 @@ Route::post('/permohonan/verifikasi/{uuid}','API\PengujianController@create')
         ->name('verifikasiPermohonanCreate');
 Route::get('/permohonan/cetak','adminController@permohonanCetak')
         ->name('permohonanCetak');
-        
+//pengujian Index
+Route::get('/pengujian/index','adminController@pengujianIndex')
+        ->name('pengujianIndex');
+
 });
 // akhir middleware admin
 
@@ -107,8 +110,8 @@ Route::get('/customer/index','customerController@index')
         ->name('customerIndex');
 Route::get('/customer/profil/edit','customerController@profilEdit')
         ->name('profilEdit');
-Route::get('/customer/pengujian','customerController@pengujianIndex')
-        ->name('pengujianIndex');
+Route::get('/customer/pengujian','customerController@pengujianCustomerIndex')
+        ->name('pengujianCustomerIndex');
 Route::get('/notif/index','customerController@notifIndex')
         ->name('notifIndex');
 Route::get('/notif/detail/{id}','customerController@notifDetail')

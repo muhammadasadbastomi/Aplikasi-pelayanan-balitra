@@ -34,7 +34,12 @@
 <ul class="list-group list-group-flush">
     @foreach( $inbox as $i)
     <li class="list-group-item">
-        <a href="{{Route('notifDetail',['id' => $i->id ] )}}"> <i class="fa fa-envelope-o"></i> Admin <span class="badge badge-success pull-right">belum dibaca</span></a><br>
+        <a href="{{Route('notifDetail',['id' => $i->id ] )}}"> <i class="fa fa-envelope-o"></i> Admin  
+        @if($i->status == 0)
+        <span class="badge badge-success pull-right">belum dibaca</span></a><br>
+        @else
+        <span class="badge badge-secondary pull-right">sudah  dibaca</span></a><br>
+        @endif
         <small>{{$i->created_at}}</small>
     </li>
     @endforeach

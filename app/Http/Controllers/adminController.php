@@ -83,6 +83,11 @@ class adminController extends Controller
         return view('admin.permohonan.verifikasi',compact('permohonan'));
     }
 
+    public function pengujianIndex(){
+       
+        return view('admin.pengujian.index');
+    }
+
     //cetak laporan data jenis pelayanan
     public function pelayananCetak(){
         $pelayanan=pelayanan::all();

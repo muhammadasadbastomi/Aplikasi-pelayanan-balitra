@@ -23,7 +23,7 @@ class Permohonan extends Model
     }
 
     public function pengujian(){
-      return $this->HasMany('App\Pengujian');
+      return $this->HasOne('App\Pengujian');
     }   
 
 }
