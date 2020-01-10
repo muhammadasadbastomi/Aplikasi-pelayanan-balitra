@@ -93,6 +93,8 @@ Route::get('/permohonan/index','adminController@permohonanIndex')
         ->name('permohonanIndex');
 Route::get('/permohonan/verifikasi/{uuid}','adminController@verifikasiPermohonan')
         ->name('verifikasiPermohonan');
+Route::post('/permohonan/verifikasi/{uuid}','API\PengujianController@create')
+        ->name('verifikasiPermohonanCreate');
 Route::get('/permohonan/cetak','adminController@permohonanCetak')
         ->name('permohonanCetak');
         
