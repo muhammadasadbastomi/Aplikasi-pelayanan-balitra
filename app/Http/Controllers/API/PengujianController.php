@@ -16,7 +16,7 @@ class PengujianController extends APIController
     public function get(){
         $pengujian = json_decode(redis::get("permohonan::all"));
         if (!$pengujian) {
-            $permohonan = permohonan::with('jenispelayanan','user')->where('status',1)->get();
+            $pengujian = permohonan::with('jenispelayanan','user')->where('status',1)->get();
             // $pengujian = permohonan::with('user')->where('status',1)->get()->load('jenis_pelayanan');
             if (!$pengujian) {
                 return $this->returnController("error", "failed get pengujian data");
