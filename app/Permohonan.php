@@ -22,4 +22,8 @@ class Permohonan extends Model
     	return $this->belongsToMany('App\Detail_permohonan');
     }
 
+    public function pengujian(){
+      return $this->HasMany('App\Pengujian');
+    }   
+
 }
