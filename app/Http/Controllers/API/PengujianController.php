@@ -87,6 +87,8 @@ class PengujianController extends APIController
             return $this->returnController("ok", $pengujian);
         }
 
+        return redirect()->route('permohonan');
+
     }
 
     public function update($uuid, Request $req){
