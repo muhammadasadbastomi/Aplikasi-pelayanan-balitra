@@ -91,6 +91,8 @@ Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
 //route permohonan
 Route::get('/permohonan/index','adminController@permohonanIndex')
         ->name('permohonanIndex');
+Route::get('/permohonan/verifikasi/{uuid}','adminController@verifikasiPermohonan')
+        ->name('verifikasiPermohonan');
 Route::get('/permohonan/cetak','adminController@permohonanCetak')
         ->name('permohonanCetak');
         

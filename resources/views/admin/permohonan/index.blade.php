@@ -30,7 +30,7 @@
                                 <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
-                            <table id="datatable" class="table table-hover" style="width:100%">
+                            <table id="datatable" class="text-center table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>permohonan </th>
@@ -101,7 +101,6 @@
                     }
                 })
             }
-            
             // fungsi render datatable
             $(document).ready(function() {
                 $('#datatable').DataTable( {
@@ -132,7 +131,7 @@
                             let uuid = row.uuid;
                             let name = row.permohonan;
                             return type === 'display'  ?
-                            '<a href="#" class="btn btn-sm  btn-primary" ><i class="ti-eye"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
+                            ' <a href="/permohonan/verifikasi'+'/'+ uuid +'" class="btn btn-sm  btn-primary" ><i class="ti-eye"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
                         data;
                         }}
                     ]
