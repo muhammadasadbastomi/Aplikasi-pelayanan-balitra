@@ -72,20 +72,21 @@ class PengujianController extends APIController
             $pengujian->permohonan_id           = $id;
             $pengujian->status = $status->status;
             $pengujian->save();
+
+            //set uuid
+            $pengujian_id = $pengujian->id;
+            $uuid = HCrypt::encrypt($pengujian_id);
+            $setuuid = pengujian::findOrFail($pengujian_id);
+            $setuuid->uuid = $uuid;
+            $setuuid->update();
+            if (!$pengujian) {
+                return $this->returnController("error", "failed create data pengujian");
+            }
+            Redis::del("pengujian:all");
+            Redis::set("pengujian:all", $pengujian);
+            return $this->returnController("ok", $pengujian);
         }
 
-        //set uuid
-        $pengujian_id = $pengujian->id;
-        $uuid = HCrypt::encrypt($pengujian_id);
-        $setuuid = pengujian::findOrFail($pengujian_id);
-        $setuuid->uuid = $uuid;
-        $setuuid->update();
-        if (!$pengujian) {
-            return $this->returnController("error", "failed create data pengujian");
-        }
-        Redis::del("pengujian:all");
-        Redis::set("pengujian:all", $pengujian);
-        return $this->returnController("ok", $pengujian);
     }
 
     public function update($uuid, Request $req){
