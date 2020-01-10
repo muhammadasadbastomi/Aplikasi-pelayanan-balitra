@@ -15,7 +15,7 @@ class PengujianController extends APIController
     public function get(){
         $pengujian = json_decode(redis::get("pengujian::all"));
         if (!$pengujian) {
-            $pengujian = pengujian::with('jenis_pengujian')->get();
+            $pengujian = pengujian::with('permohonan')->where('status',2 || 0)->get();
             if (!$pengujian) {
                 return $this->returnController("error", "failed get pengujian data");
             }
@@ -31,7 +31,7 @@ class PengujianController extends APIController
         }
         $pengujian = Redis::get("pengujian:$id");
         if (!$pengujian) {
-            $pengujian = pengujian::where('jenis_pengujian_id',$id)->get();
+            $pengujian = pengujian::where('permohonan_id',$id)->get();
             if (!$pengujian){
                 return $this->returnController("error", "failed find data pengujian");
             }
