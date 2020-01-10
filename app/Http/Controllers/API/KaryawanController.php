@@ -49,6 +49,7 @@ class KaryawanController extends APIController
         $setuuid = User::findOrFail($user_id);
         $setuuid->uuid = $uuid;
         $setuuid->password = $password;
+        $setuuid->role = 2;
         if($req->foto != null)
         {
             $img = $req->file('foto');

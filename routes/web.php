@@ -1,4 +1,5 @@
 <?php
+Route::group(['middleware' => 'admin'], function() {
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 
         Route::prefix('jenis')->name('jenis.')->group(function(){
@@ -50,11 +51,15 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::post('update/{uuid}', 'BeritaController@update')->name('update');
                 Route::delete('{uuid}', 'BeritaController@delete')->name('delete');
                 });
+        Route::prefix('pengujian')->name('pengujian.')->group(function(){
+                Route::get('', 'PengujianController@get')->name('get');
+                Route::get('{uuid}', 'PengujianController@find')->name('find');
+                Route::post('', 'PengujianController@create')->name('create');
+                Route::post('update/{uuid}', 'PengujianController@update')->name('update');
+                Route::delete('{uuid}', 'PengujianController@delete')->name('delete');
+                });
    
 });
-
-Route::get('/','adminController@depan')
-        ->name('depan');
 
 // middleware admin
 
@@ -90,7 +95,8 @@ Route::get('/permohonan/verifikasi/{uuid}','adminController@verifikasiPermohonan
         ->name('verifikasiPermohonan');
 Route::get('/permohonan/cetak','adminController@permohonanCetak')
         ->name('permohonanCetak');
-
+        
+});
 // akhir middleware admin
 
 //middleware customer
@@ -108,6 +114,10 @@ Route::get('/notif/detail','customerController@notifDetail')
 Route::get('/permohonan/customer/index','customerController@permohonanCustomerIndex')
         ->name('permohonanCustomerIndex');
 //
+
+Route::get('/','adminController@depan')
+        ->name('depan');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'DashboardController@index')->name('home');
