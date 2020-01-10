@@ -15,7 +15,7 @@ class PermohonanController extends APIController
     public function get(){
         $permohonan = json_decode(redis::get("permohonan::all"));
         if (!$permohonan) {
-            $permohonan = permohonan::with('jenispelayanan','user')->get();
+            $permohonan = permohonan::with('jenispelayanan','user')->where('status',2 || 0)->get();
             if (!$permohonan) {
                 return $this->returnController("error", "failed get permohonan data");
             }
