@@ -32,14 +32,22 @@
                             <div class="card-body">
                                 <form action="" method="post">
                                     <div class="form-group">
+                                        <label for="">Status Permohonan</label>
+                                        <select class="form-control" name="status" id="status">
+                                            <option value="1"> Diterima</option>
+                                            <option value="2">Ditolak</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="">kererangan verifikasi</label>
                                         <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                     </div>
                                     <input type="hidden" id="permohonan_id" name="permohonan_id" value="{{$permohonan->id}}">
                             </div>
                             <div class="card-footer text-right">
-                                <button class="btn btn-primary" type="submit" name="submit"> Kirim Verfikasi</button>
+                                <button class="btn btn-primary" type="submit" name="submit" id="btn-form"> Kirim Verfikasi</button>
                             </div>
+                            @csrf
                             </form>
                         </div>
                     </div>
@@ -54,32 +62,8 @@
                 $("form").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
-                    if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.permohonan.update", '')}}'
-                        let id = $('#id').val();
                         $.ajax({
-                            url: url+'/'+id,
-                            type: "put",
-                            data: $(this).serialize(),
-                            success: function (response) {
-                                form.trigger('reset');
-                                $('#mediumModal').modal('hide');
-                                $('#datatable').DataTable().ajax.reload();
-                                Swal.fire({
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Data Berhasil Tersimpan',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                            },
-                            error:function(response){
-                                console.log(response);
-                            }
-                        })
-                    }else{
-                        $.ajax({
-                            url: "{{Route('API.permohonan.create')}}",
+                            url: "{{Route('API.pengujian.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
@@ -98,7 +82,6 @@
                                 console.log(response);
                             }
                         })
-                    }
                 } );
                 } );
     </script>
