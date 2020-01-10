@@ -40,7 +40,8 @@ class PengujianController extends APIController
         return $this->returnController("ok", $pengujian);
     }
     
-    public function create(Request $req, $id){
+    public function create(Request $req){
+        $id = $req->permohonan_id;
         //update status
         $status = Permohonan::findOrFail($id);
         $status->status = $request->status;
