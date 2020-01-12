@@ -16,10 +16,11 @@ class CreatePermohonansTable extends Migration
         Schema::create('permohonans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('user_id');
-            $table->unsignedbigInteger('jenispelayanan_id');
+            $table->unsignedbigInteger('jenispelayanan_id')->nullable();
             $table->text('uuid')->nullable();
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->double('biaya')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('jenispelayanan_id')->references('id')->on('jenis_pelayanans')->onDelete('cascade');
             $table->timestamps();

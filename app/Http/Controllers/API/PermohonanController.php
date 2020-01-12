@@ -41,25 +41,15 @@ class PermohonanController extends APIController
     }
 
     public function create(Request $req){
+        $id = HCrypt::decrypt($req->pelayanan_id);
+
         $user_id = auth::id();
         $permohonan = new permohonan;
         // decrypt foreign key id
         $permohonan->user_id = $user_id;
-        $permohonan->jenispelayanan_id = Hcrypt::decrypt($req->jenispelayanan_id);
-        $permohonan->keterangan = $req->keterangan;
 
         $permohonan->save();
 
-        $pelayanans = $req->input('pelayanan_id');
-        foreach ($pelayanans as $pelayanan)
-        {
-            $permohonan_detail = new Detail_permohonan;
-            $permohonan_detail->permohonan_id = $permohonan->id;
-            $permohonan_detail->pelayanan_id = HCrypt::decrypt($pelayanan);
-            $permohonan_detail->save();
-        }
-
-        //set uuid
         $permohonan_id = $permohonan->id;
         $uuid = HCrypt::encrypt($permohonan_id);
         $setuuid = permohonan::findOrFail($permohonan_id);
@@ -71,6 +61,31 @@ class PermohonanController extends APIController
         Redis::del("permohonan:all");
         Redis::set("permohonan:all", $permohonan);
         return $this->returnController("ok", $permohonan);
+    }
+
+    public function create_detail(Request $req){
+        $id = HCrypt::decrypt($req->pelayanan_id);
+        $pelayanan = Pelayanan::findOrFail($id);
+
+        $permohonan_detail = new Detail_permohonan;
+        $permohonan_detail->permohonan_id = $permohonan->id;
+        $permohonan_detail->pelayanan_id = $id;
+        $permohonan_detail->harga = $pelayanan->price;
+        
+        $permohonan_detail->save();
+
+        //set uuid
+        $permohonan_detail_id = $permohonan_detail->id;
+        $uuid = HCrypt::encrypt($permohonan_detail_id);
+        $setuuid = permohonan_detail::findOrFail($permohonan_detail_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        if (!$permohonan_detail) {
+            return $this->returnController("error", "failed create data permohonan_detail");
+        }
+        Redis::del("permohonan_detail:all");
+        Redis::set("permohonan_detail:all", $permohonan_detail);
+        return $this->returnController("ok", $permohonan_detail);
     }
 
     public function update($uuid, Request $req){

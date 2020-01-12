@@ -19,6 +19,7 @@ class CreateDetailPermohonansTable extends Migration
             $table->unsignedBigInteger('pelayanan_id');
             $table->text('uuid')->nullable();
             $table->timestamps();
+            $table->double('biaya');
             $table->foreign('permohonan_id')->references('id')->on('permohonans')->onDelete('cascade');
             $table->foreign('pelayanan_id')->references('id')->on('pelayanans')->onDelete('cascade');
         });
