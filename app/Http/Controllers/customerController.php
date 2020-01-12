@@ -23,8 +23,20 @@ class customerController extends Controller
     }
 
     public function permohonanAdd(){
+        $user_id = auth::id();
+        $permohonan = new permohonan;
+        // decrypt foreign key id
+        $permohonan->user_id = $user_id;
 
-        return view('customer.permohonan.add');
+        $permohonan->save();
+
+        $permohonan_id = $permohonan->id;
+        $uuid = HCrypt::encrypt($permohonan_id);
+        $setuuid = permohonan::findOrFail($permohonan_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        
+        return view('customer.permohonan.add',compact('permohonan_id'));
     }
 
     public function pengujianIndex(){
