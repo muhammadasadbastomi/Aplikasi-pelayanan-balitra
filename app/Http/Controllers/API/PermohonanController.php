@@ -41,7 +41,6 @@ class PermohonanController extends APIController
     }
 
     public function create(Request $req){
-        $id = HCrypt::decrypt($req->pelayanan_id);
 
         $user_id = auth::id();
         $permohonan = new permohonan;
@@ -61,6 +60,7 @@ class PermohonanController extends APIController
         Redis::del("permohonan:all");
         Redis::set("permohonan:all", $permohonan);
         return $this->returnController("ok", $permohonan);
+        return redirect()->route('login');
     }
 
     public function create_detail(Request $req){
