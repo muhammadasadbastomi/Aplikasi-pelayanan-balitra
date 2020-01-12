@@ -17,6 +17,6 @@ class Pelayanan extends Model
 
     public function detail_permohonan()
     {
-    	return $this->belongsToMany('App\Detail_permohonan');
+    	return $this->HasMany('App\Detail_permohonan');
     }
 }
