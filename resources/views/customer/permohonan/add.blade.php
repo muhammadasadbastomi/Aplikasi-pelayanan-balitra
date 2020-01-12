@@ -5,7 +5,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Data Pengujian</h1>
+                        <h1>Tambah Data Permohonan</h1>
                     </div>
                 </div>
             </div>
@@ -36,19 +36,42 @@
                                 </select>
                             </div>
                                 <div class="form-group">
-                                    <select  style="width:100%;" class="js-example-basic-multiple" name="pelayanan_id[]" id="pelayanan_id" multiple="multiple">
+                                    <select  style="width:100%;" class="form-control" name="pelayanan_id" id="pelayanan_id" >
                                     </select>
                                 </div>
                                 <div class="form-group">
                                 <label for="">Keterangan</label>
                                    <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                 </div>
-                            </div>
-                            </div>
-                            <div class="card-footer text-right">
-                            <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Buat Permohonan</button>
+                                <div class="text-right">
+                                <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Tambahkan</button>
                                 </form>
+                                </div>
+                                <br>
+                                <br>
+                                <table id="datatable" class="table table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>kode Jenis</th>
+                                        <th>Jenis</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>kode Jenis</th>
+                                        <th>Jenis</th>
+                                        <th>action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                             </div>
+                            
+                            <br>
+                            <br>
+                            </div>                                
                         </div>
                     </div>
                 </div>
@@ -58,9 +81,6 @@
 @endsection
 @section('script')
     <script>
-            $(document).ready(function() {
-            $('.js-example-basic-multiple').select2();
-        });
             getJenis = () => {
             $.ajax({
                     type: "GET",

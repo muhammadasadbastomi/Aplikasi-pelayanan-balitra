@@ -16,10 +16,15 @@ class customerController extends Controller
 
         return view('customer.profil.tambah');
     }
+    
+    public function permohonanIndex(){
+
+        return view('customer.permohonan.index');
+    }
 
     public function permohonanAdd(){
 
-        return view('customer.pengujian.index');
+        return view('customer.permohonan.add');
     }
 
     public function pengujianIndex(){
