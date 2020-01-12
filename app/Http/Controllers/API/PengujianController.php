@@ -73,6 +73,7 @@ class PengujianController extends APIController
             $pengujian = new pengujian;
             $pengujian->user_id = $user_id;
             $pengujian->permohonan_id           = $id;
+            $pengujian->tanggal = $status->tgl_antar;
             $pengujian->status = $status->status;
             $pengujian->save();
 
