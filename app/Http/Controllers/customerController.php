@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Inbox;
 use App\Permohonan;
+use HCrypt;
 use Illuminate\Http\Request;
 
 class customerController extends Controller
