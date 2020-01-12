@@ -27,13 +27,13 @@ class PelayananController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
-        $pelayanan = Redis::get("pelayanan:$id");
+        $pelayanan = Redis::get("pelayanana:all");
         if (!$pelayanan) {
             $pelayanan = pelayanan::where('jenis_pelayanan_id',$id)->get();
             if (!$pelayanan){
                 return $this->returnController("error", "failed find data pelayanan");
             }
-            Redis::set("pelayanan:$id", $pelayanan);
+            Redis::set("pelayanan:all", $pelayanan);
         }
         return $this->returnController("ok", $pelayanan);
     }
