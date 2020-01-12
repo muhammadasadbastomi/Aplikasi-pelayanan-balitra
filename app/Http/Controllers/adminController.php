@@ -92,10 +92,6 @@ class adminController extends Controller
     public function pengujianDetail($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = permohonan::findOrFail($id);
-        $detail_permohonan = detail_permohonan::where('permohonan_id',$id)->get();
-        foreach ($detail_permohonan->pelayanan as $d){ 
-                $biaya = sum_array($d->price);
-            }
         return view('admin.pengujian.detail',compact('permohonan'));
     }
 
