@@ -70,9 +70,6 @@ class PengujianController extends APIController
         $setuid->uuid = $uid;
         $setuid->update();
 
-        $detail_permohonan = detail_permohonan::where('permohonan_id',$id)->get();
-        $biaya = array_sum($detail_permohonan->pelayanan->price);
-        
         if($req->status==1)
         {
             $pengujian = new pengujian;
@@ -80,7 +77,6 @@ class PengujianController extends APIController
             $pengujian->permohonan_id           = $id;
             $pengujian->tanggal = $req->tgl_antar;
             $pengujian->status = $req->status;
-            $pengujian->biaya = $biaya;
             $pengujian->save();
 
             //set uuid

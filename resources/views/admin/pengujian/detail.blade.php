@@ -51,16 +51,16 @@
                                 </tr>
                                 <tr>
                                     <td>Biaya</td>
-                                    <td>: Rp.</td>
+                                    <td>: @foreach($permohonan->detail_permohonan as $a)
+                                        @php
+                                        $total = $a->pelayanan->sum('price');
+                                        @endphp
+                                        @endforeach
+                                        {{ $total }}
+                                    </td>
+                                        
                                 </tr>
-                                <tr>
-                                    <td>Biaya</td>
-                                    <td>: Rp.</td>
-                                </tr>
-                                <tr>
-                                    <td>Biaya</td>
-                                    <td>: Rp.</td>
-                                </tr>
+                                
                               </table>
                         </div>
                     </div>
