@@ -29,13 +29,13 @@ class PermohonanController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
-        $permohonan = Redis::get("permohonan:$id");
+        $permohonan = Redis::get("permohonan:all", $permohonan);
         if (!$permohonan) {
             $permohonan = permohonan::with('jenispelayanan')->where('id', $id)->first();
             if (!$permohonan){
                 return $this->returnController("error", "failed find data permohonan");
             }
-            Redis::set("permohonan:$id", $permohonan);
+            Redis::set("permohonan:all", $permohonan);
         }
         return $this->returnController("ok", $permohonan);
     }
