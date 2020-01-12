@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Inbox;
+use App\Permohonan;
 use Illuminate\Http\Request;
 
 class customerController extends Controller
@@ -35,7 +36,7 @@ class customerController extends Controller
         $setuuid = permohonan::findOrFail($permohonan_id);
         $setuuid->uuid = $uuid;
         $setuuid->update();
-        
+
         return view('customer.permohonan.add',compact('permohonan_id'));
     }
 
