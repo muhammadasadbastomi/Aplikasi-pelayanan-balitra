@@ -57,10 +57,7 @@ class PermohonanController extends APIController
         if (!$permohonan) {
             return $this->returnController("error", "failed create data permohonan");
         }
-        Redis::del("permohonan:all");
-        Redis::set("permohonan:all", $permohonan);
-        return $this->returnController("ok", $permohonan);
-        return redirect()->route('login');
+        return view('customer.permohonan.add',compact('permohonan_id'));
     }
 
     public function create_detail(Request $req){
