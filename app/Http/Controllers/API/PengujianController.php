@@ -71,7 +71,7 @@ class PengujianController extends APIController
         $setuid->update();
 
         $detail_permohonan = detail_permohonan::where('permohonan_id',$id)->get();
-        $biaya = sum($detail_permohonan->pelayanan->price);
+        $biaya = array_sum($detail_permohonan->pelayanan->price);
         
         if($req->status==1)
         {
