@@ -57,7 +57,7 @@ class PermohonanController extends APIController
         if (!$permohonan) {
             return $this->returnController("error", "failed create data permohonan");
         }
-        return view('customer.permohonan.add',compact('permohonan_id'));
+        return $this->returnController("ok", $permohonan);
     }
 
     public function create_detail(Request $req){
