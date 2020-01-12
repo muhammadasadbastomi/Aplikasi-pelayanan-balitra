@@ -14,4 +14,9 @@ class Detail_permohonan extends Model
     {
         return $this->belongsTo('App\Permohonan');
     }
+
+    public function pelayanan()
+    {
+        return $this->belongsTo('App\Pelayanan');
+    }
 }

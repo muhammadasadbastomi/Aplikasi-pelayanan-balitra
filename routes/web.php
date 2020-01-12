@@ -100,6 +100,8 @@ Route::get('/permohonan/cetak','adminController@permohonanCetak')
 //pengujian Index
 Route::get('/pengujian/index','adminController@pengujianIndex')
         ->name('pengujianIndex');
+Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
+        ->name('pengujianDetail');
 
 });
 // akhir middleware admin
@@ -116,8 +118,12 @@ Route::get('/notif/index','customerController@notifIndex')
         ->name('notifIndex');
 Route::get('/notif/detail/{id}','customerController@notifDetail')
         ->name('notifDetail');
+Route::get('/permohonan/customer/add','customerController@permohonanAdd')
+        ->name('permohonanAdd');
 Route::get('/permohonan/customer/index','customerController@permohonanCustomerIndex')
         ->name('permohonanCustomerIndex');
+
+
 //
 
 Route::get('/','adminController@depan')

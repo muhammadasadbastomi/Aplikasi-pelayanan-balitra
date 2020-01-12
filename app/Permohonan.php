@@ -19,7 +19,7 @@ class Permohonan extends Model
 
     public function detail_permohonan()
     {
-    	return $this->belongsToMany('App\Detail_permohonan');
+    	return $this->hasMany('App\Detail_permohonan');
     }
 
     public function pengujian(){

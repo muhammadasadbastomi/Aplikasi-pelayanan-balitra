@@ -121,7 +121,7 @@
                         {"data": "created_at"},
                         {"data": "user.name"},
                         {data: null, render : function ( data, type, row, meta ) {
-                            let status =data.pengujian.status;
+                            let status =row.status;
                             if(status === 1){
                                 return '<a class="btn btn-warning">Pending</a>';
                               
@@ -135,7 +135,7 @@
                             let uuid = row.uuid;
                             let name = row.permohonan;
                             return type === 'display'  ?
-                            ' <a href="/permohonan/detail'+'/'+ uuid +'" class="btn btn-sm  btn-primary" ><i class="ti-eye"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
+                            ' <a href="/pengujian/detail'+'/'+ uuid +'" class="btn btn-sm  btn-primary" ><i class="ti-eye"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
                         data;
                         }}
                     ]

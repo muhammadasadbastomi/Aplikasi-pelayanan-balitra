@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="{{asset('admin/vendors/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/themify-icons/css/themify-icons.css')}}">
     <link rel="stylesheet" href="{{asset('admin/vendors/flag-icon-css/css/flag-icon.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/vendors/selectFX/css/cs-skin-elastic.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/vendors/jqvmap/dist/jqvmap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
+    <link href="{{asset('admin/vendors/froala/froala.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
@@ -51,7 +51,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>transaksi</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{Route('pengujianIndex')}}"> Pengujian</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="{{Route('permohonanAdd')}}"> Pengujian</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -150,42 +150,16 @@
 
     <!-- Right Panel -->
 
-    <script src="{{asset('admin/vendors/jquery/dist/jquery.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/main.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/init-scripts/data-table/datatables-init.js')}}"></script>
-    <script src="{{asset('admin/vendors/chart.js/dist/Chart.bundle.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/dashboard.js')}}"></script>
-    <script src="{{asset('admin/assets/js/widgets.js')}}"></script>
-    <script src="{{asset('admin/vendors/jqvmap/dist/jquery.vmap.min.js')}}"></script>
-    <script src="{{asset('admin/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js')}}"></script>
-    <script src="{{asset('admin/vendors/jqvmap/dist/maps/jquery.vmap.world.js')}}"></script>
-    <script>
-        (function($) {
-            "use strict";
-
-            jQuery('#vmap').vectorMap({
-                map: 'world_en',
-                backgroundColor: null,
-                color: '#ffffff',
-                hoverOpacity: 0.7,
-                selectedColor: '#1de9b6',
-                enableZoom: true,
-                showTooltip: true,
-                values: sample_data,
-                scaleColors: ['#1de9b6', '#03a9f5'],
-                normalizeFunction: 'polynomial'
-            });
-        })(jQuery);
-    </script>
+    <script src="{{asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/js/app.js')}}"></script>
+    <script src="{{asset('/js/datatable/jquery.datatables.min.js')}}"></script>
+    <script src="{{asset('/js/datatable/datatables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/js/sweetalert/sweetalert.all.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/vendors/froala/froala.min.js')}}"></script>
+    <script src="{{asset('admin/vendors/chosen/chosen.jquery.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    @yield('script')
 
 </body>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Pelayanan;
 use App\Berita;
 use App\Permohonan;
+use App\Pengujian;
 use Carbon\Carbon;
 use PDF;
 use HCrypt;
@@ -86,6 +87,12 @@ class adminController extends Controller
     public function pengujianIndex(){
        
         return view('admin.pengujian.index');
+    }
+
+    public function pengujianDetail($uuid){
+        $id = HCrypt::decrypt($uuid);
+        $permohonan = permohonan::findOrFail($id);
+        return view('admin.pengujian.detail',compact('permohonan'));
     }
 
     //cetak laporan data jenis pelayanan

@@ -40,6 +40,10 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="">Tanggal Antar</label>
+                                        <input type="date" name="tgl_antar" id="tgl_antar" class="form-control"></input>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="">kererangan verifikasi</label>
                                         <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                     </div>
