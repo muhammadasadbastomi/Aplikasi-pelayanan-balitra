@@ -30,7 +30,7 @@
                                 <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
-                              <table>
+                              <table class="table table-hover table-bordered">
                                 <tr>
                                     <td width="250">Permohonan</td>
                                     <td>: {{$permohonan->user->name}}</td>
@@ -60,8 +60,41 @@
                                     </td>
                                         
                                 </tr>
-                                
+                                <tr>
+                                    <td>Tanggal Antar Barang</td>
+                                    <td>: </td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Terima Barang</td>
+                                    <td>:</td>
+                                </tr>
+                                <tr>
+                                    <td>Estimasi</td>
+                                    <td>:</td>
+                                </tr>                                
+                                <tr>
+                                    <td>Keterangan Uji</td>
+                                    <td>:</td>
+                                </tr>
+                                <tr>
+                                    <td>Metode Pembayaran</td>
+                                    <td>:</td>
+                                </tr>                                
+                                <tr>
+                                    <td>Lain-lain</td>
+                                    <td>:</td>
+                                </tr>
+                                <tr>
+                                    <td>Keterangan</td>
+                                    <td>:</td>
+                                </tr>
                               </table>
+                        </div>
+                        <div class="card-footer text-right">
+                            <a href="" class="btn">Edit Data</a>
+                            @if($permohonan->pengujian->metode_pembayaran != 0)
+                                <a href="">Cetak Nota</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -74,3 +107,4 @@
         
     </script>
 @endsection
+

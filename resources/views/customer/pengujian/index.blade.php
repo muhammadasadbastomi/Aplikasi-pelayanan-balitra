@@ -58,6 +58,9 @@
 @endsection
 @section('script')
     <script>
+            $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
             getJenis = () => {
             $.ajax({
                     type: "GET",
@@ -73,11 +76,6 @@
             })
         }
         getJenis();
-
-        $(document).ready(function() {
-            $('.js-example-basic-multiple').select2();
-        });
-
     $('#jenispelayanan_id').on('change',function(){
         var uuid = $(this).val();
         if(uuid){
