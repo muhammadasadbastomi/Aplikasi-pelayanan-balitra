@@ -21,6 +21,7 @@ class CreateInboxesTable extends Migration
             $table->string('subjek')->length(50);
             $table->text('keterangan');
             $table->tinyInteger('status')->default(0);
+            $table->date('tgl_antar');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('permohonan_id')->references('id')->on('permohonans')->onDelete('cascade');
             $table->timestamps();

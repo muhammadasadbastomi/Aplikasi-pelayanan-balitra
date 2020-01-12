@@ -58,6 +58,7 @@ class PengujianController extends APIController
         $subjek = 'Verifikasi permohonan pengujian';
         $inbox->subjek          = $subjek;
         $inbox->keterangan      = $req->keterangan;
+        $inbox->tgl_antar      = $req->tgl_antar;
         $inbox->save();
 
         //set uuid
