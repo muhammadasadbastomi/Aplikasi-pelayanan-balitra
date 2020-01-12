@@ -30,5 +30,17 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: trianggautama08
       MYSQL_DATABASE: balitra
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      environment:
+          - PMA_HOST=db
+      restart: always
+      ports:
+          - 8080:80
+      volumes:
+          - /sessions
+      links:
+          - db
 
 
