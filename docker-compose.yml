@@ -32,7 +32,7 @@ services:
       MYSQL_DATABASE: balitra
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
-      container_name: phpmyadmin
+      container_name: balitra_phpmyadmin
       environment:
           - PMA_HOST=db
       restart: always
