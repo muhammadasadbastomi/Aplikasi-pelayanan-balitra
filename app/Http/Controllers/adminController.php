@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Pelayanan;
 use App\Berita;
 use App\Permohonan;
-use App\Pengujian;
+use App\Detail_permohonan;
 use Carbon\Carbon;
 use PDF;
 use HCrypt;

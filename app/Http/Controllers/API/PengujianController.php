@@ -51,6 +51,7 @@ class PengujianController extends APIController
         // dd($req);
         $user_id = $status->user_id;
         // dd($user_id);
+
         $inbox = new inbox;
 
         $inbox->user_id         = $user_id;
@@ -68,13 +69,17 @@ class PengujianController extends APIController
         $setuid->uuid = $uid;
         $setuid->update();
 
+        $detail_permohonan = detail_permohonan::where('permohonan_id',$id)->get();
+        $biaya = sum($detail_permohonan->pelayanan->price);
+        
         if($req->status==1)
         {
             $pengujian = new pengujian;
             $pengujian->user_id = $user_id;
             $pengujian->permohonan_id           = $id;
-            $pengujian->tanggal = $status->tgl_antar;
-            $pengujian->status = $status->status;
+            $pengujian->tanggal = $req->tgl_antar;
+            $pengujian->status = $req->status;
+            $pengujian->biaya = $biaya;
             $pengujian->save();
 
             //set uuid
