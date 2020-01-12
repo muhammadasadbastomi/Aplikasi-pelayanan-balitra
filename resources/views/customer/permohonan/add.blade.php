@@ -30,6 +30,7 @@
                             </div>
                             <div class="card-body">
                             <form action="">
+                            <input type="text" name="">
                             <div class="form-group">
                                 <select class="form-control" name="jenispelayanan_id" id="jenispelayanan_id">
                                     <option value="">--pilih pelayanan--</option>

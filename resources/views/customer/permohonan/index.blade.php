@@ -27,7 +27,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <a href="{{Route('API.permohonan.create')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-plus"></i> Tambah data</a>
+                                <form action="post">
+                                <input type="text" name="user_id" value="{{ Auth::user()->id }}">
+                                <button type="submit" class="btn btn-outline-primary pull-right" style="margin-right:5px;"><i class="ti-plus"></i> cetak data</button>
+                                </form>
                                 <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
@@ -63,7 +66,86 @@
  </div> 
 @endsection
 @section('script')
-    <script>
+<script>
+        //fungsi hapus
+        hapus = (uuid, name)=>{
+            let csrf_token=$('meta[name="csrf_token"]').attr('content');
+            Swal.fire({
+                        title: 'apa anda yakin?',
+                        text: " Menghapus Permohonan data " + name,
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'hapus data',
+                        cancelButtonText: 'batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url : "{{ url('/api/permohonan')}}" + '/' + uuid,
+                                type : "POST",
+                                data : {'_method' : 'DELETE', '_token' :csrf_token},
+                                success: function (response) {
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Dihapus',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            $('#datatable').DataTable().ajax.reload(null, false);
+                        },
+                    })
+                    } else if (result.dismiss === swal.DismissReason.cancel) {
+                        Swal.fire(
+                        'Dibatalkan',
+                        'data batal dihapus',
+                        'error'
+                        )
+                    }
+                })
+            }
+            // fungsi render datatable
+            $(document).ready(function() {
+                $('#datatable').DataTable( {
+                    responsive: true,
+                    processing: true,
+                    serverSide: false,
+                    searching: true,
+                    ajax: {
+                        "type": "GET",
+                        "url": "{{route('API.permohonan.get')}}",
+                        "dataSrc": "data",
+                        "contentType": "application/json; charset=utf-8",
+                        "dataType": "json",
+                        "processData": true
+                    },
+                    columns: [
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let status = row.jenispelayanan.jenis;
+
+                            return status == null  ?
+                            '<p> - </p>':
+                            '<p> '+ status +' </p>';
+                        }},
+                        {"data": "created_at"},
+                        {"data": "user.name"},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let status = row.status;
+
+                            return status === 0  ?
+                            '<a class="btn btn-warning">pending</a>':
+                            '<a class="btn btn-danger text-white">Ditolak</a>';
+                        }},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let uuid = row.uuid;
+                            let relasi = row.created_at;
+                            return relasi != null  ?
+                            ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
+                            ' <a href="/customer/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>';
+                        }}
+                    ]
+                });
 
                 //event form submit 
                 $("form").submit(function (e) {
