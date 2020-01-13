@@ -179,7 +179,7 @@
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                window.location.replace("//permohonan/customer/index");
+                                window.location.replace("/permohonan/customer/index");
                             },
                             error:function(response){
                                 console.log(response);
