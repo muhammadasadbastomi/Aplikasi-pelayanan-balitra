@@ -61,11 +61,15 @@ class PermohonanController extends APIController
     }
 
     public function create_detail(Request $req){
+        $jenis_pelayanan_id = HCrypt::decrypt($req->jenispelayanan_id);
+        $permohonan_id = HCrypt::decrypt($req->permohonan_id);
         $id = HCrypt::decrypt($req->pelayanan_id);
+
         $pelayanan = Pelayanan::findOrFail($id);
 
         $permohonan_detail = new Detail_permohonan;
         $permohonan_detail->permohonan_id = $permohonan->id;
+        $permohonan_detail->jenispelayanan_id = $jenis_pelayanan_id;
         $permohonan_detail->pelayanan_id = $id;
         $permohonan_detail->harga = $pelayanan->price;
         
