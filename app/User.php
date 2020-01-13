@@ -50,6 +50,10 @@ class User extends Authenticatable
         return $this->HasOne('App\Karyawan');
       }
 
+    public function customer(){
+        return $this->HasOne('App\Customer');
+      }
+
     public function pelanggan(){
         return $this->HasOne('App\Pelanggan');
       }
