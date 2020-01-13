@@ -1,5 +1,5 @@
 
-@extends('layouts.admin')
+@extends('layouts.customer')
 @section('content')
 <div class="breadcrumbs">
             <div class="col-sm-4">

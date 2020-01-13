@@ -81,6 +81,8 @@ Route::get('/berita/depan','adminController@beritaDepan')
         ->name('beritaDepan');
 Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
         ->name('beritaDetail');
+Route::get('/berita/cetak','adminController@beritaCetak')
+        ->name('beritaCetak');
 //route permohonan
 Route::get('/permohonan/index','adminController@permohonanIndex')
         ->name('permohonanIndex');
