@@ -21,7 +21,7 @@
                                 <h5 class="card-title">Input Data Pencairan</h5>
                                 <br>
                                 <form id="form1" action="" method="post">
-                                <input type="text" name="permohonan_id" id="permohonan_id" value="{{$permohonan->id}}">
+                                <input type="hidden" name="permohonan_id" id="permohonan_id" value="{{$permohonan->id}}">
                             <div class="form-group">
                                 <select class="form-control" name="jenispelayanan_id" id="jenispelayanan_id">
                                     <option value="">--pilih pelayanan--</option>
@@ -60,8 +60,8 @@
                             </table>
                                     <div class="card-footer text-right">
                                     <form  id="form2" action="post">
-                                        <input type="hidden" name="id_pencairan" value="{{$permohonan->id}}">
-                                        <button type="submit" name="submit" class="btn btn-success">Selesai, buat pencairan</button>
+                                        <input type="hidden" name="permohonan_id" value="{{$permohonan->id}}">
+                                        <button type="submit" name="submit" class="btn btn-success">Selesai, buat permohonan</button>
                                     </form>
                                     </div>
                             </div>
@@ -113,7 +113,7 @@
     }),
     // fungsi render datatable
     $(document).ready(function() {
-        let id = $('#pencairan_id').val();
+        let id = $('#permohonan_id').val();
                 $('#datatable').DataTable( {
                     responsive: true,
                     processing: true,
@@ -128,8 +128,8 @@
                         "processData": true
                     },
                     columns: [
-                        {"data": "pelayanan.biaya"},
-                        {"data": "pelayanan.biaya"},
+                        {"data": "pelayanan.name"},
+                        {"data": "pelayanan.price"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
                             let name = row.jenis;
@@ -172,14 +172,14 @@
         $("#form2").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
-                        let url = '{{route("API.permohonan-detail-customer.create")}}'
+                        let url = '{{route("API.permohonan-detail-customer/permohonan/total.total")}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url,
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                window.location.replace("/pencairanIndex");
+                                window.location.replace("/permohonanCustomerIndex");
                             },
                             error:function(response){
                                 console.log(response);

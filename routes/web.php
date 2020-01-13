@@ -115,8 +115,9 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::get('{uuid}', 'JenisController@find')->name('find');
         });
         Route::prefix('permohonan-detail-customer')->name('permohonan-detail-customer.')->group(function(){
-                Route::get('{uuid}', 'PermohonanController@permohonan_get')->name('get');
+                Route::get('{id}', 'PermohonanController@permohonan_get')->name('get');
                 Route::post('', 'PermohonanController@permohonan_create')->name('create');
+                Route::post('/permohonan/total', 'PermohonanController@permohonan_total_create')->name('total');
                 Route::delete('{uuid}', 'PermohonanController@permohonan_delete')->name('delete');
          });
 });
