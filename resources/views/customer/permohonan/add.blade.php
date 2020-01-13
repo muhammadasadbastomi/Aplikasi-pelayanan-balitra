@@ -62,7 +62,7 @@
                                     <form  id="form2" action="post">
                                         <input type="hidden" name="permohonan_id" value="{{$permohonan->id}}">
                                         <button type="submit" name="submit" class="btn btn-success">Selesai, buat permohonan</button>
-                                    </form>
+                                        {{ csrf_field() }}                                    </form>
                                     </div>
                             </div>
                             </div>
@@ -172,14 +172,14 @@
         $("#form2").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
-                        let url = '{{route("API.permohonan-detail-customer/permohonan/total.total")}}'
+                        let url = '{{route("permohonanTotalCreate")}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url,
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                window.location.replace("/permohonanCustomerIndex");
+                                window.location.replace("//permohonan/customer/index");
                             },
                             error:function(response){
                                 console.log(response);

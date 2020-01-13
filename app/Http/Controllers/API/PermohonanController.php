@@ -152,16 +152,15 @@ class PermohonanController extends APIController
         $permohonan_id = $req->permohonan_id;
         $total_biaya = Detail_permohonan::where('permohonan_id',$permohonan_id)->sum('biaya');
         $permohonan = Permohonan::findOrFail($permohonan_id);
-        $permohonan->jenispelayanan_id = $jenis_pelayanan_id;
         $permohonan->biaya = $total_biaya;
         $permohonan->update();
 
-        if (!$permohonan_detail) {
-            return $this->returnController("error", "failed create data permohonan_detail");
+        if (!$permohonan) {
+            return $this->returnController("error", "failed create data permohonan");
         }
         Redis::del("detail_permohonan:all");
-        Redis::set("detail_permohonan:all", $permohonan_detail);
-        return $this->returnController("ok", $permohonan_detail);
+        Redis::set("detail_permohonan:all", $permohonan);
+        return $this->returnController("ok", $permohonan);
     }
 
     public function permohonan_delete($uuid){

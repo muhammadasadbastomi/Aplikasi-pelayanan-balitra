@@ -102,6 +102,7 @@ Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
 //middleware customer
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::prefix('permohonan-customer')->name('permohonan-customer.')->group(function(){
+                Route::post('', 'PermohonanController@create')->name('create');
                 Route::get('', 'PermohonanController@get')->name('get');
                 Route::get('{uuid}', 'PermohonanController@find')->name('find');
         });
@@ -132,10 +133,12 @@ Route::get('/notif/index','customerController@notifIndex')
         ->name('notifIndex');
 Route::get('/notif/detail/{id}','customerController@notifDetail')
         ->name('notifDetail');
-Route::get('/permohonan/customer/add/{uuid}','customerController@permohonanAdd')
+Route::get('/permohonan/add/{uuid}','customerController@permohonanAdd')
         ->name('permohonanAdd');
 Route::get('/permohonan/customer/index','customerController@permohonanIndex')
         ->name('permohonanCustomerIndex');
+Route::post('/permohonan/customer/total/create','API\permohonanController@permohonan_total_create')
+        ->name('permohonanTotalCreate');
 
 
 //

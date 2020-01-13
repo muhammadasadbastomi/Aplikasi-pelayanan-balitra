@@ -167,7 +167,7 @@
                             let relasi = row.jenispelayanan;
                             return relasi != null  ?
                             ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
-                            ' <a href="/permohonan/customer/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a>';
+                            ' <a href="/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a>';
                         }}
                     ]
                         
@@ -193,7 +193,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.permohonan-customer.update", '')}}'
+                        let url = '{{route("API.permohonan-customer.create", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
