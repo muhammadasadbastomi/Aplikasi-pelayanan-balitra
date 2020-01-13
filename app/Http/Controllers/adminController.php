@@ -5,6 +5,7 @@ use App\Pelayanan;
 use App\Berita;
 use App\Permohonan;
 use App\Detail_permohonan;
+use App\Karyawan;
 use Carbon\Carbon;
 use PDF;
 use HCrypt;
@@ -118,12 +119,21 @@ class adminController extends Controller
         return $pdf->stream('Laporan data Jenis permohonan.pdf');
     }
 
-        //cetak laporan data jenis pelayanan
+        //cetak laporan data jenis Berita
         public function beritaCetak(){
             $berita=Berita::all();
             $tgl= Carbon::now()->format('d-m-Y');
             $pdf =PDF::loadView('laporan.beritaKeseluruhan', ['berita'=>$berita,'tgl'=>$tgl]);
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan data Jenis berita.pdf');
+        }
+
+        //cetak laporan data jenis pelayanan
+        public function karyawanCetak(){
+            $karyawan=karyawan::all();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.karyawanKeseluruhan', ['karyawan'=>$karyawan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data Jenis karyawan.pdf');
         }
 }

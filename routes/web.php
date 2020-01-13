@@ -81,6 +81,8 @@ Route::get('/karyawan/index','adminController@karyawanIndex')
         ->name('karyawanIndex');
 Route::get('/karyawan/info','adminController@karyawanInfo')
         ->name('karyawanInfo');
+Route::get('/karyawan/cetak','adminController@karyawanCetak')
+        ->name('karyawanCetak');
 //route berita
 Route::get('/berita/index','adminController@beritaIndex')
         ->name('beritaIndex');
