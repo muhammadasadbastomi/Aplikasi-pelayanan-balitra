@@ -167,7 +167,7 @@
                             let relasi = row.jenispelayanan;
                             return relasi != null  ?
                             ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
-                            ' <a href="/customer/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a>';
+                            ' <a href="/permohonan/customer/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a>';
                         }}
                     ]
                         

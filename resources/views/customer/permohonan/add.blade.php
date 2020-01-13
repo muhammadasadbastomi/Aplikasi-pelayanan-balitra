@@ -30,7 +30,7 @@
                             </div>
                             <div class="card-body">
                             <form action="">
-                            <input type="text" name="">
+                            <input type="text" name="permohonan_id" id="permohonan_id" value="{{$permohonan->id}}">
                             <div class="form-group">
                                 <select class="form-control" name="jenispelayanan_id" id="jenispelayanan_id">
                                     <option value="">--pilih pelayanan--</option>
@@ -124,7 +124,7 @@
        $("form").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
-                        let url = '{{route("API.permohonan.create")}}'
+                        let url = '{{route("API.permohonan_detail.create")}}'
                         $.ajax({
                             url: url,
                             type: "post",

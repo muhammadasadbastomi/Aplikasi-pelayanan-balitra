@@ -78,6 +78,11 @@ class adminController extends Controller
         return view('admin.permohonan.index');
     }
 
+    public function permohonanAdd(){
+
+        return view('admin.permohonan.add',compact('permohonan'));
+    }
+
     public function verifikasiPermohonan($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = permohonan::findOrFail($id);
