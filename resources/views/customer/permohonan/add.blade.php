@@ -1,36 +1,27 @@
-
-@extends('layouts.customer')
+@extends('layouts.admin')
 @section('content')
-<div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Tambah Data Permohonan</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{Route('adminIndex')}}">Beranda</a></li>
-                            <li class="active">Pemohon</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content mt-3">
-            <div class="animated fadeIn">
+<div class="page-wrapper">
+             <div class="page-breadcrumb">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Tabel Data</strong>
-                            </div>
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+            <div class="card">
                             <div class="card-body">
-                            <form action="post">
-                            <input type="text" name="permohonan_id" id="permohonan_id" value="{{$permohonan->id}}">
+                                <h5 class="card-title">Input Data Pencairan</h5>
+                                <br>
+                                <form id="form1" action="" method="post">
+                                <input type="text" name="permohonan_id" id="permohonan_id" value="{{$permohonan->id}}">
                             <div class="form-group">
                                 <select class="form-control" name="jenispelayanan_id" id="jenispelayanan_id">
                                     <option value="">--pilih pelayanan--</option>
@@ -47,13 +38,11 @@
                                 <div class="text-right">
                                 <button id="btn-form" type="submit" class="btn btn-primary"><i class="ti-save"></i> Tambahkan</button>
                                 </form>
-                                </div>
                                 <br>
                                 <br>
                                 <table id="datatable" class="table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Jenis</th>
                                         <th>Pelayanan</th>
                                         <th>Biaya</th>
                                         <th>action</th>
@@ -63,28 +52,29 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Jenis</th>
                                         <th>Pelayanan</th>
                                         <th>Biaya</th>
                                         <th>action</th>
                                     </tr>
                                 </tfoot>
                             </table>
+                                    <div class="card-footer text-right">
+                                    <form  id="form2" action="post">
+                                        <input type="hidden" name="id_pencairan" value="{{$permohonan->id}}">
+                                        <button type="submit" name="submit" class="btn btn-success">Selesai, buat pencairan</button>
+                                    </form>
+                                    </div>
                             </div>
-                            
-                            <br>
-                            <br>
-                            </div>                                
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
-       
+            </div>
+        </div>
 @endsection
 @section('script')
     <script>
-            getJenis = () => {
+              getJenis = () => {
             $.ajax({
                     type: "GET",
                     url: "{{ url('/api/jenis-customer')}}",
@@ -123,6 +113,7 @@
     }),
     // fungsi render datatable
     $(document).ready(function() {
+        let id = $('#pencairan_id').val();
                 $('#datatable').DataTable( {
                     responsive: true,
                     processing: true,
@@ -130,16 +121,15 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.permohonan-detail-customer.get')}}",
+                        "url": "{{ url('api/permohonan-detail-customer')}}" + '/' + id,
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
                         "processData": true
                     },
                     columns: [
-                        {"data": "permohonan.jenispelayanan.jenis"},
-                        {"data": "pelayanan.name"},
-                        {"data": "biaya"},
+                        {"data": "pelayanan.biaya"},
+                        {"data": "pelayanan.biaya"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
                             let name = row.jenis;
@@ -149,12 +139,13 @@
                         }}
                     ]
                 });
-
-       //event form submit 
-       $("form").submit(function (e) {
+            });
+            //event form submit            
+                $("#form1").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
                         let url = '{{route("API.permohonan-detail-customer.create")}}'
+                        let id = $('#id').val();
                         $.ajax({
                             url: url,
                             type: "post",
@@ -176,8 +167,24 @@
                             }
                         })
                 } );
-            });
-        
+            
+        //event form submit            
+        $("#form2").submit(function (e) {
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                        let url = '{{route("API.permohonan-detail-customer.create")}}'
+                        let id = $('#id').val();
+                        $.ajax({
+                            url: url,
+                            type: "post",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                window.location.replace("/pencairanIndex");
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                } );
     </script>
-    
 @endsection
