@@ -114,7 +114,7 @@ Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::prefix('permohonan-customer')->name('permohonan-customer.')->group(function(){
                 Route::post('', 'PermohonanController@create')->name('create');
-                Route::get('', 'PermohonanController@get')->name('get');
+                Route::get('', 'PermohonanController@getByUser')->name('get');
                 Route::get('{uuid}', 'PermohonanController@find')->name('find');
         });
         Route::prefix('pelayanan-customer')->name('pelayanan-customer.')->group(function(){
