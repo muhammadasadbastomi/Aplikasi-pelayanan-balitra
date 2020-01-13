@@ -147,6 +147,8 @@ Route::get('/customer/profil/tambah','customerController@profil_tambah')
         ->name('profil_tambah');
 Route::post('/customer/profil/tambah','customerController@profil_tambah_store')
         ->name('profil_tambah_store');
+Route::put('/customer/profil/tambah','customerController@profil_update')
+        ->name('profil_update');
 Route::get('/customer/pengujian','customerController@pengujianCustomerIndex')
         ->name('pengujianCustomerIndex');
 Route::get('/notif/index','customerController@notifIndex')

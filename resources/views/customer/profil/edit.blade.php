@@ -27,6 +27,8 @@
 </div>
 <div class="card-body">
 <form action="" method="post">
+{{method_field('PUT') }}
+{{ csrf_field() }}
     <div class="form-group">
         <label for="">Nama </label>
         <input type="text" class="form-control" name="nama" placeholder="nama kustomer" value="{{$customer_data->nama}}">
