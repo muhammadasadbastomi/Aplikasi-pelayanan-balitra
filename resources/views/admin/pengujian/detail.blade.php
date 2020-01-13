@@ -89,7 +89,7 @@
                               </table>
                         </div>
                         <div class="card-footer text-right">
-                            <a href="{{Route('pengujianEdit',['id'=> $permohonan->pengujian->id])}}" class="btn btn-primary"><i class=""></i>  Edit Data</a>
+                            <a href="{{Route('pengujianEdit',['uuid'=> $permohonan->pengujian->uuid])}}" class="btn btn-primary"><i class=""></i>  Edit Data</a>
                             @if($permohonan->pengujian->metode_pembayaran != 0)
                                 <a href="">Cetak Nota</a>
                             @endif

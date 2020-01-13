@@ -106,7 +106,7 @@ Route::get('/pengujian/index','adminController@pengujianIndex')
         ->name('pengujianIndex');
 Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
         ->name('pengujianDetail');
-Route::get('/pengujian/edit/{id}','adminController@pengujianEdit')
+Route::get('/pengujian/edit/{uuid}','adminController@pengujianEdit')
         ->name('pengujianEdit');
 
 });

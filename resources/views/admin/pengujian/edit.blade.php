@@ -30,6 +30,7 @@
                             </div>
                             <div class="card-body">
                              <form action="post">
+                                <input type="hidden" name="pengujian_id" id="pengujian_id" value="{{$pengujian->id}}">
                                 <div class="form-group">
                                     <label for="">Tanggal Terima Barang</label>
                                     <input type="date" class="form-control" name="tanggal_terima" id="tanggal_terima">

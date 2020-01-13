@@ -101,7 +101,8 @@ class adminController extends Controller
         $permohonan = permohonan::findOrFail($id);
         return view('admin.pengujian.detail',compact('permohonan'));
     }
-    public function pengujianEdit($id){
+    public function pengujianEdit($uuid){
+        $id = HCrypt::decrypt($uuid);
         $pengujian = pengujian::findOrFail($id);
         return view('admin.pengujian.edit',compact('pengujian'));
     }
