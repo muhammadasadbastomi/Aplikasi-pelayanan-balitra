@@ -25,6 +25,11 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
             Route::put('{uuid}', 'KaryawanController@update')->name('update');
             Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
         });
+        Route::prefix('customer')->name('customer.')->group(function(){
+                Route::get('', 'CustomerController@get')->name('get');
+                Route::get('{uuid}', 'CustomerController@find')->name('find');
+                Route::delete('{uuid}', 'CustomerController@delete')->name('delete');
+        });
         Route::prefix('pelanggan')->name('pelanggan.')->group(function(){
             Route::get('', 'PelangganController@get')->name('get');
             Route::get('{uuid}', 'PelangganController@find')->name('find');
