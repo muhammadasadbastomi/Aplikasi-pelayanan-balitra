@@ -51,47 +51,45 @@
                                 </tr>
                                 <tr>
                                     <td>Biaya</td>
-                                    <td>: @foreach($permohonan->detail_permohonan as $a)
-                                        @php
-                                        $total = $a->pelayanan->sum('price');
-                                        @endphp
-                                        @endforeach
-                                        {{ $total }}
+                                    <td>: {{$permohonan->biaya}}
                                     </td>
                                         
                                 </tr>
                                 <tr>
                                     <td>Tanggal Antar Barang</td>
-                                    <td>: </td>
+                                    <td>: @foreach($permohonan->inbox as $r)
+                                        {{$r->tgl_antar}}
+                                        @endforeach
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Terima Barang</td>
-                                    <td>:</td>
+                                    <td>: {{$permohonan->pengujian->tanggal_terima}}</td>
                                 </tr>
                                 <tr>
                                     <td>Estimasi</td>
-                                    <td>:</td>
+                                    <td>:{{$permohonan->pengujian->estimasi}}</td>
                                 </tr>                                
                                 <tr>
                                     <td>Keterangan Uji</td>
-                                    <td>:</td>
+                                    <td>: {{$permohonan->pengujian->status}}</td>
                                 </tr>
                                 <tr>
                                     <td>Metode Pembayaran</td>
-                                    <td>:</td>
+                                    <td>: {{$permohonan->pengujian->metode_pembayaran}}</td>
                                 </tr>                                
                                 <tr>
                                     <td>Lain-lain</td>
-                                    <td>:</td>
+                                    <td>: {{$permohonan->pengujian->lainnya}}</td>
                                 </tr>
                                 <tr>
                                     <td>Keterangan</td>
-                                    <td>:</td>
+                                    <td>: {{$permohonan->pengujian->keterangan}}</td>
                                 </tr>
                               </table>
                         </div>
                         <div class="card-footer text-right">
-                            <a href="" class="btn">Edit Data</a>
+                            <a href="{{Route('pengujianEdit',['id'=> $permohonan->pengujian->id])}}" class="btn btn-primary"><i class=""></i>  Edit Data</a>
                             @if($permohonan->pengujian->metode_pembayaran != 0)
                                 <a href="">Cetak Nota</a>
                             @endif

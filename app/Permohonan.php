@@ -22,6 +22,11 @@ class Permohonan extends Model
     	return $this->hasMany('App\Detail_permohonan');
     }
 
+    public function inbox()
+    {
+    	return $this->hasMany('App\Inbox');
+    }
+
     public function pengujian(){
       return $this->HasOne('App\Pengujian');
     }   

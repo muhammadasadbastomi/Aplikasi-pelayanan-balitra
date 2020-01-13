@@ -106,6 +106,8 @@ Route::get('/pengujian/index','adminController@pengujianIndex')
         ->name('pengujianIndex');
 Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
         ->name('pengujianDetail');
+Route::get('/pengujian/edit/{id}','adminController@pengujianEdit')
+        ->name('pengujianEdit');
 
 });
 // akhir middleware admin

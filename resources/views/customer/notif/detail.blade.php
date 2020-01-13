@@ -38,8 +38,8 @@
     <p>Harap dapat mengantar Sampel Uji pada, </p>
     <table>
         <tr>
-        <td>Hari, Tanggal </td>
-        <td> : Senin , 28 november 2019</td>
+        <td> Tanggal </td>
+        <td> : {{ date('d-m-Y', strtotime($inbox->created_at)) }} </td>
         </tr>
         <tr>
             <td>Tempat</td>
