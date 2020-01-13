@@ -24,9 +24,10 @@ class customerController extends Controller
         return view('customer.permohonan.index',compact('user_id'));
     }
 
-    public function permohonanAdd(){
-
-        return view('customer.permohonan.add');
+    public function permohonanAdd($uuid){
+        $id = HCrypt::decrypt($uuid);
+        $permohonan = permohonan::findOrFail($id);
+        return view('customer.permohonan.add',compact('permohonan'));
     }
 
     public function pengujianIndex(){

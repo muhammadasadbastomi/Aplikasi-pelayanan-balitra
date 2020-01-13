@@ -34,7 +34,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         });
         Route::prefix('permohonan_detail')->name('permohonan_detail.')->group(function(){
                 Route::get('{uuid}', 'PermohonanController@permohonan_get')->name('get');
-                Route::post('', 'PermohonanController@permohonan_create')->name('creritaeate');
+                Route::post('', 'PermohonanController@permohonan_create')->name('create');
                 Route::delete('{uuid}', 'PermohonanController@permohonan_delete')->name('delete');
          });
         Route::prefix('berita')->name('berita.')->group(function(){
@@ -120,7 +120,7 @@ Route::get('/notif/index','customerController@notifIndex')
         ->name('notifIndex');
 Route::get('/notif/detail/{id}','customerController@notifDetail')
         ->name('notifDetail');
-Route::get('/permohonan/customer/add','customerController@permohonanAdd')
+Route::get('/permohonan/customer/add/{uuid}','customerController@permohonanAdd')
         ->name('permohonanAdd');
 Route::get('/permohonan/customer/index','customerController@permohonanIndex')
         ->name('permohonanCustomerIndex');
