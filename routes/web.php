@@ -55,7 +55,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::get('', 'PengujianController@get')->name('get');
                 Route::get('{uuid}', 'PengujianController@find')->name('find');
                 Route::post('', 'PengujianController@create')->name('create');
-                Route::post('update/{uuid}', 'PengujianController@update')->name('update');
+                Route::put('{uuid}', 'PengujianController@update')->name('update');
                 Route::delete('{uuid}', 'PengujianController@delete')->name('delete');
                 });
    

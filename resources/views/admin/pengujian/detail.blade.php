@@ -68,16 +68,34 @@
                                 </tr>
                                 <tr>
                                     <td>Estimasi</td>
-                                    <td>:{{$permohonan->pengujian->estimasi}}</td>
+                                    <td>:{{$permohonan->pengujian->estimasi}} Hari</td>
                                 </tr>                                
                                 <tr>
                                     <td>Keterangan Uji</td>
-                                    <td>: {{$permohonan->pengujian->status}}</td>
+                                    @php 
+                                    $status = $permohonan->pengujian->status;
+                                    @endphp
+                                    @if($status == 0)
+                                    <td><label class="btn btn-sm btn-warning">Pending</label></td>
+                                    @elseif($status == 1)
+                                    <td><label class="btn btn-sm btn-primary">Dalam Proses</label></td>
+                                    @else
+                                    <td><label class="btn btn-sm btn-success">Selesai</label></td>
+                                    @endif
                                 </tr>
                                 <tr>
                                     <td>Metode Pembayaran</td>
-                                    <td>: {{$permohonan->pengujian->metode_pembayaran}}</td>
-                                </tr>                                
+                                    @php 
+                                    $status = $permohonan->pengujian->metode_pembayaran;
+                                    @endphp
+                                    @if($status == 0)
+                                    <td><label class="btn btn-sm btn-warning">belum dibayar</label></td>
+                                    @elseif($status == 1)
+                                    <td><label class="btn btn-sm btn-primary">Cash</label></td>
+                                    @else
+                                    <td><label class="btn btn-sm btn-success">Transfer</label></td>
+                                    @endif                                
+                                    </tr>                                
                                 <tr>
                                     <td>Lain-lain</td>
                                     <td>: {{$permohonan->pengujian->lainnya}}</td>

@@ -30,14 +30,14 @@
                             </div>
                             <div class="card-body">
                              <form action="post">
-                                <input type="hidden" name="pengujian_id" id="pengujian_id" value="{{$pengujian->id}}">
+                                <input type="hidden" name="pengujian_id" id="pengujian_id" value="{{$pengujian->uuid}}">
                                 <div class="form-group">
                                     <label for="">Tanggal Terima Barang</label>
-                                    <input type="date" class="form-control" name="tanggal_terima" id="tanggal_terima">
+                                    <input type="date" class="form-control" name="tanggal_terima" id="tanggal_terima" value="{{$pengujian->tanggal_terima}}" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Estimasi</label>
-                                    <input type="text" class="form-control" name="estimasi" id="estimasi">
+                                    <label for="">Estimasi (Hari) </label>
+                                    <input type="number" class="form-control" name="estimasi" id="estimasi" value="{{$pengujian->estimasi}}">
                                 </div>                                
                                 <div class="form-group">
                                     <label for="">Keterangan Uji</label>
@@ -50,23 +50,26 @@
                                 <div class="form-group">
                                     <label for="">Metode Pembayaran</label>
                                     <select class="form-control" name="metode_pembayaran" id="metode_pembayaran">
-                                        <option value="0">Cash</option>
-                                        <option value="1">Transfer</option>
+                                        <option value="0">belum Dibayar</option>
+                                        <option value="1">Cash</option>
+                                        <option value="2">Transfer</option>
 \                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Lainnya</label>
-                                    <input type="text" class="form-control" name="lainnya" id="lainnya">
+                                    <input type="text" class="form-control" name="lainnya" id="lainnya" value="{{$pengujian->lainnya}}">
                                 </div>                                  
                                 <div class="form-group">
                                     <label for="">Keterangan</label>
-                                    <textarea  class="form-control" name="keterangan" id="keterangan"></textarea>
+                                    <textarea  class="form-control" name="keterangan" id="keterangan">{{$pengujian->keterangan}}</textarea>
                                 </div>  
-                             </form>
                         </div>
                         <div class="card-footer text-right">
-                            <a href="" class="btn btn-primary"><i class=""></i>  Edit Data</a>
-                        </div>
+                            <button type="submit" name="submit" id="btn-form" class="btn btn-primary"><i class=""></i>  Edit Data</button>
+                            {{ csrf_field() }}                                    
+                            </form>
+                        </div> 
+                        </form>
                     </div>
                 </div>
             </div><!-- .animated -->
@@ -75,7 +78,24 @@
 @endsection
 @section('script')
     <script>
-        
+          $("form").submit(function (e) {
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                        let url = '{{route("API.pengujian.update", '')}}'
+                        let id = $('#pengujian_id').val();
+                        $.ajax({
+                            url: url+'/'+id,
+                            type: "put",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                window.location.replace("/pengujian/index");
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    
+                } );
     </script>
 @endsection
 
