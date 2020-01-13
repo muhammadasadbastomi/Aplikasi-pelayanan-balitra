@@ -104,10 +104,21 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::prefix('permohonan-customer')->name('permohonan-customer.')->group(function(){
                 Route::get('', 'PermohonanController@get')->name('get');
                 Route::get('{uuid}', 'PermohonanController@find')->name('find');
-                Route::post('', 'PermohonanController@create')->name('create');
-                Route::put('{uuid}', 'PermohonanController@update')->name('update');
-                Route::delete('{uuid}', 'PermohonanController@delete')->name('delete');
         });
+        Route::prefix('pelayanan-customer')->name('pelayanan-customer.')->group(function(){
+                Route::get('', 'PelayananController@get')->name('get');
+                Route::get('{uuid}', 'PelayananController@find')->name('find');
+                Route::get('edit/{uuid}', 'PelayananController@findEdit')->name('findEdit');
+        });
+        Route::prefix('jenis-customer')->name('jenis-customer.')->group(function(){
+                Route::get('', 'JenisController@get')->name('get');
+                Route::get('{uuid}', 'JenisController@find')->name('find');
+        });
+        Route::prefix('permohonan-detail-customer')->name('permohonan-detail-customer.')->group(function(){
+                Route::get('{uuid}', 'PermohonanController@permohonan_get')->name('get');
+                Route::post('', 'PermohonanController@permohonan_create')->name('create');
+                Route::delete('{uuid}', 'PermohonanController@permohonan_delete')->name('delete');
+         });
 });
 
 Route::get('/customer/index','customerController@index')

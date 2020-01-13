@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Detail_permohonan;
 use App\Permohonan;
+use App\Pelayanan;
 use HCrypt;
 
 class PermohonanController extends APIController
@@ -60,25 +61,28 @@ class PermohonanController extends APIController
         return $this->returnController("ok", $permohonan);
     }
 
-    public function create_detail(Request $req){
+    public function permohonan_create(Request $req){
         $jenis_pelayanan_id = HCrypt::decrypt($req->jenispelayanan_id);
-        $permohonan_id = HCrypt::decrypt($req->permohonan_id);
+        $permohonan_id = $req->permohonan_id;
         $id = HCrypt::decrypt($req->pelayanan_id);
 
+
         $pelayanan = Pelayanan::findOrFail($id);
+        $permohonan = Permohonan::findOrFail($permohonan_id);
+        $permohonan->jenispelayanan_id = $jenis_pelayanan_id;
+        $permohonan->update();
 
         $permohonan_detail = new Detail_permohonan;
-        $permohonan_detail->permohonan_id = $permohonan->id;
-        $permohonan_detail->jenispelayanan_id = $jenis_pelayanan_id;
+        $permohonan_detail->permohonan_id = $permohonan_id;
         $permohonan_detail->pelayanan_id = $id;
-        $permohonan_detail->harga = $pelayanan->price;
+        $permohonan_detail->biaya = $pelayanan->price;
         
         $permohonan_detail->save();
 
         //set uuid
         $permohonan_detail_id = $permohonan_detail->id;
         $uuid = HCrypt::encrypt($permohonan_detail_id);
-        $setuuid = permohonan_detail::findOrFail($permohonan_detail_id);
+        $setuuid = Detail_permohonan::findOrFail($permohonan_detail_id);
         $setuuid->uuid = $uuid;
         $setuuid->update();
         if (!$permohonan_detail) {
@@ -130,36 +134,6 @@ class PermohonanController extends APIController
         Redis::del("permohonan:$id");
 
         return $this->returnController("ok", "success delete data permohonan");
-    }
-
-    //permohonan detail
-
-    public function permohonan_create(Request $req){
-        $permohonan_id = HCrypt::decrypt($req->id);
-        $pelayanans = $req->input('pelayanan');
-        foreach ($pelayanans as $pelayanan)
-        {
-            $permohonan_detail = new Permohonan_detail;
-            $permohonan_detail->permohonan_id = $permohonan_id;
-            $permohonan_detail->pelayanan_id = $pelayanan;
-            $permohonan_detail->save();
-        }
-        
-        $permohonan_detail_id= $permohonan_detail->id;
-        
-        $uuid = HCrypt::encrypt($permohonan_detail_id);
-        $setuuid = permohonan_detail::findOrFail($permohonan_detail_id);
-        $setuuid->uuid = $uuid;
-            
-        $setuuid->update();
-
-        if (!$permohonan_detail) {
-            return $this->returnController("error", "failed create data permohonan detail");
-        }
-
-        Redis::del("permohonan_detail:all");
-        Redis::set("permohonan_detail:all",$permohonan_detail);
-        return $this->returnController("ok", $permohonan_detail);
     }
 
     public function permohonan_get($uuid){
