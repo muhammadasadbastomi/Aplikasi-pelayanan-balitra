@@ -101,6 +101,10 @@ Route::post('/permohonan/verifikasi/{uuid}','API\PengujianController@create')
         ->name('verifikasiPermohonanCreate');
 Route::get('/permohonan/cetak','adminController@permohonanCetak')
         ->name('permohonanCetak');
+Route::get('/permohonan/filter','adminController@permohonanFilter')
+        ->name('permohonanFilter');
+Route::post('/permohonan/filter','adminController@permohonanFilterCetak')
+        ->name('permohonanFilterCetak');
 //pengujian Index
 Route::get('/pengujian/index','adminController@pengujianIndex')
         ->name('pengujianIndex');
