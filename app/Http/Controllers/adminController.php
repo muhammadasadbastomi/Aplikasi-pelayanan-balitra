@@ -130,6 +130,15 @@ class adminController extends Controller
         return $pdf->stream('Laporan data Jenis permohonan.pdf');
     }
 
+    public function pengujianCetak(){
+        $pengujian = permohonan::with('jenispelayanan','user','pengujian')->get();
+        dd($pengujian);
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.pengujianKeseluruhan', ['pengujian'=>$pengujian,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data pengujian.pdf');
+    }
+
         //cetak laporan data jenis Berita
         public function beritaCetak(){
             $berita=Berita::all();
