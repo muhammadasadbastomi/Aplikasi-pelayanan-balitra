@@ -79,6 +79,9 @@ Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
 Route::get('/pelayanan/cetak','adminController@pelayananCetak')
         ->name('pelayananCetak');
 
+Route::get('/pengujian/cetak','adminController@pengujianCetak')
+        ->name('pengujianCetak');        
+
 Route::get('/analisis/index','adminController@analisisIndex')
         ->name('analisisIndex');
 
