@@ -11,6 +11,7 @@ use App\Permohonan;
 use App\Pengujian;
 use App\Inbox;
 use HCrypt;
+use Carbon;
 
 class PengujianController extends APIController
 {
@@ -77,6 +78,7 @@ class PengujianController extends APIController
             $pengujian->permohonan_id           = $id;
             $pengujian->tanggal = $req->tgl_antar;
             $pengujian->status = $req->status;
+            $pengujian->biaya = $status->biaya;
             $pengujian->save();
 
             //set uuid
@@ -103,14 +105,18 @@ class PengujianController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $pengujian = pengujian::findOrFail($id);
-        $pengujian->jenispengujian_id = Hcrypt::decrypt($req->jenispengujian_id);
-        $pengujian->name = $req->name;
-        $pengujian->price = $req->price;
+        
+        $pengujian->tanggal_terima = $req->tanggal_terima;
+        $pengujian->metode_pembayaran = $req->metode_pembayaran;
+        $pengujian->estimasi = $req->estimasi;
+        $pengujian->status = $req->status;
+        $pengujian->lainnya = $req->lainnya;
+        $pengujian->keterangan = $req->keterangan;
         $pengujian->update();
         if (!$pengujian) {
             return $this->returnController("error", "failed find data pengujian");
         }
-        $pengujian = pengujian::with('jenispengujian')->where('id',$id)->first();
+        $pengujian = permohonan::with('jenispelayanan','user','pengujian')->where('status',1)->get();
         Redis::del("pengujian:all");
         Redis::set("pengujian:$id", $pengujian);
         return $this->returnController("ok", $pengujian);

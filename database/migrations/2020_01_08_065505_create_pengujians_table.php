@@ -25,7 +25,7 @@ class CreatePengujiansTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->string('lainnya')->length(100)->nullable();
             $table->text('keterangan')->nullable();
-            $table->string('biaya')->length(100)->nullable();
+            $table->double('biaya')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('permohonan_id')->references('id')->on('permohonans')->onDelete('cascade');
             $table->timestamps();
