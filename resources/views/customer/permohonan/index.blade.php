@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
                                 <form action="post">
-                                <input type="text" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="user_id" value="{{ $user_id }}">
                                 <button type="submit" class="btn btn-outline-primary pull-right" style="margin-right:5px;"><i class="ti-plus"></i> cetak data</button>
                                 </form>
                                 <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
@@ -114,7 +114,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.permohonan.get')}}",
+                        "url": "{{route('API.permohonan-customer.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
@@ -122,29 +122,70 @@
                     },
                     columns: [
                         {data: null , render : function ( data, type, row, meta ) {
-                            let status = row.jenispelayanan.jenis;
+                            let jenis = row.jenispelayanan;
 
-                            return status == null  ?
-                            '<p> - </p>':
-                            '<p> '+ status +' </p>';
+                            return jenis == null  ?
+                            '<p> Data belum lengkap </p>':
+                            jenis = row.jenispelayanan.jenis; 
+                            '<p> '+ jenis +' </p>';
                         }},
-                        {"data": "created_at"},
-                        {"data": "user.name"},
+
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let created_at = row.created_at;
+                            let exist = row.jenispelayanan; 
+
+                            if(exist == null){
+                                return '<p> Data belum lengkap </p>';
+                            }else{
+                                return '<p> '+ created_at +' </p>';
+                            }
+                        }},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let user = row.user.name;
+                            let exist = row.jenispelayanan; 
+
+                            if(exist == null){
+                                return '<p> Data belum lengkap </p>';
+                            }else{
+                                return '<p> '+ user +' </p>';
+                            }
+                        }},
                         {data: null , render : function ( data, type, row, meta ) {
                             let status = row.status;
-
-                            return status === 0  ?
-                            '<a class="btn btn-warning">pending</a>':
-                            '<a class="btn btn-danger text-white">Ditolak</a>';
+                            let exist = row.jenispelayanan;
+                            
+                            if(exist == null){
+                                return '<p> Data belum lengkap </p>';
+                            }else{
+                                return status === 0  ?
+                                '<a class="btn btn-warning">pending</a>':
+                                '<a class="btn btn-danger text-white">Ditolak</a>';
+                            }
                         }},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
-                            let relasi = row.created_at;
+                            let relasi = row.jenispelayanan;
                             return relasi != null  ?
                             ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
-                            ' <a href="/customer/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>';
+                            ' <a href="/customer/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a>';
                         }}
                     ]
+                        
+                        // {data: null , render : function ( data, type, row, meta ) {
+                        //     let status = row.status;
+
+                        //     return status === 0  ?
+                        //     '<a class="btn btn-warning">pending</a>':
+                        //     '<a class="btn btn-danger text-white">Ditolak</a>';
+                        // }},
+                        // {data: null , render : function ( data, type, row, meta ) {
+                        //     let uuid = row.uuid;
+                        //     let relasi = row.created_at;
+                        //     return relasi != null  ?
+                        //     ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
+                        //     ' <a href="/customer/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>';
+                        // }}
+                    
                 });
 
                 //event form submit 
@@ -152,7 +193,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.permohonan.update", '')}}'
+                        let url = '{{route("API.permohonan-customer.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -176,7 +217,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.permohonan.create')}}",
+                            url: "{{Route('API.permohonan-customer.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {

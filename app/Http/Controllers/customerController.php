@@ -20,8 +20,8 @@ class customerController extends Controller
     }
     
     public function permohonanIndex(){
-
-        return view('customer.permohonan.index');
+        $user_id = auth::id();
+        return view('customer.permohonan.index',compact('user_id'));
     }
 
     public function permohonanAdd(){

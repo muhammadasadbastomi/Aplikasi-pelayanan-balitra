@@ -100,13 +100,15 @@ Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
 // akhir middleware admin
 
 //middleware customer
-Route::prefix('permohonan')->name('permohonan.')->group(function(){
-        Route::get('', 'PermohonanController@get')->name('get');
-        Route::get('{uuid}', 'PermohonanController@find')->name('find');
-        Route::post('', 'PermohonanController@create')->name('create');
-        Route::put('{uuid}', 'PermohonanController@update')->name('update');
-        Route::delete('{uuid}', 'PermohonanController@delete')->name('delete');
-    });
+Route::namespace('API')->prefix('api')->name('API.')->group(function(){
+        Route::prefix('permohonan-customer')->name('permohonan-customer.')->group(function(){
+                Route::get('', 'PermohonanController@get')->name('get');
+                Route::get('{uuid}', 'PermohonanController@find')->name('find');
+                Route::post('', 'PermohonanController@create')->name('create');
+                Route::put('{uuid}', 'PermohonanController@update')->name('update');
+                Route::delete('{uuid}', 'PermohonanController@delete')->name('delete');
+        });
+});
 
 Route::get('/customer/index','customerController@index')
         ->name('customerIndex');
