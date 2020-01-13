@@ -138,8 +138,10 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 
 Route::get('/customer/index','customerController@index')
         ->name('customerIndex');
-Route::get('/customer/profil/edit','customerController@profilEdit')
-        ->name('profilEdit');
+Route::get('/customer/profil/tambah','customerController@profil_tambah')
+        ->name('profil_tambah');
+Route::post('/customer/profil/tambah','customerController@profil_tambah_store')
+        ->name('profil_tambah_store');
 Route::get('/customer/pengujian','customerController@pengujianCustomerIndex')
         ->name('pengujianCustomerIndex');
 Route::get('/notif/index','customerController@notifIndex')
@@ -151,7 +153,7 @@ Route::get('/permohonan/add/{uuid}','customerController@permohonanAdd')
 Route::get('/permohonan/customer/index','customerController@permohonanIndex')
         ->name('permohonanCustomerIndex');
 Route::post('/permohonan/customer/total/create','API\permohonanController@permohonan_total_create')
-        ->name('permohonanTotalCreate');
+        ->name('permohonanTotalCreate'); 
 
 
 //

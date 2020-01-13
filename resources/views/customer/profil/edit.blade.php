@@ -24,26 +24,26 @@
 <div class="content mt-3">
 <div class="card">
 <div class="card-header">
-Ubah Data Anda ...
 </div>
 <div class="card-body">
 <form action="" method="post">
     <div class="form-group">
         <label for="">Nama </label>
-        <input type="text" class="form-control" placeholder="nama kustomer">
+        <input type="text" class="form-control" name="nama" placeholder="nama kustomer" value="{{$customer_data->nama}}">
     </div>
     <div class="form-group">
         <label for="">Nomor Telepon </label>
-        <input type="text" class="form-control" placeholder="No Telp">
+        <input type="text" class="form-control"  name="telepon" placeholder="No Telp" value="{{$customer_data->telepon}}">
     </div>
     <div class="form-group">
         <label for="">Alamat </label>
-        <textarea name="" id="" class="form-control"></textarea>
+        <textarea name="alamat" id="" class="form-control">{{$customer_data->alamat}}</textarea>
     </div>
-</form>
 </div>
 <div class="card-footer text-right">
-<a href="" class="btn btn-primary">Ubah Data</a>
+<button type="submit" class="btn btn-primary">Simpan Data</button>
+{{ csrf_field() }}                                    
+</form>
 </div>
 </div>
 </div> <!-- .content -->

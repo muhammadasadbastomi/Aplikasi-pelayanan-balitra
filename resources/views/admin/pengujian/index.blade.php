@@ -121,14 +121,14 @@
                         {"data": "created_at"},
                         {"data": "user.name"},
                         {data: null, render : function ( data, type, row, meta ) {
-                            let status =row.status;
-                            if(status === 1){
-                                return '<a class="btn btn-warning">Pending</a>';
+                            let status =row.pengujian.status;
+                            if(status === 0){
+                                return '<a class="btn btn-sm btn-warning"> pending</a>';
                               
-                            }else if (status === 2){
-                                return '<a class="btn btn-primary text-white">proses</a>';
+                            }else if (status === 1){
+                                return '<a class="btn btn-sm btn-primary text-white">proses</a>';
                             }else{
-                                return '<a class="btn btn-succes text-white">Selesai</a>' ;
+                                return '<a class="btn btn-sm btn-success text-white">Selesai</a>' ;
                             }
                         }},
                         {data: null , render : function ( data, type, row, meta ) {

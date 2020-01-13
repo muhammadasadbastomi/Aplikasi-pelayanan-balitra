@@ -30,20 +30,21 @@ Lengkapi Data Anda...
 <form action="" method="post">
     <div class="form-group">
         <label for="">Nama </label>
-        <input type="text" class="form-control" placeholder="nama kustomer">
+        <input type="text" class="form-control" name="nama" placeholder="nama kustomer">
     </div>
     <div class="form-group">
         <label for="">Nomor Telepon </label>
-        <input type="text" class="form-control" placeholder="No Telp">
+        <input type="text" class="form-control"  name="telepon" placeholder="No Telp">
     </div>
     <div class="form-group">
         <label for="">Alamat </label>
-        <textarea name="" id="" class="form-control"></textarea>
+        <textarea name="alamat" id="" class="form-control"></textarea>
     </div>
-</form>
 </div>
 <div class="card-footer text-right">
-<a href="" class="btn btn-primary">Simpan Data</a>
+<button type="submit" class="btn btn-primary">Simpan Data</button>
+{{ csrf_field() }}                                    
+</form>
 </div>
 </div>
 </div> <!-- .content -->
