@@ -85,6 +85,11 @@ class adminController extends Controller
         return view('admin.permohonan.add',compact('permohonan'));
     }
 
+    public function permohonanFilter(){
+
+        return view('admin.permohonan.filter');
+    }
+
     public function verifikasiPermohonan($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = permohonan::findOrFail($id);
@@ -142,7 +147,7 @@ class adminController extends Controller
             return $pdf->stream('Laporan data Jenis berita.pdf');
         }
 
-        //cetak laporan data jenis pelayanan
+        //cetak laporan data jenis Karyawan
         public function karyawanCetak(){
             $karyawan=karyawan::all();
             $tgl= Carbon::now()->format('d-m-Y');
@@ -150,4 +155,13 @@ class adminController extends Controller
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan data Jenis karyawan.pdf');
         }
+
+        //cetak laporan data jenis pelayanan
+            public function permohonanFilterCetak(Request $request){
+                $permohonan=permohonan::where('status',$request->status)->get();
+                $tgl= Carbon::now()->format('d-m-Y');
+                $pdf =PDF::loadView('laporan.permohonanFilter', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
+                $pdf->setPaper('a4', 'potrait');
+                return $pdf->stream('Laporan data Permohonan Berdasarkan Status .pdf');
+            }
 }
