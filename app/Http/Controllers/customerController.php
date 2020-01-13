@@ -57,9 +57,9 @@ class customerController extends Controller
         return view('customer.profil.tambah');
     }
 
-    public function profil_update(Request $request, $id){
+    public function profil_update(Request $request){
         $user_id = Auth::user()->id;
-        $customer = Customer::findOrFail($id);
+        $customer = Customer::where('user_id', $user_id)->first();
 
         $customer->nama       = $request->nama;
         $customer->alamat       = $request->alamat;
