@@ -60,6 +60,7 @@ class PelayananController extends APIController
         // decrypt foreign key id
         $pelayanan->jenis_pelayanan_id = Hcrypt::decrypt($req->jenis_pelayanan_id);
         $pelayanan->name = $req->name;
+        $pelayanan->satuan = $req->satuan;
         $pelayanan->price = $req->price;
 
         $pelayanan->save();
@@ -86,6 +87,7 @@ class PelayananController extends APIController
         $pelayanan = pelayanan::findOrFail($id);
         $pelayanan->jenispelayanan_id = Hcrypt::decrypt($req->jenispelayanan_id);
         $pelayanan->name = $req->name;
+        $pelayanan->satuan = $req->satuan;
         $pelayanan->price = $req->price;
         $pelayanan->update();
         if (!$pelayanan) {
