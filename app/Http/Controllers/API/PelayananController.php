@@ -85,7 +85,7 @@ class PelayananController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $pelayanan = pelayanan::findOrFail($id);
-        $pelayanan->jenispelayanan_id = Hcrypt::decrypt($req->jenispelayanan_id);
+        $pelayanan->jenis_pelayanan_id = Hcrypt::decrypt($req->jenis_pelayanan_id);
         $pelayanan->name = $req->name;
         $pelayanan->satuan = $req->satuan;
         $pelayanan->price = $req->price;
@@ -93,7 +93,7 @@ class PelayananController extends APIController
         if (!$pelayanan) {
             return $this->returnController("error", "failed find data pelayanan");
         }
-        $pelayanan = pelayanan::with('jenispelayanan')->where('id',$id)->first();
+        $pelayanan = pelayanan::with('jenis_pelayanan')->where('id',$id)->first();
         Redis::del("pelayanan:all");
         Redis::set("pelayanan:$id", $pelayanan);
         return $this->returnController("ok", $pelayanan);

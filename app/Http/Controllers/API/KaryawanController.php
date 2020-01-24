@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Karyawan;
 use App\User;
 use HCrypt;
+use File;
 
 class KaryawanController extends APIController
 {

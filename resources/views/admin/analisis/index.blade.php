@@ -35,6 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th>Analisis</th>
+                                        <th>Satuan</th>
                                         <th>Harga</th>
                                         <th>Jenis Pelayanan</th>
                                         <th>action</th>
@@ -45,6 +46,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Analisis</th>
+                                    <th>Satuan</th>
                                     <th>Harga</th>
                                     <th>jenis pelayanan</th>
                                     <th>action</th>
@@ -69,7 +71,8 @@
                             <div class="modal-body">
                             <form  method="post" action="">
                                 <div class="form-group"><input type="hidden" id="id" name="id"  class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Analisis</label><input type="text" id="name" name="name" placeholder="name" class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">uji</label><input type="text" id="name" name="name" placeholder="name" class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">Satuan</label><input type="text" id="satuan" name="satuan" placeholder="satuan" class="form-control"></div>
                                 <div class="form-group"><label  class=" form-control-label">Harga</label><input type="text" id="price" name="price" placeholder="Rp." class="form-control"></div>
                                 <div class="form-group">
                                 <label  class=" form-control-label">Jenis Uji</label>
@@ -147,6 +150,7 @@
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
                 $('#name').val('');
+                $('#satuan').val('');
                 $('#price').val('');
                 $('#jenis_pelayanan_id').val('');    
                 $('#btn-form').text('Simpan Data');
@@ -163,6 +167,7 @@
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
                         $('#name').val(returnData.data.name);
+                        $('#satuan').val(returnData.data.satuan);
                         $('#price').val(returnData.data.price);
                         $('#jenis_pelayanan_id').val(returnData.data.jenis_pelayanan.uuid);  
                         $('#btn-form').text('Ubah Data');
@@ -188,6 +193,7 @@
                     },
                     columns: [
                         {"data": "name"},
+                        {"data": "satuan"},
                         {"data": "price"},
                         {"data": "jenis_pelayanan.jenis"},
                         {data: null , render : function ( data, type, row, meta ) {

@@ -24,7 +24,7 @@
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="c,ard">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
                                 <a href="{{Route('permohonanFilter')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak Filter</a>
