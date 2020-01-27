@@ -90,6 +90,11 @@ class adminController extends Controller
         return view('admin.permohonan.filter');
     }
 
+    public function permohonanFilterWaktu(){
+
+        return view('admin.permohonan.filterWaktu');
+    }
+
     public function verifikasiPermohonan($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = permohonan::findOrFail($id);
@@ -164,4 +169,12 @@ class adminController extends Controller
                 $pdf->setPaper('a4', 'potrait');
                 return $pdf->stream('Laporan data Permohonan Berdasarkan Status .pdf');
             }
+        //cetak laporan data jenis pelayanan
+        public function permohonanFilterWaktuCetak(Request $request){
+            $permohonan = permohonan::whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir])->get();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.permohonanFilterWaktu', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data Permohonan Berdasarkan Status .pdf');
+        }
 }

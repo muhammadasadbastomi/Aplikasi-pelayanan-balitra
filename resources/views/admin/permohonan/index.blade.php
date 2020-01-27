@@ -27,6 +27,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
+                                <a href="{{Route('permohonanFilterWaktu')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak Filter Waktu</a>
                                 <a href="{{Route('permohonanFilter')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak Filter</a>
                                 <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>

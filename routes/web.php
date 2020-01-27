@@ -113,6 +113,10 @@ Route::get('/permohonan/filter','adminController@permohonanFilter')
         ->name('permohonanFilter');
 Route::post('/permohonan/filter','adminController@permohonanFilterCetak')
         ->name('permohonanFilterCetak');
+Route::get('/permohonan/filter/waktu','adminController@permohonanFilterWaktu')
+        ->name('permohonanFilterWaktu');
+Route::post('/permohonan/filter/waktu','adminController@permohonanFilterWaktuCetak')
+        ->name('permohonanFilterWaktuCetak');
 //pengujian Index
 Route::get('/pengujian/index','adminController@pengujianIndex')
         ->name('pengujianIndex');
