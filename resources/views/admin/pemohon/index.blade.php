@@ -29,7 +29,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <a href="" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <a href="{{Route('pemohonCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -38,28 +38,16 @@
                                             <th>Nama</th>
                                             <th>No Telepon</th>
                                             <th>Alamat</th>
-                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($user as $p)
                                         <tr>
-                                            <td>PT.SEJAHTERA</td>
-                                            <td>08764533432</td>
-                                            <td>jL.A.yani km 31 </td>
-                                            <td class="text-center">
-                                                <a href="" class="btn btn-sm btn-outline-danger" >tidak aktif</a>
-                                                <a href="" class="btn btn-sm btn-outline-primary">info</a>
-                                            </td>
+                                            <td>{{$p->customer->nama}}</td>
+                                            <td>{{$p->customer->telepon}}</td>
+                                            <td>{{$p->customer->alamat}} </td>
                                         </tr>
-                                        <tr>
-                                            <td>PT.ARUM</td>
-                                            <td>08764533432</td>
-                                            <td>jL.A.yani km 31 </td>
-                                            <td class="text-center">
-                                                <a href="" class="btn btn-sm btn-outline-info" >aktif</a>
-                                                <a href="" class="btn btn-sm btn-outline-primary">info</a>
-                                            </td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

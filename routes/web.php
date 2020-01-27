@@ -73,6 +73,8 @@ Route::get('/admin/index','adminController@index')
 
 Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
+Route::get('/pemohon/cetak','adminController@pemohonCetak')
+        ->name('pemohonCetak');
 
 Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
         ->name('pelayananIndex');

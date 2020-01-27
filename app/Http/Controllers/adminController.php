@@ -7,6 +7,7 @@ use App\Permohonan;
 use App\Pengujian;
 use App\Detail_permohonan;
 use App\Karyawan;
+use App\user;
 use Carbon\Carbon;
 use PDF;
 use HCrypt;
@@ -41,8 +42,8 @@ class adminController extends Controller
 
     //fungsi halaman data pemohon
     public function pemohonIndex(){
-       
-        return view('admin.pemohon.index');
+        $user = User::with('customer')->where('role',1)->get();
+        return view('admin.pemohon.index',compact('user'));
     }
 
     public function jenisPelayananIndex(){
@@ -176,5 +177,14 @@ class adminController extends Controller
             $pdf =PDF::loadView('laporan.permohonanFilterWaktu', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan data Permohonan Berdasarkan Status .pdf');
+        }
+
+            //cetak laporan data jenis pelayanan
+        public function pemohonCetak(){
+            $pemohon=User::where('role',1)->get();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.pemohonKeseluruhan', ['pemohon'=>$pemohon,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data Pemohon.pdf');
         }
 }
