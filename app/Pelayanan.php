@@ -15,9 +15,6 @@ class Pelayanan extends Model
         return $this->BelongsTo('App\JenisPelayanan');
       }
 
-      public function buah(){
-        return $this->BelongsTo('App\Buah');
-      }  
 
     public function buah(){
         return $this->BelongsTo('App\Buah');

@@ -34,6 +34,7 @@
                             <table id="datatable" class="table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th>Nama Buah</th>
                                         <th>Analisis</th>
                                         <th>Satuan</th>
                                         <th>Harga</th>
@@ -45,6 +46,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <th>Nama Buah</th>
                                     <th>Analisis</th>
                                     <th>Satuan</th>
                                     <th>Harga</th>
@@ -78,7 +80,6 @@
                                 </div>
                                 <div class="form-group"><input type="hidden" id="id" name="id"  class="form-control"></div>
                                 <div class="form-group"><label  class=" form-control-label">uji</label><input type="text" id="name" name="name" placeholder="name" class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Satuan</label><input type="text" id="satuan" name="satuan" placeholder="satuan" class="form-control"></div>
                                 <div class="form-group">
                                 <label  class=" form-control-label">Jenis Uji</label>
                                 <select name="jenis_pelayanan_id" id="jenis_pelayanan_id" class="form-control">
@@ -212,6 +213,7 @@
                         "processData": true
                     },
                     columns: [
+                        {"data": "buah.name"},
                         {"data": "name"},
                         {"data": "satuan"},
                         {"data": "price"},
