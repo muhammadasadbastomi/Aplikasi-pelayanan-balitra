@@ -35,6 +35,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Master Data</a>
                         <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-id-badge"></i><a href="{{Route('buahIndex')}}">Buah</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="{{Route('pelayananIndex')}}">kategori</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="{{Route('analisisIndex')}}">Pelayanan Uji</a></li>
                             <li><i class="fa fa-bars"></i><a href="{{Route('karyawanIndex')}}">Karyawan</a></li>

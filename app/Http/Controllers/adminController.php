@@ -23,6 +23,11 @@ class adminController extends Controller
         return view('admin.index');
     }
 
+    public function buahIndex(){
+
+        return view('admin.buah.index');
+    }
+
     //fungsi beranda admin
     public function depan(){
         $berita = Berita::paginate(3);
