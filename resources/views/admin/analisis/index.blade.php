@@ -120,7 +120,7 @@
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
                         $('#buah_id').append(
-                            '<option value="'+value.uuid+'">'+value.name+'</option>'
+                            '<option value="'+value.uuid+'">'+value.name+'- Rp.'+value.price+'</option>'
                         )
                     })
                 }
