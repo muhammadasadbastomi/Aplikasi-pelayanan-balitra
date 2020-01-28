@@ -29,7 +29,8 @@ class BuahController extends APIController
         }
         $buah = Redis::get("buah:all");
         if (!$buah) {
-            $buah = buah::where('id',$id)->get();
+            // $buah = buah::where('id',$id)->get();
+            $buah = buah::findOrFail($id);
             if (!$buah){
                 return $this->returnController("error", "failed find data buah");
             }
