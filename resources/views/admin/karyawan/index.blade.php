@@ -81,7 +81,7 @@
                                 <p>data user</p>
                                 <hr>
                                 <div class="form-group"><label for="city" class=" form-control-label">Email</label><input type="email" id="email" name="email"placeholder="Email" class="form-control"></div>
-                                <div class="form-group"><label for="city" class=" form-control-label">Password</label><input type="text" id="password"name="password" placeholder="" class="form-control"></div>
+                                <div class="form-group"><label for="city" class=" form-control-label">Password</label><input type="password" id="password"name="password" placeholder="" class="form-control"></div>
                                       
                             <div class="modal-footer">
                                 <button type="button" class="btn " data-dismiss="modal"> <i class="ti-close"></i> Batal</button>
