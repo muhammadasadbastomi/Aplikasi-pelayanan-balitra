@@ -15,6 +15,7 @@ class CreateBuahsTable extends Migration
     {
         Schema::create('buahs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('uuid')->nullable();
             $table->string('name')->length(100);
             $table->string('satuan');
             $table->double('price');
