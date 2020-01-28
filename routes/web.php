@@ -78,6 +78,9 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 Route::get('/admin/index','adminController@index')
         ->name('adminIndex');
 
+Route::get('/buah/index','adminController@buahIndex')
+        ->name('buahIndex');
+
 Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
 Route::get('/pemohon/cetak','adminController@pemohonCetak')
@@ -163,6 +166,8 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::get('', 'BuahController@get')->name('get');
                 Route::get('{uuid}', 'BuahController@find')->name('find');
             });
+
+
 });
 
 Route::get('/customer/index','customerController@index')
