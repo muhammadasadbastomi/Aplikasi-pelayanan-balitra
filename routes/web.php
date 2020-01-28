@@ -9,6 +9,13 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::put('{uuid}', 'JenisController@update')->name('update');
                 Route::delete('{uuid}', 'JenisController@delete')->name('delete');
             });
+        Route::prefix('buah')->name('buah.')->group(function(){
+                Route::get('', 'BuahController@get')->name('get');
+                Route::get('{uuid}', 'BuahController@find')->name('find');
+                Route::post('', 'BuahController@create')->name('create');
+                Route::put('{uuid}', 'BuahController@update')->name('update');
+                Route::delete('{uuid}', 'BuahController@delete')->name('delete');
+            });
         Route::prefix('pelayanan')->name('pelayanan.')->group(function(){
                 Route::get('', 'PelayananController@get')->name('get');
                 Route::get('{uuid}', 'PelayananController@find')->name('find');
@@ -152,6 +159,10 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::post('/permohonan/total', 'PermohonanController@permohonan_total_create')->name('total');
                 Route::delete('{uuid}', 'PermohonanController@permohonan_delete')->name('delete');
          });
+        Route::prefix('buah-customer')->name('buah-customer.')->group(function(){
+                Route::get('', 'BuahController@get')->name('get');
+                Route::get('{uuid}', 'BuahController@find')->name('find');
+            });
 });
 
 Route::get('/customer/index','customerController@index')
