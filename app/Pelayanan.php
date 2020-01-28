@@ -13,7 +13,11 @@ class Pelayanan extends Model
 
     public function jenis_pelayanan(){
         return $this->BelongsTo('App\JenisPelayanan');
-      }    
+      }
+
+      public function buah(){
+        return $this->BelongsTo('App\Buah');
+      }  
 
     public function detail_permohonan()
     {

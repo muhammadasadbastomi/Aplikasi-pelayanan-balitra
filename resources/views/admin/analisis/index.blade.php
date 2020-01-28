@@ -70,10 +70,15 @@
                             </div>
                             <div class="modal-body">
                             <form  method="post" action="">
+                                <div class="form-group">
+                                    <label  class=" form-control-label">Buah</label>
+                                    <select name="buah_id" id="buah_id" class="form-control">
+                                        <option value="">-- pilih Buah --</option>
+                                    </select>
+                                </div>
                                 <div class="form-group"><input type="hidden" id="id" name="id"  class="form-control"></div>
                                 <div class="form-group"><label  class=" form-control-label">uji</label><input type="text" id="name" name="name" placeholder="name" class="form-control"></div>
                                 <div class="form-group"><label  class=" form-control-label">Satuan</label><input type="text" id="satuan" name="satuan" placeholder="satuan" class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">Harga</label><input type="text" id="price" name="price" placeholder="Rp." class="form-control"></div>
                                 <div class="form-group">
                                 <label  class=" form-control-label">Jenis Uji</label>
                                 <select name="jenis_pelayanan_id" id="jenis_pelayanan_id" class="form-control">
@@ -106,7 +111,22 @@
                 }
             })
         }
+        getBuah = () => {
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/buah')}}",
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $.each(returnData.data, function (index, value) {
+                        $('#buah_id').append(
+                            '<option value="'+value.uuid+'">'+value.name+'</option>'
+                        )
+                    })
+                }
+            })
+        }
         getJenis();
+        getBuah();
         //fungsi hapus
         hapus = (uuid, name)=>{
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
@@ -151,8 +171,8 @@
                 $('.modal-title').text('Tambah Data');
                 $('#name').val('');
                 $('#satuan').val('');
-                $('#price').val('');
-                $('#jenis_pelayanan_id').val('');    
+                $('#jenis_pelayanan_id').val('');
+                $('#buah_id').val('');        
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
@@ -168,8 +188,8 @@
                         $('#id').val(returnData.data.uuid);
                         $('#name').val(returnData.data.name);
                         $('#satuan').val(returnData.data.satuan);
-                        $('#price').val(returnData.data.price);
-                        $('#jenis_pelayanan_id').val(returnData.data.jenis_pelayanan.uuid);  
+                        $('#jenis_pelayanan_id').val(returnData.data.jenis_pelayanan.uuid);
+                        $('#buah_id').val(returnData.data.buah.uuid);    
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
