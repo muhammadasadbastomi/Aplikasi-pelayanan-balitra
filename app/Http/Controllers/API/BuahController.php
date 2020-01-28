@@ -13,7 +13,7 @@ class BuahController extends APIController
     public function get(){
         $buah = json_decode(redis::get("buah::all"));
         if (!$buah) {
-            $buah = buah::with('jenis_buah')->get();
+            $buah = buah::all();
             if (!$buah) {
                 return $this->returnController("error", "failed get buah data");
             }
@@ -27,9 +27,9 @@ class BuahController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
-        $buah = Redis::get("buaha:all");
+        $buah = Redis::get("buah:all");
         if (!$buah) {
-            $buah = buah::where('jenis_buah_id',$id)->get();
+            $buah = buah::where('id',$id)->get();
             if (!$buah){
                 return $this->returnController("error", "failed find data buah");
             }
@@ -45,7 +45,8 @@ class BuahController extends APIController
         }
         $buah = Redis::get("buah:$id");
         if (!$buah) {
-            $buah = buah::with('jenis_buah')->where('id',$id)->first();
+            // $buah = buah::with('jenis_buah')->where('id',$id)->first();
+            $buah = buah::findOrFail($id);
             if (!$buah){
                 return $this->returnController("error", "failed find data buah");
             }
@@ -91,7 +92,7 @@ class BuahController extends APIController
         if (!$buah) {
             return $this->returnController("error", "failed find data buah");
         }
-        $buah = buah::with('jenis_buah')->where('id',$id)->first();
+        $buah = buah::findOrFail($id);
         Redis::del("buah:all");
         Redis::set("buah:$id", $buah);
         return $this->returnController("ok", $buah);
