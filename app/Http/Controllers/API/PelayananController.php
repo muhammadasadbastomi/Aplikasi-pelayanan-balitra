@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Pelayanan;
+use App\Buah;
 use HCrypt;
 
 class PelayananController extends APIController
@@ -13,7 +14,7 @@ class PelayananController extends APIController
     public function get(){
         $pelayanan = json_decode(redis::get("pelayanan::all"));
         if (!$pelayanan) {
-            $pelayanan = pelayanan::with('jenis_pelayanan')->get();
+            $pelayanan = pelayanan::with('jenis_pelayanan','buah')->get();
             if (!$pelayanan) {
                 return $this->returnController("error", "failed get pelayanan data");
             }
@@ -45,7 +46,7 @@ class PelayananController extends APIController
         }
         $pelayanan = Redis::get("pelayanan:$id");
         if (!$pelayanan) {
-            $pelayanan = pelayanan::with('jenis_pelayanan')->where('id',$id)->first();
+            $pelayanan = pelayanan::with('jenis_pelayanan','buah')->where('id',$id)->first();
             if (!$pelayanan){
                 return $this->returnController("error", "failed find data pelayanan");
             }
@@ -60,11 +61,18 @@ class PelayananController extends APIController
         // decrypt foreign key id
         $pelayanan->jenis_pelayanan_id = Hcrypt::decrypt($req->jenis_pelayanan_id);
         if(isset($req->buah_id)){
-            $pelayanan->buah_id = Hcrypt::decrypt($req->buah_id);
+            $buah_id = Hcrypt::decrypt($req->buah_id);
+            $buah = buah::findOrFail($buah_id);
+            $pelayanan->buah_id = $buah->id;
+            $pelayanan->name = $req->name;
+            $pelayanan->satuan = $buah->satuan;
+            $pelayanan->price = $buah->price;
+        }else{
+            $pelayanan->name = $req->name;
+            $pelayanan->satuan = $req->satuan;
+            $pelayanan->price = $req->price;
         }
-        $pelayanan->name = $req->name;
-        $pelayanan->satuan = $req->satuan;
-        $pelayanan->price = $req->price;
+        
 
         $pelayanan->save();
 
@@ -90,16 +98,22 @@ class PelayananController extends APIController
         $pelayanan = pelayanan::findOrFail($id);
         $pelayanan->jenis_pelayanan_id = Hcrypt::decrypt($req->jenis_pelayanan_id);
         if(isset($req->buah_id)){
-            $pelayanan->buah_id = Hcrypt::decrypt($req->buah_id);
+            $buah_id = Hcrypt::decrypt($req->buah_id);
+            $buah = buah::findOrFail($buah_id);
+            $pelayanan->buah_id = $buah->id;
+            $pelayanan->name = $req->name;
+            $pelayanan->satuan = $buah->satuan;
+            $pelayanan->price = $buah->price;
+        }else{
+            $pelayanan->name = $req->name;
+            $pelayanan->satuan = $req->satuan;
+            $pelayanan->price = $req->price;
         }
-        $pelayanan->name = $req->name;
-        $pelayanan->satuan = $req->satuan;
-        $pelayanan->price = $req->price;
         $pelayanan->update();
         if (!$pelayanan) {
             return $this->returnController("error", "failed find data pelayanan");
         }
-        $pelayanan = pelayanan::with('jenis_pelayanan')->where('id',$id)->first();
+        $pelayanan = pelayanan::with('jenis_pelayanan','buah')->where('id',$id)->first();
         Redis::del("pelayanan:all");
         Redis::set("pelayanan:$id", $pelayanan);
         return $this->returnController("ok", $pelayanan);

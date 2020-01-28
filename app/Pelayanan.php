@@ -9,7 +9,7 @@ use HCrypt;
 class Pelayanan extends Model
 {
     protected $fillable = ['uuid','name', 'price'];
-    protected $hidden = ['id','jenis_pelayanan_id'];
+    protected $hidden = ['id','jenis_pelayanan_id','buah_id'];
 
     public function jenis_pelayanan(){
         return $this->BelongsTo('App\JenisPelayanan');
@@ -18,6 +18,10 @@ class Pelayanan extends Model
       public function buah(){
         return $this->BelongsTo('App\Buah');
       }  
+
+    public function buah(){
+        return $this->BelongsTo('App\Buah');
+      }    
 
     public function detail_permohonan()
     {
