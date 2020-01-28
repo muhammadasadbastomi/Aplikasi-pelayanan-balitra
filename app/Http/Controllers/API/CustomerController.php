@@ -9,7 +9,7 @@ use App\Customer;
 use App\User;
 use HCrypt;
 
-class KaryawanController extends APIController
+class CustomerController extends APIController
 {
     public function get(){
         $customer = json_decode(redis::get("customer::all"));
