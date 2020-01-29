@@ -63,6 +63,12 @@ class adminController extends Controller
         return view('admin.analisis.index');
     }
 
+
+    public function pelayananFilter(){
+        $jenisPelayanan = jenisPelayanan::all();
+        return view('admin.analisis.filter',compact('jenisPelayanan'));
+    }
+
     public function karyawanIndex(){
        
         return view('admin.karyawan.index');
@@ -212,4 +218,14 @@ class adminController extends Controller
                 $pdf->setPaper('a4', 'potrait');
                 return $pdf->stream('Laporan data Buah.pdf');
             }
+        // cetak pelayanan filter kategori
+        public function pelayananFilterCetak(Request $request){
+            $pelayanan = Pelayanan::where('jenis_pelayanan_id', $request->kategori)->get();
+            $kategori = Jenispelayanan::findOrfail($request->kategori);
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.pelayananFilter', ['kategori'=>$kategori,'pelayanan'=>$pelayanan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data Permohonan Berdasarkan Status .pdf');
+        }
+
 }

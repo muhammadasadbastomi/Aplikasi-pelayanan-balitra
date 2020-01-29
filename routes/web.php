@@ -94,6 +94,10 @@ Route::get('/jenis_pelayanan/cetak','adminController@kategoriCetak')
         ->name('kategoriCetak');
 Route::get('/pelayanan/cetak','adminController@pelayananCetak')
         ->name('pelayananCetak');
+Route::get('/pelayanan/filter','adminController@pelayananFilter')
+        ->name('pelayananFilter');
+Route::post('/pelayanan/filter','adminController@pelayananFilterCetak')
+        ->name('pelayananFilterCetak');
 
 Route::get('/pengujian/cetak','adminController@pengujianCetak')
         ->name('pengujianCetak');        
