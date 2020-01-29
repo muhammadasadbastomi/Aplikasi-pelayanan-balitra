@@ -29,7 +29,7 @@ Lengkapi Data Anda...
 <div class="card-body">
 <form action="" method="post">
     <div class="form-group">
-        <label for="">Nama </label>
+        <label for="">Nama CCV/PT</label>
         <input type="text" class="form-control" name="nama" placeholder="nama kustomer">
     </div>
     <div class="form-group">

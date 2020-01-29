@@ -31,7 +31,6 @@
                                 <input type="hidden" name="user_id" value="{{ $user_id }}">
                                 <button type="submit" class="btn btn-outline-primary pull-right" style="margin-right:5px;"><i class="ti-plus"></i> cetak data</button>
                                 </form>
-                                <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="text-center table table-hover" style="width:100%">

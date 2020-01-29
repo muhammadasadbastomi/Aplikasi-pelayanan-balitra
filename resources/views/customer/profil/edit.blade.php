@@ -30,7 +30,7 @@
 {{method_field('PUT') }}
 {{ csrf_field() }}
     <div class="form-group">
-        <label for="">Nama </label>
+        <label for="">Nama CV/PT</label>
         <input type="text" class="form-control" name="nama" placeholder="nama kustomer" value="{{$customer_data->nama}}">
     </div>
     <div class="form-group">
