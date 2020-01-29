@@ -98,12 +98,12 @@
                     @foreach ($pengujian as $r)
 
                     <tr>
-                        <td>{{$r->jenispelayanan->jenis}}</td>
+                        <td>{{$r->permohonan->jenispelayanan->jenis}}</td>
                         <td>{{$r->created_at}}</td>
                         <td>{{$r->user->name}}</td>
                         <td>
                             @php 
-                                $status = $r->pengujian->status;
+                                $status = $r->status;
                             @endphp
                             @if($status == 0)
                                 <p style="color:red;">Pending</p>

@@ -150,7 +150,7 @@ class adminController extends Controller
     }
 
     public function pengujianCetak(){
-        $pengujian = permohonan::with('jenispelayanan','user','pengujian')->get();
+        $pengujian = pengujian::with('permohonan')->get();
         $tgl= Carbon::now()->format('d-m-Y');
         $pdf =PDF::loadView('laporan.pengujianKeseluruhan', ['pengujian'=>$pengujian,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');

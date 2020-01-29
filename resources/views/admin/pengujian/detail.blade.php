@@ -86,12 +86,12 @@
                                 <tr>
                                     <td>Metode Pembayaran</td>
                                     @php 
-                                    $status = $permohonan->pengujian->metode_pembayaran;
+                                    $ = $permohonan->pengujian->metode_pembayaran;
                                     @endphp
                                     @if($status == 0)
                                     <td><label class="btn btn-sm btn-warning">belum dibayar</label></td>
                                     @elseif($status == 1)
-                                    <td><label class="btn btn-sm btn-primary">Cash</label></td>
+                                    status<td><label class="btn btn-sm btn-primary">Cash</label></td>
                                     @else
                                     <td><label class="btn btn-sm btn-success">Transfer</label></td>
                                     @endif                                
