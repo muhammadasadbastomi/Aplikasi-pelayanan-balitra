@@ -50,7 +50,6 @@
                         </ul>
                     </li>
                     <li><a href="{{Route('beritaIndex')}}"><i class="menu-icon fa fa-file"></i> Data Berita</a></li>
-                    <li><a href="#"><i class="menu-icon fa fa-user"></i> Data Admin</a></li>
                 </ul>
             </div>
         </nav>
