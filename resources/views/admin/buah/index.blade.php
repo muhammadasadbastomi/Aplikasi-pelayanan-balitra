@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
                                 <button href="" class="btn btn-outline-primary pull-right" id="tambah" >+ tambah data</button>
-                                <a href="{{Route('pelayananCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <a href="{{Route('buahCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="table table-hover" style="width:100%">

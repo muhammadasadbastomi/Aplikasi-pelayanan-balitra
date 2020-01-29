@@ -7,7 +7,9 @@ use App\Permohonan;
 use App\Pengujian;
 use App\Detail_permohonan;
 use App\Karyawan;
+use App\JenisPelayanan;
 use App\user;
+use App\Buah;
 use Carbon\Carbon;
 use PDF;
 use HCrypt;
@@ -192,4 +194,22 @@ class adminController extends Controller
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan data Pemohon.pdf');
         }
+
+        //cetak laporan data jenis pelayanan
+        public function buahCetak(){
+            $buah=Buah::all();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.buahKeseluruhan', ['buah'=>$buah,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data Buah.pdf');
+        }
+
+            //cetak laporan data jenis pelayanan
+            public function kategoriCetak(){
+                $jenis_pelayanan=JenisPelayanan::all();
+                $tgl= Carbon::now()->format('d-m-Y');
+                $pdf =PDF::loadView('laporan.jenisPelayanan', ['jenis_pelayanan'=>$jenis_pelayanan,'tgl'=>$tgl]);
+                $pdf->setPaper('a4', 'potrait');
+                return $pdf->stream('Laporan data Buah.pdf');
+            }
 }

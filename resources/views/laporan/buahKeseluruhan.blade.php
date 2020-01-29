@@ -83,22 +83,19 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">DATA PELAYANAN UJI</h2>
+            <h2 style="text-align:center;">DATA BUAH</h2>
             <table class="table table-bordered table-hover text-center">
                 <thead>
-                    <tr>                        
-                        <th>Kategori</th>
-                        <th>Nama Buah</th>
-                        <th>Analisis</th>
+                    <tr>
+                        <th>Nama</th>
                         <th>Satuan</th>
-                        <th>tarif</th>
+                        <th>Harga</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pelayanan as $r)
+                    @foreach ($buah as $r)
+
                     <tr>
-                        <td>{{$r->jenis_pelayanan->jenis}}</td>
-                        <td>{{$r->buah->name}}</td>
                         <td>{{$r->name}}</td>
                         <td>{{$r->satuan}}</td>
                         <td>Rp.{{$r->price}}</td>

@@ -216,7 +216,10 @@
                         {"data": "buah.name"},
                         {"data": "name"},
                         {"data": "satuan"},
-                        {"data": "price"},
+                        {data: null , render : function ( data, type, row, meta ) {
+                           
+                            return '<p>Rp.'+ row.price +'</p>'
+                        }},
                         {"data": "jenis_pelayanan.jenis"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;

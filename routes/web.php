@@ -80,6 +80,8 @@ Route::get('/admin/index','adminController@index')
 
 Route::get('/buah/index','adminController@buahIndex')
         ->name('buahIndex');
+Route::get('/buah/cetak','adminController@buahCetak')
+        ->name('buahCetak');
 
 Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
@@ -88,6 +90,8 @@ Route::get('/pemohon/cetak','adminController@pemohonCetak')
 
 Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
         ->name('pelayananIndex');
+Route::get('/jenis_pelayanan/cetak','adminController@kategoriCetak')
+        ->name('kategoriCetak');
 Route::get('/pelayanan/cetak','adminController@pelayananCetak')
         ->name('pelayananCetak');
 
