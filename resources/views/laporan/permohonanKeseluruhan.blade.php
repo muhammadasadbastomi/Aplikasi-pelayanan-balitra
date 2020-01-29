@@ -95,7 +95,7 @@
                 <tbody>
                     @foreach ($permohonan as $r)
                     <tr>
-                        <td>{{$r->jenispelayanan->jenis}}</td>
+                        <td>{{$r->jenisPelayanan->jenis}}</td>
                         <td>{{$r->created_at}}</td>
                         <td>{{$r->user->name}}</td>
                         <td> 
