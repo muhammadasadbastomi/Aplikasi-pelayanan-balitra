@@ -47,7 +47,6 @@
                             <li><i class="menu-icon fa fa-map-o"></i><a href="{{Route('pemohonIndex')}}">Pemohon</a></li>
                             <li><i class="menu-icon fa fa-map-o"></i><a href="{{Route('permohonanIndex')}}">Permohonan</a></li>
                             <li><i class="menu-icon fa fa-street-view"></i><a href="{{Route('pengujianIndex')}}">Transaksi</a></li>
-                            <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Hasil Uji</a></li>
                         </ul>
                     </li>
                     <li><a href="{{Route('beritaIndex')}}"><i class="menu-icon fa fa-file"></i> Data Berita</a></li>
