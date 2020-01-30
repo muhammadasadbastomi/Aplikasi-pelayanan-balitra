@@ -174,6 +174,10 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::get('', 'BuahController@get')->name('get');
                 Route::get('{uuid}', 'BuahController@find')->name('find');
             });
+        Route::prefix('pengujian-customer')->name('pengujian-customer.')->group(function(){
+                Route::get('', 'PengujianController@get')->name('getByCustomer');
+                Route::get('{uuid}', 'PengujianController@find')->name('find');
+                });
 
 
 });

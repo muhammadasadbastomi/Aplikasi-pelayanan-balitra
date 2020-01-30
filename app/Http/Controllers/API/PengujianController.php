@@ -28,6 +28,20 @@ class PengujianController extends APIController
         return $this->returnController("ok", $permohonan);
     }
 
+    public function getByCustomer(){
+        $customer_id = auth::id();
+        $permohonan = json_decode(redis::get("permohonan::all"));
+        if (!$permohonan) {
+            $permohonan = permohonan::with('jenispelayanan','user','pengujian')->where('status',1)->where('user_id',$customer_id)->get();
+            // $permohonan = permohonan::with('user')->where('status',1)->get()->load('jenis_pelayanan');
+            if (!$permohonan) {
+                return $this->returnController("error", "failed get permohonan data");
+            }
+            Redis::set("permohonan:all", $permohonan);
+        }
+        return $this->returnController("ok", $permohonan);
+    }
+
     public function find($uuid){
         $id = HCrypt::decrypt($uuid);
         if (!$id) {
