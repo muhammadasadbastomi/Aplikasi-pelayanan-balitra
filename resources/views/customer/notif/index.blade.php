@@ -37,8 +37,11 @@
         <a href="{{Route('notifDetail',['id' => $i->id ] )}}"> <i class="fa fa-envelope-o"></i> Admin  
         @if($i->status == 0)
         <span class="badge badge-success pull-right">belum dibaca</span></a><br>
-        @else
+
+        @elseif($i->status == 1)
         <span class="badge badge-secondary pull-right">sudah  dibaca</span></a><br>
+        @else
+        <p>tes</p>
         @endif
         <small>{{$i->created_at}}</small>
     </li>
