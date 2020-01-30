@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use App\Pelayanan;
 use App\Berita;
 use App\Permohonan;
@@ -236,4 +237,31 @@ class adminController extends Controller
                 $pdf->setPaper('a4', 'potrait');
                 return $pdf->stream('Laporan data Buah.pdf');
             }
+
+        // cetak pelayanan filter kategori
+        public function pengujianCustomerCetak(){ 
+            $customer_id = auth::id();
+            $permohonan = permohonan::with('jenispelayanan','user','pengujian')->where('status',1)->where('user_id',$customer_id)->get();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.pengujianCustomer', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data pengujian berdasarkan customer .pdf');
+        }
+        // cetak pelayanan filter kategori
+        public function permohonanCustomerCetak(){ 
+            $customer_id = auth::id();
+            $permohonan = permohonan::with('jenispelayanan','user','pengujian')->whereIn('status',[0,2])->where('user_id',$customer_id)->get();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.permohonanCustomer', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data permohonan berdasarkan customer .pdf');
+        }
+        //cetak laporan data jenis pelayanan
+        public function detailPengujianCetak($id){
+            $permohonan=permohonan::findOrfail($id);
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.detailPengujian', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan Detail pengujian.pdf');
+        }
 }

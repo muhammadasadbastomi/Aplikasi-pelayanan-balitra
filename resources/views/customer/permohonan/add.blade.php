@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.customer')
 @section('content')
 <div class="page-wrapper">
              <div class="page-breadcrumb">

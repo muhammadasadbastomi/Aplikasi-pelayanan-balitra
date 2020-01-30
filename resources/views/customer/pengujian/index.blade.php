@@ -5,7 +5,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Data permohonan</h1>
+                        <h1>Data pengujian Customer</h1>
                     </div>
                 </div>
             </div>
@@ -27,11 +27,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <form action="post">
-                                <input type="hidden" name="user_id" value="{{ $user_id }}">
-                                <button type="submit" class="btn btn-outline-primary pull-right" style="margin-left:5px;"><i class="ti-plus"></i> tambah data</button>
-                                </form>
-                                <a class="btn btn-outline-success pull-right" href="{{Route('permohonanCustomerCetak')}}">cetak data</a>
+                                <a href="{{Route('pengujianCustomerCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="text-center table table-hover" style="width:100%">
@@ -66,7 +62,7 @@
  </div> 
 @endsection
 @section('script')
-<script>
+    <script>
         //fungsi hapus
         hapus = (uuid, name)=>{
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
@@ -114,78 +110,35 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.permohonan-customer.get')}}",
+                        "url": "{{route('API.pengujian-customer.getByCustomer')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
                         "processData": true
                     },
                     columns: [
-                        {data: null , render : function ( data, type, row, meta ) {
-                            let jenis = row.jenispelayanan;
-
-                            return jenis == null  ?
-                            '<p> Data belum lengkap </p>':
-                            jenis = row.jenispelayanan.jenis; 
-                            '<p> '+ jenis +' </p>';
-                        }},
-
-                        {data: null , render : function ( data, type, row, meta ) {
-                            let created_at = row.created_at;
-                            let exist = row.jenispelayanan; 
-
-                            if(exist == null){
-                                return '<p> Data belum lengkap </p>';
+                        {"data": "jenispelayanan.jenis"},
+                        {"data": "created_at"},
+                        {"data": "user.name"},
+                        {data: null, render : function ( data, type, row, meta ) {
+                            let status =row.pengujian.status;
+                            if(status === 0){
+                                return '<a class="btn btn-sm btn-warning"> pending</a>';
+                              
+                            }else if (status === 1){
+                                return '<a class="btn btn-sm btn-primary text-white">proses</a>';
                             }else{
-                                return '<p> '+ created_at +' </p>';
-                            }
-                        }},
-                        {data: null , render : function ( data, type, row, meta ) {
-                            let user = row.user.name;
-                            let exist = row.jenispelayanan; 
-
-                            if(exist == null){
-                                return '<p> Data belum lengkap </p>';
-                            }else{
-                                return '<p> '+ user +' </p>';
-                            }
-                        }},
-                        {data: null , render : function ( data, type, row, meta ) {
-                            let status = row.status;
-                            let exist = row.jenispelayanan;
-                            
-                            if(exist == null){
-                                return '<p> Data belum lengkap </p>';
-                            }else{
-                                return status === 0  ?
-                                '<a class="btn btn-warning">pending</a>':
-                                '<a class="btn btn-danger text-white">Ditolak</a>';
+                                return '<a class="btn btn-sm btn-success text-white">Selesai</a>' ;
                             }
                         }},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
-                            let relasi = row.jenispelayanan;
-                            return relasi != null  ?
-                            ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
-                            ' <a href="/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a>';
+                            let name = row.permohonan;
+                            return type === 'display'  ?
+                            ' <a href="/pengujian/customer/detail'+'/'+ uuid +'" class="btn btn-sm  btn-primary" ><i class="ti-eye"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
+                        data;
                         }}
                     ]
-                        
-                        // {data: null , render : function ( data, type, row, meta ) {
-                        //     let status = row.status;
-
-                        //     return status === 0  ?
-                        //     '<a class="btn btn-warning">pending</a>':
-                        //     '<a class="btn btn-danger text-white">Ditolak</a>';
-                        // }},
-                        // {data: null , render : function ( data, type, row, meta ) {
-                        //     let uuid = row.uuid;
-                        //     let relasi = row.created_at;
-                        //     return relasi != null  ?
-                        //     ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
-                        //     ' <a href="/customer/permohonan/add/'+uuid +'" class="btn btn-warning"> isi detail permohonan </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>';
-                        // }}
-                    
                 });
 
                 //event form submit 
@@ -193,7 +146,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.permohonan-customer.create", '')}}'
+                        let url = '{{route("API.permohonan.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -217,7 +170,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.permohonan-customer.create')}}",
+                            url: "{{Route('API.permohonan.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
@@ -227,7 +180,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Data Permohonan Berhasil dibuat',
+                                    title: 'Your work has been saved',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })

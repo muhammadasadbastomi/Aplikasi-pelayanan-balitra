@@ -193,7 +193,7 @@ Route::post('/customer/profil/tambah','customerController@profil_tambah_store')
 Route::put('/customer/profil/tambah','customerController@profil_update')
         ->name('profil_update');
 Route::get('/customer/pengujian','customerController@pengujianCustomerIndex')
-        ->name('pengujianCustomerIndex');
+        ->name('customerPengujianIndex');
 Route::get('/notif/index','customerController@notifIndex')
         ->name('notifIndex');
 Route::get('/notif/detail/{id}','customerController@notifDetail')
@@ -202,8 +202,16 @@ Route::get('/permohonan/add/{uuid}','customerController@permohonanAdd')
         ->name('permohonanAdd');
 Route::get('/permohonan/customer/index','customerController@permohonanIndex')
         ->name('permohonanCustomerIndex');
+Route::get('/permohonan/customer/cetak','adminController@permohonanCustomerCetak')
+        ->name('permohonanCustomerCetak');
 Route::post('/permohonan/customer/total/create','API\permohonanController@permohonan_total_create')
-        ->name('permohonanTotalCreate'); 
+        ->name('permohonanTotalCreate');
+Route::get('/pengujian/customer/detail/{uuid}','customerController@pengujianCustomerDetail')
+        ->name('pengujianCustomerDetail');
+Route::get('/pengujian/customer/cetak','adminController@pengujianCustomerCetak')
+        ->name('pengujianCustomerCetak');
+Route::get('/nota/customer/cetak/{id}','adminController@detailPengujianCetak')
+        ->name('cetakCustomerNota');  
 
 
 //
