@@ -33,13 +33,13 @@
         </div>
     </div>
     <br>
-    <p style="text-align: justify;" > {{$inbox->keterangan}} <b class="text-danger"> {{$inbox->permohonan->id}}</b></p>
+    <p style="text-align: justify;" >Permohonan pengujiian {{$inbox->permohonan->user->name}} yang diajukan pada tanggal {{$inbox->permohonan->created_at}} telah di verifikasi oleh admin dab dinyatakan @if($inbox->permohonan->id = 1) <b class="text-danger">DITERIMA</b>@else  <b class="text-danger">DITOLAK</b> @endif dengan keterangan :{{$inbox->keterangan}} </p>
     <br>
     <p>Harap dapat mengantar Sampel Uji pada, </p>
     <table>
         <tr>
         <td> Tanggal </td>
-        <td> : {{ date('d-m-Y', strtotime($inbox->created_at)) }} </td>
+        <td> : {{ date('d-m-Y', strtotime($inbox->tgl_antar)) }} </td>
         </tr>
         <tr>
             <td>Tempat</td>
