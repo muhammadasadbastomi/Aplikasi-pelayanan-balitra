@@ -228,4 +228,12 @@ class adminController extends Controller
             return $pdf->stream('Laporan data Permohonan Berdasarkan Status .pdf');
         }
 
+             //cetak laporan data jenis pelayanan
+             public function notaCetak($id){
+                $permohonan=permohonan::findOrfail($id);
+                $tgl= Carbon::now()->format('d-m-Y');
+                $pdf =PDF::loadView('laporan.notaCetak', ['permohonan'=>$permohonan,'tgl'=>$tgl]);
+                $pdf->setPaper('a4', 'potrait');
+                return $pdf->stream('Laporan data Buah.pdf');
+            }
 }

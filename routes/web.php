@@ -100,7 +100,9 @@ Route::post('/pelayanan/filter','adminController@pelayananFilterCetak')
         ->name('pelayananFilterCetak');
 
 Route::get('/pengujian/cetak','adminController@pengujianCetak')
-        ->name('pengujianCetak');        
+        ->name('pengujianCetak'); 
+Route::get('/nota/cetak/{id}','adminController@notaCetak')
+        ->name('cetakNota');           
 
 Route::get('/analisis/index','adminController@analisisIndex')
         ->name('analisisIndex');

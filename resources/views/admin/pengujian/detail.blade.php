@@ -51,7 +51,7 @@
                                 </tr>
                                 <tr>
                                     <td>Biaya</td>
-                                    <td>: {{$permohonan->biaya}}
+                                    <td>:Rp. {{$permohonan->biaya}}
                                     </td>
                                         
                                 </tr>
@@ -86,7 +86,7 @@
                                 <tr>
                                     <td>Metode Pembayaran</td>
                                     @php 
-                                    $ = $permohonan->pengujian->metode_pembayaran;
+                                    $status = $permohonan->pengujian->metode_pembayaran;
                                     @endphp
                                     @if($status == 0)
                                     <td><label class="btn btn-sm btn-warning">belum dibayar</label></td>
@@ -109,7 +109,7 @@
                         <div class="card-footer text-right">
                             <a href="{{Route('pengujianEdit',['uuid'=> $permohonan->pengujian->uuid])}}" class="btn btn-primary"><i class=""></i>  Edit Data</a>
                             @if($permohonan->pengujian->metode_pembayaran != 0)
-                                <a href="">Cetak Nota</a>
+                                <a href="{{Route('cetakNota',['id'=> $permohonan->pengujian->id])}}">Cetak Nota</a>
                             @endif
                         </div>
                     </div>
