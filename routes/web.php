@@ -116,10 +116,6 @@ Route::get('/karyawan/cetak','adminController@karyawanCetak')
 //route berita
 Route::get('/berita/index','adminController@beritaIndex')
         ->name('beritaIndex');
-Route::get('/berita/depan','adminController@beritaDepan')
-        ->name('beritaDepan');
-Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
-        ->name('beritaDetail');
 Route::get('/berita/cetak','adminController@beritaCetak')
         ->name('beritaCetak');
 //route permohonan
@@ -177,7 +173,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::get('{uuid}', 'BuahController@find')->name('find');
             });
         Route::prefix('pengujian-customer')->name('pengujian-customer.')->group(function(){
-                Route::get('', 'PengujianController@get')->name('getByCustomer');
+                Route::get('', 'PengujianController@getByCustomer')->name('getByCustomer');
                 Route::get('{uuid}', 'PengujianController@find')->name('find');
                 });
 
@@ -222,3 +218,7 @@ Route::get('/','adminController@depan')
 Auth::routes();
 
 Route::get('/home', 'DashboardController@index')->name('home');
+Route::get('/berita/depan','adminController@beritaDepan')
+        ->name('beritaDepan');
+Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
+        ->name('beritaDetail');

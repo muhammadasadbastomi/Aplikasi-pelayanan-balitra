@@ -123,7 +123,7 @@
                         {data: null, render : function ( data, type, row, meta ) {
                             let status =row.pengujian.status;
                             if(status === 0){
-                                return '<a class="btn btn-sm btn-warning"> pending</a>';
+                                return '<a class="btn btn-sm btn-warning">barang belum diterima</a>';
                               
                             }else if (status === 1){
                                 return '<a class="btn btn-sm btn-primary text-white">proses</a>';

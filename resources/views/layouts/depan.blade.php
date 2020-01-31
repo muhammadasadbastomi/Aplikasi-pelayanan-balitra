@@ -33,16 +33,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="about.html">Beranda</a>
+            <a class="nav-link" href="#">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">Pelayanan</a>
+            <a class="nav-link" href="#">Pelayanan</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Berita</a>
+            <a class="nav-link" href="#">Berita</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Kontak</a>
+            <a class="nav-link" href="#">Kontak</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('login')}}">Register / Login</a>

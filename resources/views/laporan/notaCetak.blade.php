@@ -98,7 +98,7 @@
                                     <td width="250">Analisis</td>
                                     <td style=""> :
                                     @foreach($permohonan->detail_permohonan as $a)
-                                     {{$a->pelayanan->name}} - Rp.{{$a->pelayanan->price}}
+                                      {{$a->pelayanan->name}} - Rp.{{$a->pelayanan->price}} <br>
                                     @endforeach                                    
                                     </td>
                                 </tr>
@@ -120,7 +120,7 @@
                                     <td>:{{$permohonan->pengujian->estimasi}} Hari</td>
                                 </tr>                                
                                 <tr>
-                                    <td>Keterangan Uji</td>
+                                    <td>Keterangan Uji {{$permohonan->pengujian->status}}</td>
                                     @php 
                                     $status = $permohonan->pengujian->status;
                                     @endphp
