@@ -107,7 +107,7 @@
                                     Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Data Berhasil Dihapus',
+                                    title: 'Data Buah Berhasil Dihapus',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
@@ -201,7 +201,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Data Berhasil Tersimpan',
+                                    title: 'Data Buah Berhasil Diubah',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
@@ -222,7 +222,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Your work has been saved',
+                                    title: 'Data buah berhasil tersimpan',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })

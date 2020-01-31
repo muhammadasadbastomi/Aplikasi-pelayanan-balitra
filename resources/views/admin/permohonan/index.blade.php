@@ -87,7 +87,7 @@
                                     Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Data Berhasil Dihapus',
+                                    title: 'Data Permohonan Berhasil Dihapus',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })

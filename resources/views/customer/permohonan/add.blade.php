@@ -110,7 +110,46 @@
             $("#kecamatan").empty();
             $("#kelurahan").empty();
         }
-    }),
+    })
+
+     //fungsi hapus
+     hapus = (uuid, name)=>{
+            let csrf_token=$('meta[name="csrf_token"]').attr('content');
+            Swal.fire({
+                        title: 'apa anda yakin?',
+                        text: " Menghapus Rincian Permohonan data " + name,
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'hapus data',
+                        cancelButtonText: 'batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url : "{{ url('/api/permohonan-detail-customer')}}" + '/' + uuid,
+                                type : "POST",
+                                data : {'_method' : 'DELETE', '_token' :csrf_token},
+                                success: function (response) {
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data detailPermohonan Berhasil Dihapus',
+                                    showConfirmButton: false,
+                                    timer: 150000
+                                })
+                            $('#datatable').DataTable().ajax.reload(null, false);
+                        },
+                    })
+                    } else if (result.dismiss === swal.DismissReason.cancel) {
+                        Swal.fire(
+                        'Dibatalkan',
+                        'data batal dihapus',
+                        'error'
+                        )
+                    }
+                })
+            }
     // fungsi render datatable
     $(document).ready(function() {
         let id = $('#permohonan_id').val();
@@ -134,7 +173,7 @@
                             let uuid = row.uuid;
                             let name = row.jenis;
                             return type === 'display'  ?
-                            '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                            ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
                         data;
                         }}
                     ]
@@ -157,7 +196,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Data Berhasil Tersimpan',
+                                    title: 'Data rincian Berhasil Ditambahkan',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
