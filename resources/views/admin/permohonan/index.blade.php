@@ -133,7 +133,7 @@
                             let uuid = row.uuid;
                             let name = row.permohonan;
                             return type === 'display'  ?
-                            ' <a href="/permohonan/verifikasi'+'/'+ uuid +'" class="btn btn-sm  btn-primary" ><i class="ti-eye"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
+                            ' <a href="/permohonan/verifikasi'+'/'+ uuid +'" class="btn btn-sm  btn-primary" ><i class="ti-email"></i> </a> <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i></button>':
                         data;
                         }}
                     ]

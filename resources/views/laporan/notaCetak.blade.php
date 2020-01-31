@@ -116,10 +116,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Terima Barang</td>
-                                    <td>: {{$permohonan->pengujian->tanggal_terima}}</td>
-                                </tr>
-                                <tr>
                                     <td>Estimasi</td>
                                     <td>:{{$permohonan->pengujian->estimasi}} Hari</td>
                                 </tr>                                

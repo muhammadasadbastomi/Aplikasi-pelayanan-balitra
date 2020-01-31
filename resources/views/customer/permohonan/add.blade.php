@@ -99,7 +99,7 @@
                 if(returnData){
                     $("#pelayanan_id").empty();
                             $.each(returnData.data, function (index, value) {
-                        $("#pelayanan_id").append('<option value="'+value.uuid+'">'+value.name+'- Rp.'+value.price+' </option>');
+                        $("#pelayanan_id").append('<option value="'+value.uuid+'">'+value.buah.name+'- Rp.'+value.price+'/'+ value.buah.satuan +' </option>');
                     });
                 }else{
                 $("#kecamatan").empty();

@@ -99,10 +99,12 @@
                         <td>{{$r->created_at}}</td>
                         <td>{{$r->user->name}}</td>
                         <td> 
-                            @if($r->status === 0)
-                                <p style="color:red;">Pending</p>
+                            @if($r->status == 0)
+                                <p style="color:blue;">Pending</p>
+                            @elseif($r->status == 2)
+                                <p style="color:red;">Ditolak</p>
                             @else
-                                <p style="color:green;">Terverifikasi</p>
+                            <p>-</p>
                             @endif
                         </td>
                     </tr>
