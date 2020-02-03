@@ -29,7 +29,7 @@
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
                                 <a href="" class="btn btn-outline-primary pull-right"  data-toggle="modal" data-target="#mediumModal" >+ tambah data</a>
-                                <a href="{{Route('karyawanCetak')}}" class="btn btn-outline-success pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <!-- <a href="{{Route('karyawanCetak')}}" class="btn btn-outline-success pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a> -->
                             </div>
                             <div class="card-body">
                                 <table id="datatable" class="table table-hover" style="width:100%">
