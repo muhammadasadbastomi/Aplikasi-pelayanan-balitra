@@ -103,6 +103,10 @@ Route::post('/pelayanan/filter','adminController@pelayananFilterCetak')
 
 Route::get('/pengujian/cetak','adminController@pengujianCetak')
         ->name('pengujianCetak'); 
+Route::get('/pengujian/filter','adminController@pengujianFilter')
+        ->name('pengujianFilter');
+Route::post('/pengujian/filter','adminController@pengujianFilterCetak')
+        ->name('pengujianFilterCetak');  
 Route::get('/nota/cetak/{id}','adminController@notaCetak')
         ->name('cetakNota');           
 

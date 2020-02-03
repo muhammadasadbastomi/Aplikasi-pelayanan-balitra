@@ -29,6 +29,7 @@
                                 <strong class="card-title">Tabel Data</strong>
                                 <a href="{{Route('analisisPengujian')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> Analisis Pengujian</a>
                                 <a href="{{Route('pengujianCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <a href="{{Route('pengujianFilter')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> filter waktu</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="text-center table table-hover" style="width:100%">

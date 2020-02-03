@@ -121,6 +121,11 @@ class adminController extends Controller
         return view('admin.pengujian.index');
     }
 
+    public function pengujianFilter(){
+       
+        return view('admin.pengujian.filter');
+    }
+
     public function pengujianDetail($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = permohonan::findOrFail($id);
@@ -290,6 +295,15 @@ class adminController extends Controller
             $pdf =PDF::loadView('laporan.analisisPengujian', ['pelayanan'=>$pelayanan,'tgl'=>$tgl]);
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan analisis permohonan.pdf');
+        }
+
+        //cetak laporan data jenis pelayanan
+        public function pengujianFilterCetak(Request $request){
+            $pengujian = pengujian::whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir])->get();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.pengujianFilterWaktu', ['pengujian'=>$pengujian,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data pengujian Berdasarkan Status .pdf');
         }
 }
  
