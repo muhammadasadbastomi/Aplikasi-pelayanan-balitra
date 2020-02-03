@@ -30,6 +30,7 @@
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
                                 <a href="{{Route('pemohonCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <a href="{{Route('analisisPemohon')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> analisis pemohon</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">

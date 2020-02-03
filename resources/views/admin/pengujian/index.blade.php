@@ -27,6 +27,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
+                                <a href="{{Route('analisisPengujian')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> Analisis Pengujian</a>
                                 <a href="{{Route('pengujianCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">

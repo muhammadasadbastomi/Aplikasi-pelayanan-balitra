@@ -87,6 +87,8 @@ Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
 Route::get('/pemohon/cetak','adminController@pemohonCetak')
         ->name('pemohonCetak');
+Route::get('/analisis/pemohon/cetak','adminController@analisisPemohon')
+        ->name('analisisPemohon');
 
 Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
         ->name('pelayananIndex');
@@ -135,6 +137,8 @@ Route::get('/permohonan/filter/waktu','adminController@permohonanFilterWaktu')
         ->name('permohonanFilterWaktu');
 Route::post('/permohonan/filter/waktu','adminController@permohonanFilterWaktuCetak')
         ->name('permohonanFilterWaktuCetak');
+Route::get('/analisis/permohonan','adminController@analisisPermohonan')
+        ->name('analisisPermohonan');
 //pengujian Index
 Route::get('/pengujian/index','adminController@pengujianIndex')
         ->name('pengujianIndex');
@@ -142,6 +146,8 @@ Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
         ->name('pengujianDetail');
 Route::get('/pengujian/edit/{uuid}','adminController@pengujianEdit')
         ->name('pengujianEdit');
+Route::get('/analisis/pengujian','adminController@analisisPengujian')
+        ->name('analisisPengujian');
 
 });
 // akhir middleware admin

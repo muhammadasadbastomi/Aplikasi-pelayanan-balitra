@@ -264,4 +264,32 @@ class adminController extends Controller
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan Detail pengujian.pdf');
         }
+
+        //cetak laporan data jenis pelayanan
+        public function analisisPemohon(){
+            $pemohon=User::where('role',1)->get();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.analisisPemohon', ['pemohon'=>$pemohon,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data Pemohon.pdf');
+        }
+
+        //cetak laporan data jenis pelayanan
+        public function analisisPermohonan(){
+            $pelayanan=JenisPelayanan::all();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.analisisPermohonan', ['pelayanan'=>$pelayanan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan analisis permohonan.pdf');
+        }
+
+        //cetak laporan data jenis pelayanan
+        public function analisisPengujian(){
+            $pelayanan=JenisPelayanan::all();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.analisisPengujian', ['pelayanan'=>$pelayanan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan analisis permohonan.pdf');
+        }
 }
+ 
