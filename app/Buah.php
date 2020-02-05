@@ -17,4 +17,9 @@ class Buah extends Model
     {
     	return $this->HasMany('App\Pelayanan');
     }
+
+    public function detail_permohonan()
+    {
+    	return $this->belongsTo('App\detail_permohonan');
+    }
 }

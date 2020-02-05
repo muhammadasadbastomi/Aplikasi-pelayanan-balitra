@@ -152,6 +152,15 @@ Route::get('/pengujian/edit/{uuid}','adminController@pengujianEdit')
         ->name('pengujianEdit');
 Route::get('/analisis/pengujian','adminController@analisisPengujian')
         ->name('analisisPengujian');
+//pendapatan
+Route::get('/pendapatan/data','adminController@pendapatanIndex')
+        ->name('pendapatanIndex');
+Route::get('/pendapatan/keseluruhan','adminController@pendapatanKeseluruhan')
+        ->name('pendapatankeseluruhan');
+Route::get('/pendapatan/filter','adminController@pendapatanFilterWaktu')
+        ->name('pendapatanFilterWaktu');
+Route::post('/pendapatan/filter','adminController@pendapatanFilterWaktuCetak')
+        ->name('pendapatanFilterWaktuCetak');
 
 });
 // akhir middleware admin

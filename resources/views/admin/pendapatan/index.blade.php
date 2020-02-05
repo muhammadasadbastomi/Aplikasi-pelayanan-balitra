@@ -5,7 +5,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Data Pemohon</h1>
+                        <h1>Data Pendapatan</h1>
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="{{Route('adminIndex')}}">Beranda</a></li>
-                            <li class="active">Pemohon</li>
+                            <li class="active">Pendapatan</li>
                         </ol>
                     </div>
                 </div>
@@ -29,26 +29,32 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <a href="{{Route('pemohonCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
-                                <a href="{{Route('analisisPemohon')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> analisis transaksi pemohon</a>
+                                <a href="{{Route('pendapatankeseluruhan')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> pendapatan keseluruhan</a>
+                                <a href="{{Route('pendapatanFilterWaktu')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak pendapatan periode waktu</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>No Telepon</th>
-                                            <th>Alamat</th>
+                                            <th>Pengujian</th>
+                                            <th>Kategori</th>
+                                            <th>Tanggal</th>
+                                            <th>Biaya</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($user as $p)
-                                        <tr>
-                                            <td>{{$p->customer->nama}}</td>
-                                            <td>{{$p->customer->telepon}}</td>
-                                            <td>{{$p->customer->alamat}} </td>
-                                        </tr>
+                                    @foreach($pendapatan as $p)
+                                       <tr>
+                                            <td>{{$p->permohonan->user->name}}</td>
+                                            <td>{{$p->permohonan->jenispelayanan->jenis}}</td>
+                                            <td>{{$p->permohonan->pengujian->created_at}}</td>
+                                            <td>Rp.{{$p->biaya}}</td>
+                                       </tr>
                                     @endforeach
+                                    <tr>
+                                    <td colspan="3">Total</td>
+                                    <td ><b>Rp.{{$pendapatan->sum('biaya')}}</b></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

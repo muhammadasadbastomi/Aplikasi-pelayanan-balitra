@@ -126,6 +126,15 @@ class adminController extends Controller
         return view('admin.pengujian.filter');
     }
 
+    public function pendapatanIndex(){
+       $pendapatan = pengujian::whereIn('metode_pembayaran',[1,2])->get();
+        return view('admin.pendapatan.index',compact('pendapatan'));
+    }
+
+    public function pendapatanFilterWaktu(){
+         return view('admin.pendapatan.filterWaktu');
+     }
+
     public function pengujianDetail($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = permohonan::findOrFail($id);
@@ -304,6 +313,24 @@ class adminController extends Controller
             $pdf =PDF::loadView('laporan.pengujianFilterWaktu', ['pengujian'=>$pengujian,'tgl'=>$tgl]);
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan data pengujian Berdasarkan Status .pdf');
+        }
+
+        //cetak laporan data jenis pelayanan
+            public function pendapatanKeseluruhan(){
+                $pengujian = pengujian::whereIn('metode_pembayaran', [1,2])->get();
+                $tgl= Carbon::now()->format('d-m-Y');
+                $pdf =PDF::loadView('laporan.pendapatanKeseluruhan', ['pengujian'=>$pengujian,'tgl'=>$tgl]);
+                $pdf->setPaper('a4', 'potrait');
+                return $pdf->stream('Laporan data pengujian Berdasarkan Status .pdf');
+            }
+        
+        //cetak laporan data jenis pelayanan
+        public function pendapatanFilterWaktuCetak(Request $request){
+            $pengujian = pengujian::whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir])->whereIn('metode_pembayaran',[1,2])->get();
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.pendapatanFilterWaktu', ['pengujian'=>$pengujian,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data pendapatan Berdasarkan waktu .pdf');
         }
 }
  

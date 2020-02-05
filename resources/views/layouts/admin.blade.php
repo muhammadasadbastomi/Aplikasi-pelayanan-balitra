@@ -49,6 +49,13 @@
                             <li><i class="menu-icon fa fa-street-view"></i><a href="{{Route('pengujianIndex')}}">Transaksi</a></li>
                         </ul>
                     </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>pendapatan</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-dollar"></i><a href="{{Route('pendapatanIndex')}}">pendapatan</a></li>
+
+                        </ul>
+                    </li>
                     <li><a href="{{Route('beritaIndex')}}"><i class="menu-icon fa fa-file"></i> Data Berita</a></li>
                 </ul>
             </div>
