@@ -12,7 +12,7 @@
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table,
         th,
         td {
@@ -83,7 +83,7 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">DATA PENGUJIAN CUSTOMER</h2>
+            <h2 style="text-align:center;">LAPORAN PENGUJIAN CUSTOMER</h2>
             <table class="table table-bordered table-hover text-center">
                 <thead>
                     <tr>
@@ -101,7 +101,7 @@
                         <td>{{$r->user->name}}</td>
                         <td>Rp.{{$r->biaya}}</td>
                         <td>
-                            @php 
+                            @php
                                 $status = $r->pengujian->status;
                             @endphp
                             @if($status == 0)

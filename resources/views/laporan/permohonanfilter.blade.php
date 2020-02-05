@@ -11,7 +11,7 @@
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table,
         th,
         td {
@@ -82,7 +82,7 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">DATA PERMOHONAN FILTER STATUS</h2>
+            <h2 style="text-align:center;">LAPORAN PERMOHONAN FILTER STATUS</h2>
             <table class="table table-bordered table-hover text-center">
                 <thead>
                     <tr>
@@ -98,7 +98,7 @@
                         <td>{{$r->jenispelayanan->jenis}}</td>
                         <td>{{$r->created_at}}</td>
                         <td>{{$r->user->name}}</td>
-                        <td> 
+                        <td>
                             @if($r->status == 0)
                                 <p style="color:blue;">Pending</p>
                             @elseif($r->status == 2)

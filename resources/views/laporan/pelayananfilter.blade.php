@@ -12,7 +12,7 @@
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table,
         th,
         td {
@@ -83,10 +83,10 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center; text-transform:uppercase;">DATA PELAYANAN UJI KATEGORI {{$kategori->jenis}}</h2>
+            <h2 style="text-align:center; text-transform:uppercase;">LAPORAN PELAYANAN UJI KATEGORI {{$kategori->jenis}}</h2>
             <table class="table table-bordered table-hover text-center">
                 <thead>
-                    <tr>                        
+                    <tr>
                         <th>Kategori</th>
                         <th>Nama Buah</th>
                         <th>Analisis</th>
