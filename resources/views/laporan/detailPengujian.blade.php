@@ -12,7 +12,7 @@
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table,
         th,
         td {
@@ -82,7 +82,7 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">DETAIL PENGUJIAN</h2>
+            <h2 style="text-align:center;">LAPORAN DETAIL PENGUJIAN</h2>
             <table class="table table-bordered table-hover text-center">
                <tr>
                <table class="table table-hover table-bordered">
@@ -99,14 +99,14 @@
                                     <td style=""> :
                                     @foreach($permohonan->detail_permohonan as $a)
                                      {{$a->pelayanan->name}} - Rp.{{$a->pelayanan->price}}
-                                    @endforeach                                    
+                                    @endforeach
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Biaya</td>
                                     <td>:Rp. {{$permohonan->biaya}}
                                     </td>
-                                        
+
                                 </tr>
                                 <tr>
                                     <td>Tanggal Antar Barang</td>
@@ -122,10 +122,10 @@
                                 <tr>
                                     <td>Estimasi</td>
                                     <td>:{{$permohonan->pengujian->estimasi}} Hari</td>
-                                </tr>                                
+                                </tr>
                                 <tr>
                                     <td>Keterangan Uji</td>
-                                    @php 
+                                    @php
                                     $status = $permohonan->pengujian->status;
                                     @endphp
                                     @if($status == 0)
@@ -138,7 +138,7 @@
                                 </tr>
                                 <tr>
                                     <td>Metode Pembayaran</td>
-                                    @php 
+                                    @php
                                     $status = $permohonan->pengujian->metode_pembayaran;
                                     @endphp
                                     @if($status == 0)
@@ -147,8 +147,8 @@
                                     status<td>: <label class="btn btn-sm btn-primary">Cash</label></td>
                                     @else
                                     <td>: <label class="btn btn-sm btn-success">Transfer</label></td>
-                                    @endif                                
-                                    </tr>                                
+                                    @endif
+                                    </tr>
                                 <tr>
                                     <td>Lain-lain</td>
                                     <td>: {{$permohonan->pengujian->lainnya}}</td>

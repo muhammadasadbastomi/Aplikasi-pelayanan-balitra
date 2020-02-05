@@ -12,7 +12,7 @@
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table,
         th,
         td {
@@ -83,7 +83,7 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">DATA KARYAWAN</h2>
+            <h2 style="text-align:center;">LAPORAN KARYAWAN</h2>
             <table class="table table-bordered table-hover text-center">
                 <thead>
                     <tr>
