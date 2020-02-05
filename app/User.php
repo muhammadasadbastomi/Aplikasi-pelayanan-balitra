@@ -63,4 +63,7 @@ class User extends Authenticatable
     public function inbox(){
         return $this->HasMany('App\Inbox');
     }
+    public function permohonan(){
+      return $this->HasMany('App\Permohonan');
+  }
 }

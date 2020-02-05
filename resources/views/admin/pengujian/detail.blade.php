@@ -27,7 +27,6 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
-                                <a href="{{Route('permohonanCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
                             </div>
                             <div class="card-body">
                               <table class="table table-hover table-bordered">
@@ -44,7 +43,7 @@
                                     <td style="padding-left:30px;">
                                     <ul>
                                     @foreach($permohonan->detail_permohonan as $a)
-                                    <li>{{$a->pelayanan->name}} - Rp.{{$a->pelayanan->price}} </li>
+                                    <li>{{$a->pelayanan->name}} {{$a->pelayanan->buah->name}} - Rp.{{$a->pelayanan->price}} </li>
                                     @endforeach
                                     </ul>
                                     </td>
@@ -109,7 +108,7 @@
                         <div class="card-footer text-right">
                             <a href="{{Route('pengujianEdit',['uuid'=> $permohonan->pengujian->uuid])}}" class="btn btn-primary"><i class=""></i>  Edit Data</a>
                             @if($permohonan->pengujian->metode_pembayaran != 0)
-                                <a href="{{Route('cetakNota',['id'=> $permohonan->pengujian->id])}}">Cetak Nota</a>
+                                <a href="{{Route('cetakNota',['id'=> $permohonan->id])}}">Cetak Nota</a>
                             @endif
                         </div>
                     </div>

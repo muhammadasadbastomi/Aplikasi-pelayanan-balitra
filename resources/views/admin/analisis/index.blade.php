@@ -75,15 +75,15 @@
                             <form  method="post" action="">
                                 <div class="form-group">
                                     <label  class=" form-control-label">Buah</label>
-                                    <select name="buah_id" id="buah_id" class="form-control">
+                                    <select name="buah_id" id="buah_id" class="form-control" required> 
                                         <option value="">-- pilih Buah --</option>
                                     </select>
                                 </div>
                                 <div class="form-group"><input type="hidden" id="id" name="id"  class="form-control"></div>
-                                <div class="form-group"><label  class=" form-control-label">uji</label><input type="text" id="name" name="name" placeholder="name" class="form-control"></div>
+                                <div class="form-group"><label  class=" form-control-label">uji</label><input type="text" id="name" name="name" placeholder="name" class="form-control" required></div>
                                 <div class="form-group">
                                 <label  class=" form-control-label">Jenis Uji</label>
-                                <select name="jenis_pelayanan_id" id="jenis_pelayanan_id" class="form-control">
+                                <select name="jenis_pelayanan_id" id="jenis_pelayanan_id" class="form-control" required>
                                     <option value="">-- pilih Jenis Uji</option>
                                 </select></div>
                             <div class="modal-footer">
@@ -134,7 +134,7 @@
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
             Swal.fire({
                         title: 'apa anda yakin?',
-                        text: " Menghapus Kecamatan data " + name,
+                        text: " Menghapus  data pelayanan" + name,
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
@@ -250,7 +250,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Data Berhasil Tersimpan',
+                                    title: 'Data Pengujian Berhasil di Ubah',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
@@ -271,7 +271,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Your work has been saved',
+                                    title: 'Data Pelayanan Berhasil Tersimpan',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })

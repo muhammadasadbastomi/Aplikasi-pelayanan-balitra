@@ -27,7 +27,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
+                                <a href="{{Route('analisisPengujian')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> Analisis Pengujian</a>
                                 <a href="{{Route('pengujianCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <a href="{{Route('pengujianFilter')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> filter waktu</a>
                             </div>
                             <div class="card-body">
                             <table id="datatable" class="text-center table table-hover" style="width:100%">
@@ -123,7 +125,7 @@
                         {data: null, render : function ( data, type, row, meta ) {
                             let status =row.pengujian.status;
                             if(status === 0){
-                                return '<a class="btn btn-sm btn-warning"> pending</a>';
+                                return '<a class="btn btn-sm btn-warning">barang belum diterima</a>';
                               
                             }else if (status === 1){
                                 return '<a class="btn btn-sm btn-primary text-white">proses</a>';

@@ -87,6 +87,8 @@ Route::get('/pemohon/index','adminController@pemohonIndex')
         ->name('pemohonIndex');
 Route::get('/pemohon/cetak','adminController@pemohonCetak')
         ->name('pemohonCetak');
+Route::get('/analisis/pemohon/cetak','adminController@analisisPemohon')
+        ->name('analisisPemohon');
 
 Route::get('/pelayanan/index','adminController@jenisPelayananIndex')
         ->name('pelayananIndex');
@@ -101,6 +103,10 @@ Route::post('/pelayanan/filter','adminController@pelayananFilterCetak')
 
 Route::get('/pengujian/cetak','adminController@pengujianCetak')
         ->name('pengujianCetak'); 
+Route::get('/pengujian/filter','adminController@pengujianFilter')
+        ->name('pengujianFilter');
+Route::post('/pengujian/filter','adminController@pengujianFilterCetak')
+        ->name('pengujianFilterCetak');  
 Route::get('/nota/cetak/{id}','adminController@notaCetak')
         ->name('cetakNota');           
 
@@ -116,10 +122,6 @@ Route::get('/karyawan/cetak','adminController@karyawanCetak')
 //route berita
 Route::get('/berita/index','adminController@beritaIndex')
         ->name('beritaIndex');
-Route::get('/berita/depan','adminController@beritaDepan')
-        ->name('beritaDepan');
-Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
-        ->name('beritaDetail');
 Route::get('/berita/cetak','adminController@beritaCetak')
         ->name('beritaCetak');
 //route permohonan
@@ -139,6 +141,8 @@ Route::get('/permohonan/filter/waktu','adminController@permohonanFilterWaktu')
         ->name('permohonanFilterWaktu');
 Route::post('/permohonan/filter/waktu','adminController@permohonanFilterWaktuCetak')
         ->name('permohonanFilterWaktuCetak');
+Route::get('/analisis/permohonan','adminController@analisisPermohonan')
+        ->name('analisisPermohonan');
 //pengujian Index
 Route::get('/pengujian/index','adminController@pengujianIndex')
         ->name('pengujianIndex');
@@ -146,6 +150,8 @@ Route::get('/pengujian/detail/{uuid}','adminController@pengujianDetail')
         ->name('pengujianDetail');
 Route::get('/pengujian/edit/{uuid}','adminController@pengujianEdit')
         ->name('pengujianEdit');
+Route::get('/analisis/pengujian','adminController@analisisPengujian')
+        ->name('analisisPengujian');
 
 });
 // akhir middleware admin
@@ -177,7 +183,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
                 Route::get('{uuid}', 'BuahController@find')->name('find');
             });
         Route::prefix('pengujian-customer')->name('pengujian-customer.')->group(function(){
-                Route::get('', 'PengujianController@get')->name('getByCustomer');
+                Route::get('', 'PengujianController@getByCustomer')->name('getByCustomer');
                 Route::get('{uuid}', 'PengujianController@find')->name('find');
                 });
 
@@ -222,3 +228,7 @@ Route::get('/','adminController@depan')
 Auth::routes();
 
 Route::get('/home', 'DashboardController@index')->name('home');
+Route::get('/berita/depan','adminController@beritaDepan')
+        ->name('beritaDepan');
+Route::get('/berita/detail/{uuid}','adminController@beritaDetail')
+        ->name('beritaDetail');

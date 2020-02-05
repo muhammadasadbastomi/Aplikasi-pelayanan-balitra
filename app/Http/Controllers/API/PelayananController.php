@@ -30,7 +30,7 @@ class PelayananController extends APIController
         }
         $pelayanan = Redis::get("pelayanana:all");
         if (!$pelayanan) {
-            $pelayanan = pelayanan::where('jenis_pelayanan_id',$id)->get();
+            $pelayanan = pelayanan::with('buah')->where('jenis_pelayanan_id',$id)->get();
             if (!$pelayanan){
                 return $this->returnController("error", "failed find data pelayanan");
             }

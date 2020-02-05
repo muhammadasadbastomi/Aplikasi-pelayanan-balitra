@@ -24,13 +24,12 @@
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Tabel Data</strong>
                                 <button href="" class="btn btn-outline-primary pull-right" id="tambah" >+ tambah data</button>
-                                <a href="{{Route('beritaCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a>
+                                <!-- <a href="{{Route('beritaCetak')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak data</a> -->
                             </div>
                             <div class="card-body">
                                 <table id="datatable" class=" text-center table table-striped table-bordered">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
             border-collapse: collapse;
             width: 100%;
         }
-
+        
         table,
         th,
         td {
@@ -82,34 +83,26 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">LAPORAN PERMOHONAN FILTER STATUS</h2>
-            <table class="table table-bordered table-hover text-center">
+            <h2 style="text-align:center;">DATA ANALISIS CUSTOMER</h2>
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Jenis Pelayanan</th>
-                        <th>Tanggal</th>
-                        <th>Pemohon</th>
-                        <th>Status</th>
+                        <th>Nama</th>
+                        <th>Nomor telepon</th>
+                        <th>Permohonan</th>
+                        <th>Riwayat Pengujian</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($permohonan as $r)
+                @foreach($pemohon as $p)
                     <tr>
-                        <td>{{$r->jenispelayanan->jenis}}</td>
-                        <td>{{$r->created_at}}</td>
-                        <td>{{$r->user->name}}</td>
-                        <td>
-                            @if($r->status == 0)
-                                <p style="color:blue;">Pending</p>
-                            @elseif($r->status == 2)
-                                <p style="color:red;">Ditolak</p>
-                            @else
-                            <p>-</p>
-                            @endif
-                        </td>
+                        <td>{{$p->customer->nama}}</td>
+                        <td>{{$p->customer->telepon}}</td>
+                        <td>{{$p->permohonan->whereIn('status',[0,2])->count()}} Permohonan</td>
+                        <td>{{$p->permohonan->where('status',1)->count()}} pengujian</td>
                     </tr>
-                    @endforeach
-                    </tfoot>
+                @endforeach
+                </tfoot>
             </table>
             <br>
             <br>

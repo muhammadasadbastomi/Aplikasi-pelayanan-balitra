@@ -193,7 +193,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Data Berhasil Tersimpan',
+                                    title: 'Data Pelayanan Berhasil Tersimpan',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
