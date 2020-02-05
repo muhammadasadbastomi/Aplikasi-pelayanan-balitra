@@ -161,7 +161,10 @@ Route::get('/pendapatan/filter','adminController@pendapatanFilterWaktu')
         ->name('pendapatanFilterWaktu');
 Route::post('/pendapatan/filter','adminController@pendapatanFilterWaktuCetak')
         ->name('pendapatanFilterWaktuCetak');
-
+Route::get('/pendapatan/filter/pelayanan','adminController@pendapatanFilterPelayanan')
+        ->name('pendapatanFilterPelayanan');
+Route::post('/pendapatan/filter/pelayanan','adminController@pendapatanFilterPelayananCetak')
+        ->name('pendapatanFilterPelayananCetak');
 });
 // akhir middleware admin
 

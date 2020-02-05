@@ -31,6 +31,7 @@
                                 <strong class="card-title">Tabel Data</strong>
                                 <a href="{{Route('pendapatankeseluruhan')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> pendapatan keseluruhan</a>
                                 <a href="{{Route('pendapatanFilterWaktu')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak pendapatan periode waktu</a>
+                                <a href="{{Route('pendapatanFilterPelayanan')}}" class="btn btn-outline-info pull-right" style="margin-right:5px;"><i class="ti-printer"></i> cetak pendapatan filter pelayanan</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">

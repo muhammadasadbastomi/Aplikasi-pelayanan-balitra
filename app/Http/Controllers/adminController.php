@@ -135,6 +135,11 @@ class adminController extends Controller
          return view('admin.pendapatan.filterWaktu');
      }
 
+    public function pendapatanFilterPelayanan(){
+        $jenisPelayanan = jenisPelayanan::all();
+        return view('admin.pendapatan.filterPelayanan',compact('jenisPelayanan'));
+    }
+
     public function pengujianDetail($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = permohonan::findOrFail($id);
@@ -331,6 +336,16 @@ class adminController extends Controller
             $pdf =PDF::loadView('laporan.pendapatanFilterWaktu', ['pengujian'=>$pengujian,'tgl'=>$tgl]);
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan data pendapatan Berdasarkan waktu .pdf');
+        }
+
+        //cetak laporan data jenis pelayanan
+        public function pendapatanFilterPelayananCetak(Request $request){
+            $pendapatan = Permohonan::where('jenispelayanan_id',$request->kategori)->get();
+            $pelayanan = jenisPelayanan::findOrFail($request->kategori);
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.pendapatanFilterPelayanan', ['pelayanan'=>$pelayanan,'pendapatan'=>$pendapatan,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan data pendapatan Berdasarkan Pelayanan .pdf');
         }
 }
  
