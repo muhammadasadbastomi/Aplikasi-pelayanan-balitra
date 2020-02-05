@@ -91,7 +91,6 @@
                         <th>Tanggal</th>
                         <th>Pemohon</th>
                         <th>Biaya</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -99,14 +98,30 @@
 
                     <tr>
                         <td>{{$r->jenispelayanan->jenis}}</td>
+                        @if($r->pengujian != null)
                         <td>{{$r->pengujian->created_at}}</td>
+                        @else
+                        <td>pengujian belum ada</td>
+                        @endif
+                        @if($r->pengujian != null)
                         <td>{{$r->user->name}}</td>
+                        @else
+                        <td>-</td>
+                        @endif
+                        @if($r->pengujian != null)
                         <td>Rp.{{$r->biaya}} </td>
+                        @else
+                        <td>-</td>
+                        @endif
                     </tr>
                     @endforeach
                     <tr>
                     <td colspan="3">Total</td>
-                    <td>Rp.{{$pendapatan->sum('biaya')}}</td>
+                        @if($r->pengujian != null)
+                        <td>Rp.{{$pendapatan->sum('biaya')}}</td>
+                        @else
+                        <td>-</td>
+                        @endif
                     </tr>
                     </tfoot>
             </table>
