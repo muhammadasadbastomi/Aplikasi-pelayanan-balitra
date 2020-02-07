@@ -28,8 +28,7 @@
         </table>
         </div>
         <div class="col-md-8 text-right">
-            <a href="" class="text-primary" style="margin-right:5px;"> <i class="ti-printer"></i> </a>
-            <a href="" class="text-danger"> <i class="ti-trash"></i> </a>
+            <a href="{{Route('notifCetak',['id'=>$inbox->id])}}" class="text-primary" style="margin-right:5px;"> <i class="ti-printer"></i> </a>
         </div>
     </div>
     <br>
@@ -47,7 +46,7 @@
         </tr>
     </table>
     <br>
-    <p>Sekian pemberitahuan in kami beri sampaikan , atsa perhatiannya terimakasih.</p>
+    <p>Sekian pemberitahuan ini kami beri sampaikan ,anda dapat mencetak pesan ini sebagai bukti bahwa permohonan anda telah disetujui atas perhatiannya terimakasih.</p>
 </div>
 </section>
 </aside>

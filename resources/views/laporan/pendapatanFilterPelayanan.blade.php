@@ -83,11 +83,10 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">DATA PENDAPATAN FILTER PELAYANAN {{$pelayanan->jenis}}</h2>
+            <h2 style="text-align:center; text-transform:uppercase;">LAPORAN PENDAPATAN FILTER PELAYANAN {{$pelayanan->jenis}}</h2>
             <table class="table table-bordered table-hover text-center">
                 <thead>
                     <tr>
-                        <th>Permohonan</th>
                         <th>Tanggal</th>
                         <th>Pemohon</th>
                         <th>Biaya</th>
@@ -97,26 +96,21 @@
                     @foreach ($pendapatan as $r)
 
                     <tr>
-                        <td>{{$r->jenispelayanan->jenis}}</td>
                         @if($r->pengujian != null)
                         <td>{{$r->pengujian->created_at}}</td>
                         @else
-                        <td>pengujian belum ada</td>
+                        <td colspan="3"></td>
                         @endif
                         @if($r->pengujian != null)
                         <td>{{$r->user->name}}</td>
-                        @else
-                        <td>-</td>
                         @endif
                         @if($r->pengujian != null)
                         <td>Rp.{{$r->biaya}} </td>
-                        @else
-                        <td>-</td>
                         @endif
                     </tr>
                     @endforeach
                     <tr>
-                    <td colspan="3">Total</td>
+                    <td colspan="2">Total</td>
                         @if($r->pengujian != null)
                         <td>Rp.{{$pendapatan->sum('biaya')}}</td>
                         @else

@@ -229,7 +229,9 @@ Route::get('/pengujian/customer/detail/{uuid}','customerController@pengujianCust
 Route::get('/pengujian/customer/cetak','adminController@pengujianCustomerCetak')
         ->name('pengujianCustomerCetak');
 Route::get('/nota/customer/cetak/{id}','adminController@detailPengujianCetak')
-        ->name('cetakCustomerNota');  
+        ->name('cetakCustomerNota');
+Route::get('/notif/cetak/{id}','adminController@notifCetak')
+        ->name('notifCetak');    
 
 
 //

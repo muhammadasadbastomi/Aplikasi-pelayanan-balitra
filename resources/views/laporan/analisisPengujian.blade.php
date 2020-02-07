@@ -83,7 +83,7 @@
 
     <div class="container">
         <div class="isi">
-            <h2 style="text-align:center;">DATA ANALISIS PENGUJIAN</h2>
+            <h2 style="text-align:center;">LAPORAN ANALISIS PENGUJIAN</h2>
             <table class="table table-bordered table-hover text-center">
                 <thead>
                     <tr>

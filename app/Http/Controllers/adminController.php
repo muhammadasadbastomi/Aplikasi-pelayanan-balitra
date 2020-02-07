@@ -10,6 +10,7 @@ use App\Detail_permohonan;
 use App\Karyawan;
 use App\JenisPelayanan;
 use App\user;
+use App\Inbox;
 use App\Buah;
 use Carbon\Carbon;
 use PDF;
@@ -346,6 +347,15 @@ class adminController extends Controller
             $pdf =PDF::loadView('laporan.pendapatanFilterPelayanan', ['pelayanan'=>$pelayanan,'pendapatan'=>$pendapatan,'tgl'=>$tgl]);
             $pdf->setPaper('a4', 'potrait');
             return $pdf->stream('Laporan data pendapatan Berdasarkan Pelayanan .pdf');
+        }
+
+        //cetak laporan data jenis pelayanan
+        public function notifCetak($id){
+            $inbox = inbox::findOrFail($id);
+            $tgl= Carbon::now()->format('d-m-Y');
+            $pdf =PDF::loadView('laporan.buktiPermohonan', ['inbox'=>$inbox,'tgl'=>$tgl]);
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Laporan Bukti Permohonan Diterima .pdf');
         }
 }
  
