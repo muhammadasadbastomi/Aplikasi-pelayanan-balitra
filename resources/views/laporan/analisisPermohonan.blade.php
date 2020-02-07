@@ -89,7 +89,7 @@
                     <tr>
                         <th>Pelayanan Uji</th>                        
                         <th>Kategori</th>
-                        <th>Pengujian</th>
+                        <th>Permohonan</th>
                     </tr>
                 </thead>
                 <tbody>
