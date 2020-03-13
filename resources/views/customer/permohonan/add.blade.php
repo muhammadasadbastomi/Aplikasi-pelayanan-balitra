@@ -99,7 +99,7 @@
                 if(returnData){
                     $("#pelayanan_id").empty();
                             $.each(returnData.data, function (index, value) {
-                        $("#pelayanan_id").append('<option value="'+value.uuid+'">'+value.buah.name+'- Rp.'+value.price+'/'+ value.buah.satuan +' </option>');
+                        $("#pelayanan_id").append('<option value="'+value.uuid+'">'+value.buah.name+' </option>');
                     });
                 }else{
                 $("#kecamatan").empty();
@@ -173,7 +173,7 @@
                             let uuid = row.uuid;
                             let name = row.jenis;
                             return type === 'display'  ?
-                            ' <button onClick="hapus(\'' + uuid + '\',\'' + name + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                            ' <button onClick="" class="btn btn-sm btn-outline-danger" > <i class=></i>-</button>':
                         data;
                         }}
                     ]
